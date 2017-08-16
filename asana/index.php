@@ -52,7 +52,15 @@
             } else {
                 status = 'inProgress';
             }
-            $http.post("create.php",{
+            $http.post("updateStatus.php",{
+                'status': status,
+                'goal_id': goal_id
+            }
+            ).success(function(data){
+                alert(data);    
+                
+            
+                      
             });
         }
 
