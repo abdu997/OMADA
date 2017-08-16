@@ -1,7 +1,18 @@
     var app = angular.module("myapp", []);
     app.controller("linkRepository", function($scope, $http) {
         $scope.member  = [
-        "Abdul Amoud", "Youssef El Khalili", "Swagat Ghimire"
+            {
+                "user_id": "1",
+                "user_name": "Abdul Amoud"
+            },
+            {
+                "user_id": "2",
+                "user_name": "Youssef El Khalili"
+            },
+            {
+                "user_id": "3",
+                "user_name": "Swagat Ghimire"
+            }
         ]
         $scope.selectedNames = [];
         $scope.btnName = "ADD";
