@@ -1,15 +1,24 @@
 <?php 
-require_once 'connect.php'; // The mysql database connection script
-if(isset($_GET['itemID'])){
-	$status = $mysqli->real_escape_string($_GET['status']);
-	$itemID = $mysqli->real_escape_string($_GET['itemID']);
+include('connect.php'); // The mysql database connection script
+$data = json_decode(file_get_contents("php://input"));
+if(count($data) > 0){
+$status = mysqli_real_escape_string($connect,$data->status);
+$goal_id = mysqli_real_escape_string($connect, $data->goal_id);
 
-	$query="UPDATE personal_task set status='$status' where id='$itemID'";
-	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-
-	$result = $mysqli->affected_rows;
-
-	$json_response = json_encode($result);
+	$query="UPDATE team_goal set status='$status' where goal_id='$goal_id'";
+	if(mysqli_query($connect, $query)){
+        echo "Status update successful";    
+    }
+    else{
+        echo "Error Occured";
+    }
 }
+    else{
+        echo "Data error";
+    }
+
+	
+
+
 ?>
 
