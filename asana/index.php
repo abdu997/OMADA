@@ -12,22 +12,12 @@
         <input type="submit" name="btnInsert" ng-click="goalInsert()" value="{{btnName}}" />
         <br />
         <br />
-        <table>
-            <tr>
-                <th>First Name</th>
-                <th>Update</th>
-                <th>Delete</th>
-            </tr>
-            <tr ng-repeat="x in goals">
-                <td>{{x.goal}}</td>
-                <td>
-                    <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
-                </td>
-                <td>
-                    <button ng-click="deleteData(x.goal_id)">Delete</button>
-                </td>
-            </tr>
-        </table>
+        <div ng-repeat="x in goals">
+            <p>{{x.goal}}</p>
+            <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
+            <button ng-click="deleteData(x.goal_id)">Delete</button>
+            <button ng-click="changeGoalStatus(x.goal_id, x.status)">In Progress</button>
+        </div>
     </div>
 </body>
 
@@ -56,6 +46,16 @@
                 });
             }
         }
+        $scope.changeGoalStatus = function(goal_id, status) {
+            if (status == 'not_started') {
+                status = 'inProgress';
+            } else {
+                status = 'inProgress';
+            }
+            $http.post("create.php",{
+            });
+        }
+
         
         $scope.displayData = function() {
             $http.get("read.php")
