@@ -7,44 +7,20 @@
 <body>
     <div ng-app="myapp" ng-controller="linkRepository" ng-init="displayData()">
         <form>
-            <label>Link</label>
-            <input type="text" name="link" ng-model="link">
-            <br />
-            <label>note</label>
+            <label>Chatroom name</label>
+            <input type="text" name="chatroom_name" ng-model="chatroom_name">
+            <br>
+            <label>Pick Members:</label>
             <div class="form-group" ng-repeat="x in member">
-                <input type="radio" name="note" ng-model="note" value="{{ x }}">{{x}}
-<!--                <input type="checkbox" name="note" ng-model="note" value="Bike">{{x}}<br>-->
+                <input type="checkbox" name="checkBox" ng-click="updateCheckBox($event)" id="{{x}}" value="{{x}}">{{x}}
             </div>
             <br>
             <br />
             <input type="hidden" ng-model="id" />
-            <input type="submit" name="btnInsert" ng-click="insertData()" value="{{btnName}}" />
+            <input type="submit" name="btnInsert"  ng-click="insertData()" value="{{btnName}}" />
         </form>
         <br />
         <br />
-<!--
-        <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-            <tr>
-                <th>Member</th>
-                <th>Link</th>
-                <th>Notes</th>
-                <th>Update</th>
-                <th>Delete</th>
-            </tr>
-            <tr ng-repeat="x in links">
-                <td>{{x.user_id}}</td>
-                <td><a href="{{x.link}}" target="_blank">{{x.link}}</a>
-                </td>
-                <td>{{x.note}}</td>
-                <td>
-                    <button ng-click="updateData(x.id, x.link, x.note)">Edit</button>
-                </td>
-                <td>
-                    <button ng-click="deleteData(x.id )">Delete</button>
-                </td>
-            </tr>
-        </table>
--->
     </div>
 </body>
 

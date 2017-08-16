@@ -1,31 +1,39 @@
     var app = angular.module("myapp", []);
     app.controller("linkRepository", function($scope, $http) {
         $scope.member  = [
-        "Abdul Amoud", "Youssef El-Khalili", "Swagat Ghimire"
+        "Abdul Amoud", "Youssef El Khalili", "Swagat Ghimire"
         ]
-        
+        $scope.selectedNames = [];
         $scope.btnName = "ADD";
         $scope.insertData = function() {
-            if ($scope.link == null) {
-                alert("Link is required");
-            } else if ($scope.note == null) {
-                alert("Note is required");
+            if ($scope.chatroom_name == null) {
+                alert("Chatroom name is required");
             } else {
                 $http.post(
                     "create.php", {
-                        'link': $scope.link,
-                        'note': $scope.note,
+                        'chatroom_name': $scope.chatroom_name,
                         'btnName': $scope.btnName,
-                        'id': $scope.id
+                        'members':$scope.selectedNames
                     }
                 ).success(function(data) {
-                    //alert(data);
-                    $scope.firstname = null;
-                    $scope.lastname = null;
+                    //document.writeln(data);
+                   $scope.chatroom_name = null;
                     $scope.btnName = "ADD";
                     $scope.displayData();
                 });
             }
+        }
+        
+        $scope.updateCheckBox = function(event){
+            if($scope.selectedNames.indexOf(event.target.id) !== -1) {
+                var index = $scope.selectedNames.indexOf(event.target.id);
+                $scope.selectedNames.splice(index,1);
+                }
+            else{
+                $scope.selectedNames.push(event.target.id);    
+            }
+            console.log($scope.selectedNames);
+            
         }
         
         $scope.displayData = function() {

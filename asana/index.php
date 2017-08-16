@@ -40,13 +40,16 @@
             if ($scope.goal == null) {
                 alert("Goal is required");
             } else {
+                
                 $http.post(
-                    "create.php", {
+                    "create.php", 
+                    {
                         'goal': $scope.goal,
                         'btnName': $scope.btnName,
-                        'id': $scope.id
+                        'goal_id': $scope.goal_id
                     }
                 ).success(function(data) {
+                    
                     $scope.goal = null;
                     $scope.btnName = "ADD";
                     $scope.displayData();
