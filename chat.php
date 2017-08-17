@@ -19,54 +19,7 @@
         }
     </script>
     
-    <script>
-    $.('#sendMsg').submit(function(e){
-        e.preventDefault();
-        formData = {
-            'msg' : $('.message.input').val(),
-            
-        };
-        $.ajax({
-            type: 'POST',
-            url : '',
-            data: formData,
-            dataType: 'json',
-            success: function(data){
-                console.log(data);
-            }
-        })
-        
-    });
-    
-    
-    
-    </script>
-    <script>
-    $.('#chatroom-submit').submit(function(e){
-        e.preventDefault();
-        var mems = new Array();
-        $("input:checkbox[name=chatroom_members]:checked").each(function(){
-            mems.push($(this).innerHTML);
-        });
-        formData = {
-            'chatroomname' : $('#chatroomname').val(),
-            'members': mems
-            };
-        $.ajax({
-            type: 'POST',
-            url : 'chatroom.php',
-            data: formData,
-            dataType: 'json',
-            success: function(data){
-                console.log(data);
-            }
-        })
-        
-    });
-    
-    
-    
-    </script>
+   
 
 <div id="chatroom_create" class="w3-modal">
     <div class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important">
@@ -215,8 +168,8 @@
         </div>
         <div class="panel-foot">
             <form id = "sendMsg">
-                <input class="message-input" placeholder="Type message here..." required>
-                <input type="submit" value="Send">
+                <input class="message-input" id="msg" placeholder="Type message here..." required>
+                <input type="submit" ng-click = "submitMessage(x.chatroom_id)" value="Send">
             </form>
         </div>
     </div>
