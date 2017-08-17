@@ -141,19 +141,41 @@ app.controller('ChatController', function ($scope) {
             "message": "yoyo!"
         },
 	];
+    
+    
+    
+    $scope.submitMessage = function(chatroom_id) {
+    $scope.message = document.getElementById('msg').value;
+            if ($scope.message == null) {
+                alert("Input is empty");
+            } else {
+                
+                $http.post(
+                    "sendMessages.php", 
+                    {
+                        'message': $scope.message,
+                        'chatroom_id': chatroom_id
+                    }
+                ).success(function(data) {
+                    alert(data)
+                    $scope.message = null;
+                    $scope.chatRoomMsgs(id);
+                });
+            }
+        }
 
   $scope.chatRoomMsgs = function(id){
-      var msgs = [];
+      
       $("#clist").toggleClass("chat-list");
-  
-      angular.forEach($scope.messages, function(item) {
-          var key = item['chatroom_id'];
-          if(key == id) {
-              msgs.push(item);
-          }
-      });
-
-      $scope.chat = msgs;
+       $http.get("getMessages.php",{
+           'chatroom_id': id
+       }).success(function(msgs) {
+                    $scope.chat = msgs;
+                });
+        }
+    
+  setInterval(function(){$scope.chatRoomMsgs();}, 1000);
+      
   }
 
 });
