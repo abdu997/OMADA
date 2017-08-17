@@ -14,13 +14,7 @@ if (count($data) > 0) {
         if (mysqli_query($connect, $query)) {
             $chat_id = mysqli_insert_id($connect);
             foreach($members as $x){
-                
-                $sql = "SELECT idusers FROM users WHERE concat_ws(' ',first_name,last_name) LIKE '$x'";
-                $res = mysqli_query($connect,$sql);
-                $row = mysqli_fetch_array($res);
-                $id = $row[0];
-                
-                $sql2 = "INSERT INTO chatroom_user (chatroom_id, user_id) VALUES('$chat_id', '$id')";
+                $sql2 = "INSERT INTO chatroom_user (chatroom_id, user_id) VALUES('$chat_id', '$x')";
                 mysqli_query($connect, $sql2);
             }
         } else {
