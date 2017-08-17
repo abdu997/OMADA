@@ -5,14 +5,14 @@
 </head>
 
 <body>
-    <div ng-app="myapp" ng-controller="linkRepository" ng-init="displayData()">
+    <div ng-app="myapp" ng-controller="linkRepository" ng-init="getMembers()">
         <form>
             <label>Chatroom name</label>
             <input type="text" name="chatroom_name" ng-model="chatroom_name">
             <br>
             <label>Pick Members:</label>
             <div class="form-group" ng-repeat="x in member">
-                <input type="checkbox" name="checkBox" ng-click="updateCheckBox($event)" id="{{x}}" value="{{x}}">{{x}}
+                <input type="checkbox" name="checkBox" ng-click="updateCheckBox($event)" id="{{x.user_id}}" value="{{x.user_name}}">{{x.user_name}}
             </div>
             <br>
             <br />
