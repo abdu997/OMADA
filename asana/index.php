@@ -80,11 +80,12 @@
             }
         }
         $scope.changeGoalStatus = function(goal_id, status) {
+            console.log(status);
             if (status == 'not_started') {
                 status = 'inProgress';
-            } if (status == 'inProgress') {
+            } else if (status == 'inProgress') {
                 status = 'inReview';
-            } if (status == 'inReview') {
+            } else if (status == 'inReview') {
                 status = 'completed';
             }
             $http.post("updateStatus.php",{
