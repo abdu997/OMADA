@@ -25,7 +25,7 @@
         
         <div class="col-sm-3">
             <h3>In Progress</h3>
-            <div ng-repeat="x in goals | filter : 'inProgress'">
+            <div ng-repeat="x in goals | filter : {'status':'inProgress'}">
                 <p>{{x.goal}}</p>
                 <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
                 <button ng-click="deleteData(x.goal_id)">Delete</button>
@@ -36,7 +36,7 @@
 
         <div class="col-sm-3">
             <h3>In Review</h3>
-            <div ng-repeat="x in goals | filter : 'inReview'">
+            <div ng-repeat="x in goals | filter : {'status':'inReview'}">
                 <p>{{x.goal}}</p>
                 <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
                 <button ng-click="deleteData(x.goal_id)">Delete</button>
@@ -47,7 +47,7 @@
         
         <div class="col-sm-3">
             <h3>Completed</h3>
-            <div ng-repeat="x in goals | filter : 'completed'">
+            <div ng-repeat="x in goals | filter : {'status':'completed'}">
                 <p>{{x.goal}}</p>
                 <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
                 <button ng-click="deleteData(x.goal_id)">Delete</button>
