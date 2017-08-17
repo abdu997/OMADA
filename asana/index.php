@@ -2,6 +2,7 @@
 
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
 <body>
@@ -12,11 +13,43 @@
         <input type="submit" name="btnInsert" ng-click="goalInsert()" value="{{btnName}}" />
         <br />
         <br />
-        <div ng-repeat="x in goals">
-            <p>{{x.goal}}</p>
-            <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
-            <button ng-click="deleteData(x.goal_id)">Delete</button>
-            <button ng-click="changeGoalStatus(x.goal_id, x.status)">In Progress</button>
+        <div class="col-sm-3">
+            <h3>Not Started</h3>
+            <div ng-repeat="x in goals | filter : 'not_started'">
+                <p>{{x.goal}}</p>
+                <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
+                <button ng-click="deleteData(x.goal_id)">Delete</button>
+                <button ng-click="changeGoalStatus(x.goal_id, x.status)">In Progress</button>
+            </div>
+        </div>
+        
+        <div class="col-sm-3">
+            <h3>In Progress</h3>
+            <div ng-repeat="x in goals | filter : 'inProgress'">
+                <p>{{x.goal}}</p>
+                <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
+                <button ng-click="deleteData(x.goal_id)">Delete</button>
+                <button ng-click="changeGoalStatus(x.goal_id, x.status)">In Review</button>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <h3>In Review</h3>
+            <div ng-repeat="x in goals | filter : 'inReview'">
+                <p>{{x.goal}}</p>
+                <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
+                <button ng-click="deleteData(x.goal_id)">Delete</button>
+                <button ng-click="changeGoalStatus(x.goal_id, x.status)">Completed!</button>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <h3>Completed</h3>
+            <div ng-repeat="x in goals | filter : 'completed'">
+                <p>{{x.goal}}</p>
+                <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
+                <button ng-click="deleteData(x.goal_id)">Delete</button>
+                <button ng-click="changeGoalStatus(x.goal_id, x.status)">Completed!</button>
+            </div>
         </div>
     </div>
 </body>
@@ -49,18 +82,16 @@
         $scope.changeGoalStatus = function(goal_id, status) {
             if (status == 'not_started') {
                 status = 'inProgress';
-            } else {
-                status = 'inProgress';
+            } if (status == 'inProgress') {
+                status = 'inReview';
+            } if (status == 'inReview') {
+                status = 'completed';
             }
             $http.post("updateStatus.php",{
                 'status': status,
                 'goal_id': goal_id
             }
-            ).success(function(data){
-                alert(data);    
-                
-            
-                      
+            ).success(function(data){                      
             });
         }
 
