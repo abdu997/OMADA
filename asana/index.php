@@ -19,7 +19,7 @@
                 <p>{{x.goal}}</p>
                 <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
                 <button ng-click="deleteData(x.goal_id)">Delete</button>
-                <button ng-click="changeGoalStatus(x.goal_id, x.status)">In Progress</button>
+                <button ng-click="advanceGoalStatus(x.goal_id, x.status)">In Progress</button>
             </div>
         </div>
         
@@ -29,7 +29,8 @@
                 <p>{{x.goal}}</p>
                 <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
                 <button ng-click="deleteData(x.goal_id)">Delete</button>
-                <button ng-click="changeGoalStatus(x.goal_id, x.status)">In Review</button>
+                <button ng-click="reverseGoalStatus(x.goal_id, x.status)">Not Now</button>
+                <button ng-click="advanceGoalStatus(x.goal_id, x.status)">In Review</button>
             </div>
         </div>
 
@@ -39,16 +40,18 @@
                 <p>{{x.goal}}</p>
                 <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
                 <button ng-click="deleteData(x.goal_id)">Delete</button>
-                <button ng-click="changeGoalStatus(x.goal_id, x.status)">Completed!</button>
+                <button ng-click="reverseGoalStatus(x.goal_id, x.status)">Back to Work</button>
+                <button ng-click="advanceGoalStatus(x.goal_id, x.status)">Completed!</button>
             </div>
         </div>
+        
         <div class="col-sm-3">
             <h3>Completed</h3>
             <div ng-repeat="x in goals | filter : 'completed'">
                 <p>{{x.goal}}</p>
                 <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
                 <button ng-click="deleteData(x.goal_id)">Delete</button>
-                <button ng-click="changeGoalStatus(x.goal_id, x.status)">Completed!</button>
+                <button ng-click="reverseGoalStatus(x.goal_id, x.status)">Needs Review</button>
             </div>
         </div>
     </div>
@@ -79,7 +82,7 @@
                 });
             }
         }
-        $scope.changeGoalStatus = function(goal_id, status) {
+        $scope.advanceGoalStatus = function(goal_id, status) {
             console.log(status);
             if (status == 'not_started') {
                 status = 'inProgress';
@@ -87,6 +90,22 @@
                 status = 'inReview';
             } else if (status == 'inReview') {
                 status = 'completed';
+            }
+            $http.post("updateStatus.php",{
+                'status': status,
+                'goal_id': goal_id
+            }
+            ).success(function(data){                      
+            });
+        }
+        $scope.reverseGoalStatus = function(goal_id, status) {
+            console.log(status);
+            if (status == 'inProgress') {
+                status = 'not_started';
+            } else if (status == 'inReview') {
+                status = 'inProgress';
+            } else if (status == 'completed') {
+                status = 'inReview';
             }
             $http.post("updateStatus.php",{
                 'status': status,
