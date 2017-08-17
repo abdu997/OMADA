@@ -1,19 +1,16 @@
     var app = angular.module("myapp", []);
     app.controller("linkRepository", function($scope, $http) {
-        $scope.member  = [
-            {
-                "user_id": "1",
-                "user_name": "Abdul Amoud"
-            },
-            {
-                "user_id": "2",
-                "user_name": "Youssef El Khalili"
-            },
-            {
-                "user_id": "3",
-                "user_name": "Swagat Ghimire"
-            }
-        ]
+        
+     
+        
+        $scope.getMembers = function(){
+            
+            $http.get('getMembers.php').success(function(data){
+                $scope.member = data;
+            });
+        }
+        
+        
         $scope.selectedNames = [];
         $scope.btnName = "ADD";
         $scope.insertData = function() {
@@ -47,14 +44,14 @@
             
         }
         
-        $scope.displayData = function() {
+        /*$scope.displayData = function() {
             $http.get("read.php")
                 .success(function(data) {
                     $scope.links = data;
                 });
-        }
+        }*/
         
-        setInterval(function(){$scope.displayData();}, 500);
+        //setInterval(function(){$scope.displayData();}, 500);
         
         $scope.updateData = function(id, link, note) {
             $scope.id = id;
