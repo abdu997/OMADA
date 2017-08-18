@@ -29,7 +29,7 @@
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
-            <tr ng-repeat="x in links">
+            <tr ng-repeat="x in links | filter: '.'">
                 <td>{{x.user_id}}</td>
                 <td><a href="{{x.link}}" target="_blank">{{x.link}}</a>
                 </td>
