@@ -27,7 +27,7 @@
                     //document.writeln(data);
                    $scope.chatroom_name = null;
                     $scope.btnName = "ADD";
-                    $scope.displayData();
+                    $scope.getChatrooms();
                 });
             }
         }
@@ -74,9 +74,24 @@
         }
     
     });
-app.controller('ChatController', function ($scope) {
+app.controller('ChatController', function ($scope,$http) {
     
-    $scope.chatrooms = [
+    $scope.members  = [
+        {
+            "member_id": "3",
+            "member_name": "yousef"
+        },
+        {
+            "member_id": "4",
+            "member_name": "Swagat"
+        },
+        {
+            "member_id": "1",
+            "member_name": "abdul"
+        },
+    ]
+    
+   /* $scope.chatrooms = [
         {
             "chatroom_id": 1,
             "chatroom_name": "Development"
@@ -89,7 +104,11 @@ app.controller('ChatController', function ($scope) {
             "chatroom_id": 3,
             "chatroom_name": "marketing"
         }
-    ]
+    ]*/
+    
+    
+    
+    
   
 	$scope.messages = [
         {
@@ -147,19 +166,49 @@ app.controller('ChatController', function ($scope) {
             "message": "yoyo!"
         },
 	];
+    
+       $scope.getChatrooms = function(){
+           $http.get("getChatrooms.php").success(function(data) {
+           //alert(data);
+            $scope.chatrooms = data;
+               
+                });
+        }
+   
+    
+    
+    $scope.submitMessage = function() {
+    $scope.message = document.getElementById('msg').value;
+            if ($scope.message == null) {
+                alert("Input is empty");
+            } else {
+                
+                $http.post(
+                    "sendMessages.php", 
+                    {
+                        'message': $scope.message,
+                        'chatroom_id': $scope.chatroom_id
+                    }
+                ).success(function(data) {
+                    
+                    $scope.message = '';
+                    $scope.chatRoomMsgs($scope.chatroom_id);
+                });
+            }
+        }
 
+    
+    $scope.chatroom_id;
   $scope.chatRoomMsgs = function(id){
-      var msgs = [];
-      $("#clist").toggleClass("chat-list");
-  
-      angular.forEach($scope.messages, function(item) {
-          var key = item['chatroom_id'];
-          if(key == id) {
-              msgs.push(item);
-          }
-      });
+      $scope.chatroom_id = id;
+      $("#clist").hide();
+       $http.get("getMessages.php?chatroom_id="+id).success(function(msgs) {
+        
+                    $scope.chat = msgs;
+                });
+        }
+    
+  /*setInterval(function(){$scope.chatRoomMsgs($scope.chatroom_id);}, 1000);*/
+      
+  });
 
-      $scope.chat = msgs;
-  }
-
-});
