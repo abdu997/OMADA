@@ -118,7 +118,7 @@
         <br />
         <br />
     </div>
-    <div id="chat" ng-controller="ChatController">
+    <div id="chat" ng-controller="ChatController" ng-init="getChatrooms()">
         <div class="panel-head">
             <button id="chat-toggle">Show Chat Rooms</button>
         </div>
@@ -148,8 +148,8 @@
         </div>
         <div class="panel-foot">
             <form id = "sendMsg">
-                <input class="message-input" placeholder="Type message here..." required>
-                <input type="submit" value="Send">
+                <input class="message-input" id="msg" placeholder="Type message here..." required>
+                <input type="submit" ng-click="submitMessage()" value="Send">
             </form>
         </div>
     </div>
