@@ -27,7 +27,8 @@ if (isset($_GET['chatroom_id'])) {
                 'status' => $status,
                 'sender' => $name,
                 'timestamp' => $row[4],
-                'message' => $row[5]
+                'message' => $row[5],
+                'initial_message'=> $row[6],
             );
             $output[] = $out;
                 
