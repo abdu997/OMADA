@@ -115,7 +115,7 @@ app.controller('ChatController', function ($scope,$http) {
                
                 });
         }
-setInterval(function(){$scope.getChatrooms();}, 1000); 
+//setInterval(function(){$scope.getChatrooms();}, 1000); 
     
     $scope.submitMessage = function() {
     $scope.message = document.getElementById('msg').value;

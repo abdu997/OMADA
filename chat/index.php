@@ -118,6 +118,10 @@
         .hidden {
              display:none;
         }
+        #chatroomEdit {
+            margin-left: 95px;
+            color: grey;
+        }
         
     </style>
 
@@ -172,13 +176,15 @@
                                 $("#chatroomCreate").toggleClass("hidden");
                                     });
                                 });
+
                         </script>
                     </ul>
                 </div>
-                <div>
-                    <ul ng-repeat="x in chatrooms | filter: chatSearch" style="margin-top: 0px">
+                <div ng-repeat="x in chatrooms | filter: chatSearch">
+                    <ul  style="margin-top: 0px">
                         <li ng-click='chatRoomMsgs(x.chatroom_id)' class="chat" style="margin-top: -16px; margin-bottom: -16px; text-transform: capitalize;">{{x.chatroom_name}}</li>
                     </ul>
+                    <button id="chatroomEdit"><i class="fa fa-cog fw"></i></button>
                 </div>
             </div>
             <div id="messages" class="compressed">
@@ -220,6 +226,10 @@
         $("#chat-toggle").click(function(e) {
             e.preventDefault();
             $("#msg").toggleClass("compressed");
+        });
+        $("#chatroomEdit").click(function(e) {
+            e.preventDefault();
+            $("#chatroomCreate").toggleClass("hidden");
         });
     </script>
     
