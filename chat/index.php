@@ -119,7 +119,8 @@
              display:none;
         }
         #chatroomEdit {
-            margin-left: 95px;
+            margin-left: 80px;
+            margin-right: 5px;
             color: grey;
         }
         
@@ -166,11 +167,6 @@
                             <input type="submit" name="btnInsert"  ng-click="insertData()" value="{{btnName}}" />
                         </form>
                         <script>
-//                        $(document).ready(function(){
-//                            $(".chat").click(function(){
-//                                $("#chatroomCreate").toggle();
-//                            });
-//                        });
                             $(document).ready(function(){
                                 $("#addChatroom").click(function(){
                                 $("#chatroomCreate").toggleClass("hidden");
@@ -180,11 +176,17 @@
                         </script>
                     </ul>
                 </div>
-                <div ng-repeat="x in chatrooms | filter: chatSearch">
-                    <ul  style="margin-top: 0px">
-                        <li ng-click='chatRoomMsgs(x.chatroom_id)' class="chat" style="margin-top: -16px; margin-bottom: -16px; text-transform: capitalize;">{{x.chatroom_name}}</li>
+                <div>
+                    <ul ng-repeat="x in chatrooms | filter: chatSearch" style="margin-top: 0px">
+                        <li ng-click='chatRoomMsgs(x.chatroom_id)' class="chat" style="margin-top: -16px; margin-bottom: -16px; text-transform: capitalize;">{{x.chatroom_name}}<button id="chatroomEdit" class="chatroomEdit"><i class="fa fa-cog fw"></i></button><button><i class="fa fa-trash fw" style="color: red;"></i></button></li>
                     </ul>
-                    <button id="chatroomEdit"><i class="fa fa-cog fw"></i></button>
+                    <script>
+                        $(document).ready(function(){
+                            $(".chatroomEdit").click(function(){
+                                $("#chatroomCreate").toggleClass("hidden");
+                            });
+                        });
+                    </script>
                 </div>
             </div>
             <div id="messages" class="compressed">
@@ -226,10 +228,6 @@
         $("#chat-toggle").click(function(e) {
             e.preventDefault();
             $("#msg").toggleClass("compressed");
-        });
-        $("#chatroomEdit").click(function(e) {
-            e.preventDefault();
-            $("#chatroomCreate").toggleClass("hidden");
         });
     </script>
     
