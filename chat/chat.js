@@ -112,10 +112,12 @@ app.controller('ChatController', function ($scope,$http) {
            $http.get("getChatrooms.php").success(function(data) {
            //alert(data);
             $scope.chatrooms = data;
+               //console.log($scope.chatrooms);
                
                 });
         }
 setInterval(function(){$scope.getChatrooms();}, 1000); 
+    setInterval(function(){$scope.chatRoomMsgs($scope.chatroom_id);}, 1000); 
     
     $scope.submitMessage = function() {
     $scope.message = document.getElementById('msg').value;
@@ -143,11 +145,13 @@ setInterval(function(){$scope.getChatrooms();}, 1000);
       $scope.chatroom_id = id;
        $http.get("getMessages.php?chatroom_id="+id).success(function(msgs) {
                     $scope.chat = msgs;
+                    //$("#messages").scrollTop($("#messages")[0].scrollHeight);
                 });
         }
 //  setInterval(function(){$scope.chatRoomMsgs($scope.chatroom_id);}, 1000);
   
   function init() {
+      alert("Init called");
   getChatrooms();
   getMembers();
 }

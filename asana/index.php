@@ -76,7 +76,7 @@
                         'goal_id': $scope.goal_id
                     }
                 ).success(function(data) {
-                    
+                    //alert(data);
                     $scope.goal = null;
                     $scope.btnName = "ADD";
                     $scope.displayData();

@@ -145,7 +145,7 @@
         <br />
 -->
     </div>
-    <div id="chat" ng-controller="ChatController" ng-init="init()">
+    <div id="chat" ng-controller="ChatController" ng-init="getMembers()">
         <div class="panel-head">
             <button id="chat-toggle">Show Chat Rooms</button>
         </div>
