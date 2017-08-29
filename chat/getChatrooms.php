@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("../php/connect.php");
 $output = [];
 
 $query = "SELECT chatroom_id FROM chatroom_user WHERE user_id = '$user_id' AND team_id = '$team_id'";

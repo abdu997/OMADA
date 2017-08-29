@@ -48,20 +48,20 @@
 
         <div class="w3-container">
             <div class="row">
-                <div class="col-md-6 left" style="padding-right: 0px">
+                <div class="col-md-8 left" style="padding-right: 0px">
                     <div class="tile-bg">
                         <h3><i class="fa fa-comments fa-fw icon"></i>Chat</h3>
-                        <?php include 'chat.php';?>
+                        <?php include 'chat/index.php';?>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="tile-bg">
                         <h3><i class="fa fa-list-ol fa-fw icon"></i>Personal To Do</h3>
-                        <?php include 'personal-todo.php';?>
+                        <?php include 'personalToDo/index.php';?>
                     </div>
                     <div class="tile-bg">
                         <h3><i class="fa fa-map-marker fa-fw icon"></i>Team Map</h3>
-                        <?php include 'team-map.php';?>
+                        <?php //include 'team-map.php';?>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                 <div class="col-md-8">
                     <div class="tile-bg">
                         <h3><i class="fa fa-calendar fa-fw icon"></i>Team Calendar</h3>
-                        <?php //include 'team-calendar.php';?>
+                        <?php include 'teamCalendar.php';?>
                     </div>
                 </div>
                 <div class="col-md-4">

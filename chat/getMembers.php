@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("../php/connect.php");
 $output = array();
 $query  = "SELECT u_id FROM team_user where t_id = '$team_id'";
 $result = mysqli_query($connect, $query);
@@ -14,7 +14,6 @@ if (mysqli_num_rows($result) > 0) {
         $output[] = $out;
         
     }
-    //echo "success"
     echo json_encode($output);
 }
 ?> 

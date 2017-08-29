@@ -1,5 +1,5 @@
 <?php 
-require_once 'db.php'; // The mysql database connection script
+require_once '../php/connect.php'; // The mysql database connection script
 if(isset($_GET['itemID'])){
 	$status = $mysqli->real_escape_string($_GET['status']);
 	$itemID = $mysqli->real_escape_string($_GET['itemID']);
