@@ -1,5 +1,5 @@
 <?php 
-include('connect.php'); // The mysql database connection script
+include('../php/connect.php'); // The mysql database connection script
 $data = json_decode(file_get_contents("php://input"));
 if(count($data) > 0){
 $status = mysqli_real_escape_string($connect,$data->status);

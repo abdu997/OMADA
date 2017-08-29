@@ -1,10 +1,10 @@
 <html  ng-app="myapp">
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="../js/angular.min.js"></script>
     <script src="../js/jquery.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        .panel {
+        .chatPanel {
             background: black;
             max-width: 700px;
             height: 500px;
@@ -58,7 +58,7 @@
             max-width: 700px
         }
         .message-input.compressed {
-            width: 64%;
+            width: 60%;
             height: 40px;
             margin-left: 200px
         }
@@ -74,14 +74,14 @@
             height: 500px;
             background: black;
             position: absolute;
-            width: 225px;
+            max-width: 225px;
             overflow-y: auto;
         }
         .chat-list#clist {
             height: 540px;
             background: black;
             position: absolute;
-            width: 200px;
+            max-width: 200px;
             overflow-y: auto;
             display: initial
         }
@@ -149,7 +149,7 @@
         <div class="panel-head">
             <button id="chat-toggle">Show Chat Rooms</button>
         </div>
-        <div class="panel" id="scroll">
+        <div class="chatPanel" id="scroll">
             <div id="clist" class='chat-list'>
                 <div class="search-chat">
                     <input placeholder="Search Chatroom" style="width:200px" ng-model="chatSearch">
@@ -199,10 +199,20 @@
                 <ul id="test" ng-repeat="x in chat | filter : {'initial_message':'N'} | orderBy : 'message_id'">
                     <li class="{{ x.class }}">
                         <span class="{{ x.status }}">{{ x.sender }}</span>
-                        <span class="time">{{ x.timestamp | date : "EEE d h:mm a"}}</span>
+                        <span class="time">{{ x.timestamp | date : "EEE d MMM h:mm a"}}</span>
                         <br>
-                        <span class="message">{{ x.message }}</span>
+                        <span id="message" class="message">{{ x.message }}</span>
                     </li>
+                    <script>
+var $words = $('#message.message').text().split(' ');
+for (i in $words) {
+    if ($words[i].indexOf('http://') == 0) {
+        $words[i] = '<a href="' + $words[i] + '">' + $words[i] + '</a>';
+    }
+}
+
+$('#message.message').html($words.join(' '));
+                    </script>
                 </ul>
             </div>
         </div>

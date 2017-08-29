@@ -10,11 +10,7 @@
         }
     </style>
 </head>
-
 <body ng-controller="PersonalList">
-
-
-
     <form name="shopList">
 
         <input type="text" ng-model="itemInput" placeholder="Add New Item" autofocus required />
@@ -35,11 +31,6 @@
         <br>
     </label>
     <br>
-
-
-
-
-
     <script>
         //Define an angular module for our app
         var app = angular.module('List', []);

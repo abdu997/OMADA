@@ -1,8 +1,8 @@
 <html>
 
 <head>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <script src="../js/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
         
         <div class="col-sm-3">
             <h3>In Progress</h3>
-            <div ng-repeat="x in goals | filter : {'status':'inProgress'}">
+            <div ng-repeat="x in goals | filter : 'inProgress'">
                 <p>{{x.goal}}</p>
                 <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
                 <button ng-click="deleteData(x.goal_id)">Delete</button>
@@ -36,7 +36,7 @@
 
         <div class="col-sm-3">
             <h3>In Review</h3>
-            <div ng-repeat="x in goals | filter : {'status':'inReview'}">
+            <div ng-repeat="x in goals | filter : 'inReview'">
                 <p>{{x.goal}}</p>
                 <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
                 <button ng-click="deleteData(x.goal_id)">Delete</button>
@@ -47,7 +47,7 @@
         
         <div class="col-sm-3">
             <h3>Completed</h3>
-            <div ng-repeat="x in goals | filter : {'status':'completed'}">
+            <div ng-repeat="x in goals | filter : 'completed'">
                 <p>{{x.goal}}</p>
                 <button ng-click="updateData(x.goal_id, x.goal)">Update</button>
                 <button ng-click="deleteData(x.goal_id)">Delete</button>
@@ -111,10 +111,10 @@
                 'status': status,
                 'goal_id': goal_id
             }
-            ).success(function(data){                      
+                      ).success(function(data){
+                
             });
         }
-
         
         $scope.displayData = function() {
             $http.get("read.php")

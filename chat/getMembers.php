@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("../php/connect.php");
 $output = array();
 $query  = "SELECT u_id FROM team_user where t_id = '$team_id'";
 $result = mysqli_query($connect, $query);

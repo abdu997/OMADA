@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("../php/connect.php");
 $output = array();
 $query  = "SELECT * FROM linkRepository where TEAM_ID = '$team_id'";
 $result = mysqli_query($connect, $query);

@@ -1,5 +1,4 @@
 <?php
-// include '/php/calendar/editEventInfo.php';
 session_start();
 
 if(!isset($_SESSION[ 'name'])){
@@ -11,36 +10,17 @@ $user_id = $_SESSION['user_id'];
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<div w3-include-html="head.html"></div>
+    <!-- Fullcalendar CSS -->
+    <link href='lib/fullcalendar.min.css' rel='stylesheet' />
+    <link href='lib/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
-<body>
-  <div id="wrapper">
-    <div>
-      <?php include "nav_bar.php"; ?>
-    </div>
-
-    <div id="page-wrapper">
-
-      <div class="container-fluid">
-
-        <!-- Page Heading -->
-        <div class="row">
-          <div class="col-lg-12">
-            <h1 class="page-header">
-              Drag and Drop Calendar (jQuery)
-              <small>Subheading</small>
-            </h1>
-          </div>
-        </div>
-        <div class="row">
-          <div id="calendar" class="col-lg-8" width="100%"></div>
-        </div>
 
         <!-- /.row -->
-
+        <div class="row">
+          <div id="calendar" width="100%"></div>
+        </div>
         		<!-- Modal -->
         		<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         		  <div class="modal-dialog" role="document">
@@ -234,23 +214,14 @@ $user_id = $_SESSION['user_id'];
         			</div>
         		  </div>
         		</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- jQuery -->
+<!--Scripts-->
   <script src="js/jquery.js"></script>
-  <script src="js/w3data.js"></script>
-  <script>
-      w3IncludeHTML();
-  </script>
 
-  <!-- Bootstrap Core JavaScript -->
   <script src="js/bootstrap.min.js"></script>
   <script src='lib/moment.min.js'></script>
-  <!-- <script src='lib/jquery.min.js'></script> -->
+
   <script src='lib/fullcalendar.min.js'></script>
-  <!-- <script src='lib/jquery-ui.min.js'></script> -->
+
 
   <script>
 	  $(document).ready(function() {
@@ -416,6 +387,3 @@ $user_id = $_SESSION['user_id'];
 
 	});
 </script>
-
-</body>
-</html>

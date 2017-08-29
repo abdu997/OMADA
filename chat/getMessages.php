@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("../php/connect.php");
 $output = [];
 if (isset($_GET['chatroom_id'])) {
     $chatroom_id   = $_GET['chatroom_id'];

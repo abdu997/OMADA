@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("../php/connect.php");
 $data = json_decode(file_get_contents("php://input"));
 if (count($data) > 0) {
     $goal = mysqli_real_escape_string($connect, $data->goal);
@@ -13,7 +13,7 @@ if (count($data) > 0) {
         } else {
             echo 'Error';
         }
-    }
+    } 
     if ($btn_name == 'Update') {
         $goal_id = $data->goal_id;
         $query = "UPDATE team_goal SET goal = '$goal' WHERE goal_id = '$goal_id'";
