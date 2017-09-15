@@ -1,8 +1,8 @@
 <?php
-  session_start();
+  //session_start();
   include dirname(__FILE__)."../../connection.php";
-  $user_id = $_SESSION['user_id'];
-  $team_id = $_SESSION['team_id'];
+  //$user_id = "1";
+  //$team_id = "1";
 
   if ($_GET['type'] == 'team'){
     $calendar_sql="SELECT * FROM `test`.`calendar` WHERE `team_id` = $team_id";

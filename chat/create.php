@@ -17,12 +17,7 @@ if (count($data) > 0) {
             
             $chat_id = mysqli_insert_id($connect);
             
-            foreach($members as $x){
-                date_default_timezone_set('US/Eastern');
-                $date = date("Y-m-d", strtotime("now"));
-                $time = date("H:i:s", strtotime("now"));
-                $timestamp = $date . 'T' . $time . 'Z';
-                
+            foreach($members as $x){                
                 $sql2 = "INSERT INTO chatroom_user (chatroom_id, user_id, team_id) VALUES('$chat_id', '$x', '$team_id')";
                 mysqli_query($connect, $sql2);
                 
@@ -45,4 +40,6 @@ if (count($data) > 0) {
     
 
 
-?>  
+?>
+
+

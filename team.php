@@ -1,5 +1,10 @@
-<html>
+<?php
 
+$team_id = '1';
+$user_id = '1';
+
+?>
+<html>
 <head>
     <title>Dashboard Draft</title>
     <meta charset="UTF-8">
@@ -21,8 +26,31 @@
     <link rel="stylesheet" href="css/style.css">
     
     <!--Angular Scripts-->
-    <script src="js/dash-app.js"></script>
+<!--    <script src="js/dash-app.js"></script>-->
     <script src="js/angular.min.js"></script>
+    
+    <!--Scripts-->
+    <script src='lib/moment.min.js'></script>
+    <script src='lib/fullcalendar.min.js'></script>
+    <script src="lib/ajaxCalendar.js"></script>
+    
+    <!-- Calendar CSS-->
+    <link href='lib/fullcalendar.min.css' rel='stylesheet'>
+    <link href='lib/fullcalendar.print.min.css' rel='stylesheet' media='print'>
+    
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    
+    <!--Calendar Scripts-->
+<!--
+    <script src='lib/fullcalendar.min.js'></script>
+    <script src="lib/ajaxCalendar.js"></script>
+    <script src='lib/moment.min.js'></script>
+-->
+    
+    <!--Todo Scripts-->
+    <script src="personalTodo/personalTodo.js"></script>
+    
 </head>
 
 <!-- Top container -->
@@ -51,17 +79,39 @@
                 <div class="col-md-8 left" style="padding-right: 0px">
                     <div class="tile-bg">
                         <h3><i class="fa fa-comments fa-fw icon"></i>Chat</h3>
-                        <?php include 'chat/index.php';?>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="tile-bg">
                         <h3><i class="fa fa-list-ol fa-fw icon"></i>Personal To Do</h3>
-                        <?php include 'personalToDo/index.php';?>
+<style>
+    .items-list-cb:checked ~ .items-list-desc {
+            color: #34bf6e;
+            text-decoration: line-through;
+        }
+</style>
+
+<div ng-controller="taskController" ng-app="personalToDo"> 
+    <form name="taskForm">
+        <input type="text" ng-model="itemInput" placeholder="Add New Item" autocomplete="off" autofocus required />
+        <button type="submit" ng-click="addItem(itemInput); itemInput = null" ng-disabled="taskForm.$invalid">
+            <i class="fa fa-plus"></i>&nbsp;Add Item
+        </button>
+    </form>
+    <input type="text" ng-model="filterItem"placeholder="Filter Items" />
+    <br>
+        <label ng-repeat="item in items | filter : filterItem">
+            <input type="checkbox" value="{{item.STATUS}}" ng-checked="item.STATUS==2" ng-click="changeStatus(item.TASK_ID,item.STATUS,item.ITEM)" class="items-list-cb">
+            <span></span>
+            <span class="items-list-desc" ng-class="{strike:item.STATUS==2}">{{item.ITEM}} <span>[{{item.CREATED_AT | date:"MMM d"}}]</span></span>
+            <a ng-click="deleteItem(item.TASK_ID)"><i class="fa fa-minus-circle"></i></a>
+            <br>
+        </label>
+</div>
                     </div>
+                    
                     <div class="tile-bg">
                         <h3><i class="fa fa-map-marker fa-fw icon"></i>Team Map</h3>
-                        <?php //include 'team-map.php';?>
                     </div>
                 </div>
             </div>
@@ -69,7 +119,8 @@
                 <div class="col-md-8">
                     <div class="tile-bg">
                         <h3><i class="fa fa-calendar fa-fw icon"></i>Team Calendar</h3>
-                        <?php include 'teamCalendar.php';?>
+                        <?php include'teamCalendar.php'; ?>
+                        <div id="calendar" width="100%"></div>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -82,7 +133,6 @@
                 <div class="col-md-12">
                     <div class="tile-bg">
                         <h3><i class="fa fa-money fa-fw icon"></i>Transaction Tracker</h3>
-                        <?php //include 'trantracker.php';?>
                     </div>
                 </div>
             </div>
@@ -92,8 +142,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+
 
     <!--Javascript-->
     <script src="js/w3data.js"></script>
@@ -101,13 +150,8 @@
       w3IncludeHTML();
     </script>
     <script for="sidebar">
-        // Get the Sidebar
         var mySidebar = document.getElementById("mySidebar");
-
-        // Get the DIV with overlay effect
         var overlayBg = document.getElementById("myOverlay");
-
-        // Toggle between showing and hiding the sidebar, and add overlay effect
         function w3_open() {
             if (mySidebar.style.display === 'block') {
                 mySidebar.style.display = 'none';
@@ -117,18 +161,13 @@
                 overlayBg.style.display = "block";
             }
         }
-
-        // Close the sidebar with the close button
         function w3_close() {
             mySidebar.style.display = "none";
             overlayBg.style.display = "none";
         }
     </script>
     <script for="modal">
-        // Get the modal
         var modal = document.getElementById('team_create');
-
-        // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";

@@ -1,11 +1,11 @@
 <?php 
-require_once '../php/connect.php'; // The mysql database connection script
+require_once '../php/connect.php';
 $status = '%';
 if(isset($_GET['status'])){
-	$status = $mysqli->real_escape_string($_GET['status']);
+	$status = $connect->real_escape_string($_GET['status']);
 }
-$query="SELECT ID, ITEM, STATUS, CREATED_AT from personal_task where status like '$status' order by id desc";
-$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+$query="SELECT TASK_ID, ITEM, STATUS, CREATED_AT from personal_todo where status like '$status' and user_id = '$user_id' order by task_id desc";
+$result = $connect->query($query) or die($connect->error.__LINE__);
 
 $arr = array();
 if($result->num_rows > 0) {

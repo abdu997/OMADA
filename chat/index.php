@@ -1,7 +1,7 @@
-<html  ng-app="myapp">
-<head>
+<div ng-app="myapp" ng-controller="ChatController" ng-init="getMembers()">
     <script src="../js/angular.min.js"></script>
     <script src="../js/jquery.js"></script>
+    <script src="chat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .chatPanel {
@@ -76,6 +76,7 @@
             position: absolute;
             max-width: 225px;
             overflow-y: auto;
+            overflow-x: visible;
         }
         .chat-list#clist {
             height: 540px;
@@ -126,39 +127,20 @@
         
     </style>
 
-</head>
-
-<body>
-    <div ng-controller="chatroomController" ng-init="getMembers()">
-<!--
-        <form>
-            <label>Chatroom name</label>
-            <input type="text" name="chatroom_name" ng-model="chatroom_name">
-            <br>
-            <label>Pick Members:</label>
-            <div class="form-group" ng-repeat="x in member">
-                <input type="checkbox" name="checkBox" ng-click="updateCheckBox($event)" id="{{x.user_id}}" value="{{x.user_name}}">{{x.user_name}}
-            </div>
-            <input type="submit" name="btnInsert"  ng-click="insertData()" value="{{btnName}}" />
-        </form>
-        <br />
-        <br />
--->
-    </div>
-    <div id="chat" ng-controller="ChatController" ng-init="getMembers()">
+    <div id="chat">
         <div class="panel-head">
             <button id="chat-toggle">Show Chat Rooms</button>
         </div>
-        <div class="chatPanel" id="scroll">
+        <div class="chatPanel" id="scroll" style="width:100%">
             <div id="clist" class='chat-list'>
                 <div class="search-chat">
-                    <input placeholder="Search Chatroom" style="width:200px" ng-model="chatSearch">
+                    <input placeholder="Search Chatroom" style="width:200px" ng-model="chatSearch" autocomplete="off">
                     <ul style="border-bottom: 1px solid white; margin-top: 0px">
                         <li id="addChatroom" class="chat"><i class="fa fa-plus fa-fw"></i> Add Chatroom
                         </li>
                         <form id="chatroomCreate" class="hidden">
                             <label>Chatroom name</label>
-                            <input type="text" name="chatroom_name" ng-model="chatroom_name">
+                            <input type="text" name="chatroom_name" ng-model="chatroom_name" autocomplete="off">
                             <br>
                             <label>Pick Members:</label>
                             <div class="form-group" ng-repeat="x in member">
@@ -178,7 +160,7 @@
                 </div>
                 <div>
                     <ul ng-repeat="x in chatrooms | filter: chatSearch" style="margin-top: 0px">
-                        <li ng-click='chatRoomMsgs(x.chatroom_id)' class="chat" style="margin-top: -16px; margin-bottom: -16px; text-transform: capitalize;">{{x.chatroom_name}}<button id="chatroomEdit" class="chatroomEdit"><i class="fa fa-cog fw"></i></button><button><i class="fa fa-trash fw" style="color: red;"></i></button></li>
+                        <li ng-click='chatRoomMsgs(x.chatroom_id)' class="chat" style="margin-top: -16px; margin-bottom: -16px; text-transform: capitalize;">{{x.chatroom_name}}<button id="chatroomEdit" class="chatroomEdit"><i class="fa fa-cog fw"></i></button><button ng-click="deleteData(x.chatroom_id);"><i class="fa fa-trash fw" style="color: red;"></i></button></li>
                     </ul>
                     <script>
                         $(document).ready(function(){
@@ -203,16 +185,6 @@
                         <br>
                         <span id="message" class="message">{{ x.message }}</span>
                     </li>
-                    <script>
-var $words = $('#message.message').text().split(' ');
-for (i in $words) {
-    if ($words[i].indexOf('http://') == 0) {
-        $words[i] = '<a href="' + $words[i] + '">' + $words[i] + '</a>';
-    }
-}
-
-$('#message.message').html($words.join(' '));
-                    </script>
                 </ul>
             </div>
         </div>
@@ -223,9 +195,7 @@ $('#message.message').html($words.join(' '));
             </form>
         </div>
     </div>
-    <!-- /#wrapper -->
-    
-    
+
     <script>
         $("#chat-toggle").click(function(e) {
             e.preventDefault();
@@ -239,9 +209,9 @@ $('#message.message').html($words.join(' '));
             e.preventDefault();
             $("#msg").toggleClass("compressed");
         });
+//        $("#panel-toggle").click(function(e) {
+//            e.preventDefault();
+//            $("#sendMsg").removeClass("hidden");
+//        });
     </script>
-    
-</body>
-
-</html>
-<script src="chat.js"></script>
+</div>

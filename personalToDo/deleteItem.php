@@ -1,12 +1,12 @@
 <?php 
-require_once '../php/connect.php'; // The mysql database connection script
+require_once '../php/connect.php';
 if(isset($_GET['itemID'])){
-	$itemID = $mysqli->real_escape_string($_GET['itemID']);
+	$itemID = $connect->real_escape_string($_GET['itemID']);
 
-	$query="DELETE FROM personal_task WHERE id='$itemID'";
-	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	$query="DELETE FROM personal_todo WHERE task_id = '$itemID'";
+	$result = $connect->query($query) or die($connect->error.__LINE__);
 
-	$result = $mysqli->affected_rows;
+	$result = $connect->affected_rows;
 
 	echo $json_response = json_encode($result);
 }
