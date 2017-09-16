@@ -39,7 +39,7 @@
         }
         
         $scope.deleteData = function(chatroom_id) {
-            if (confirm("Are you sure you want to delete this data?")) {
+            if (confirm("Are you sure you want to delete this chatroom?")) {
                 $http.post("delete.php", {
                         'chatroom_id': chatroom_id
                     })
@@ -71,26 +71,24 @@
     // submitMessage is the add button messageInput is the field
     // ng-click="submitMessage(messageInput); messageInput = null"
     $scope.submitMessage = function() {
-    // 
-    $scope.message = document.getElementById('msg').value;
-            if ($scope.messageInput == null) {
-                alert("Input is empty");
-            } else {
-                
-                $http.post(
-                    "sendMessages.php", 
-                    {
-                        'message': $scope.message,
-                        'chatroom_id': $scope.chatroom_id
-                    }
-                ).success(function(data) {
-                    
-                    $scope.message = '';
-                    // gets the ID from the click fetch function
-                    $scope.chatRoomMsgs($scope.chatroom_id);
-                });
+        $scope.message = document.getElementById('msg').value;
+                if ($scope.messageInput == null) {
+                    alert("Message field is empty");
+                } else {
+                    $http.post(
+                        "sendMessages.php", 
+                        {
+                            'message': $scope.message,
+                            'chatroom_id': $scope.chatroom_id
+                        }
+                    ).success(function(data) {
+
+                        $scope.message = '';
+                        // gets the ID from the click fetch function
+                        $scope.chatRoomMsgs($scope.chatroom_id);
+                    });
+                }
             }
-        }
 
     
     $scope.chatroom_id;
@@ -101,13 +99,7 @@
                     //$("#messages").scrollTop($("#messages")[0].scrollHeight);
                 });
         }
-//  setInterval(function(){$scope.chatRoomMsgs($scope.chatroom_id);}, 1000);
+
   
-  function init() {
-      alert("Init called");
-  getChatrooms();
-  getMembers();
-}
-      
   });
 

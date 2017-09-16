@@ -190,7 +190,7 @@
         </div>
         <div class="panel-foot">
             <form id="sendMsg" name="sendMsg">
-                <input class="message-input compressed" id="msg" placeholder="Type message here..." ng-model="messageInput" autocomplete="off" name="message" autofocus required>
+                <input type="text" class="message-input compressed" id="msg" placeholder="Type message here..." ng-model="messageInput" autocomplete="off" name="message" autofocus required>
                 <input type="submit" ng-click="submitMessage(messageInput); messageInput = null" value="Send" ng-disabled="sendMsg.$invalid">
             </form>
         </div>
