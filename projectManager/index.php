@@ -12,8 +12,6 @@
         <form name="goalEnter">
             <label>Goal</label>
             <input type="text" name="goal" ng-model="goal" autocomplete="off" autofocus required>
-            <label>objective</label>
-            <input type="text" name="objective" ng-model="objective" autocomplete="off" autofocus>
             <br />
             <input type="submit" name="btnInsert" ng-click="goalInsert();" value="{{btnName}}" ng-disabled="goalEnter.$invalid" >
         </form>
@@ -22,7 +20,7 @@
         <div class="col-sm-2">
             <h3>Not Started</h3>
             <div ng-repeat="x in goals | filter : 'not_started'">
-                <p style="cursor:pointer;" ng-click="filterRecords(x.goal_id)">{{x.goal}}</p>
+                <p style="cursor:pointer;" ng-click="filterRecords(x.goal_id); showProgress()">{{x.goal}}</p>
                 <button ng-click="updateData(x.goal_id, x.goal)"><i class="fa fa-pencil-square-o fw"></i></button>
                 <button ng-click="deleteData(x.goal_id)"><i class="fa fa-trash fw"></i></button><br>
                 <button ng-click="advanceGoalStatus(x.goal_id, x.status)"><i class="fa fa-arrow-right fw"></i></button>
@@ -61,21 +59,21 @@
             </div>
         </div>
         
-        <div class="col-sm-4" style="background: yellow; overflow-y: auto; height: 400px">
+        <div ng-show="progress_record" class="col-sm-4" style="overflow-y: auto; height: 400px">
             <h3>Progress Record</h3>
-            <form name="recordForm">
-                <input type="text" id="recordField" placeholder="Add record" autocomplete="off" autofocus name="progress" ng-model="addRecord" required>
-                <input type="submit" name="recordInsert" ng-click="submitRecord(addRecord); addRecord = null" ng-disabled="recordForm.$invalid">
+            <form name="recordForm" id="recordForm">
+                <input type="text" id="recordField" ng-model="recordInput" name="progress" placeholder="Add record" autocomplete="off" autofocus required>
+                <input type="submit" name="recordInsert" ng-click="submitRecord(recordInput); recordInput = null" ng-disabled="recordForm.$invalid">
             </form>
             <div id="comments" ng-repeat="x in records | filter : {'initial_record':'N'} | orderBy : '-record_id'">
                 <p style="margin-bottom: 0px">{{x.record}}</p>
                 <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
-                <span style="font-size: 10px; float: right;"> By {{x.user_id}}</span>
+                <span style="font-size: 10px; float: right;"> By {{x.user}}</span>
             </div>
             <div id="first-comment" width="100px" ng-repeat="x in records | filter : {'initial_record':'Y'} | orderBy : '-record_id'">
-                <h4 style="margin-bottom: 0px">{{x.record}}</h4>
+                <h4 style="margin-bottom: 0px">{{x.record}} {{x.user}}</h4>
                 <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
-                <span style="font-size: 10px; float: right;"> By {{x.user_id}}</span>
+<!--                <span style="font-size: 10px; float: right;"> By {{x.user}}</span>-->
             </div>       
         </div>
     </div>
@@ -84,28 +82,23 @@
 </html>
 <script>
     var app = angular.module("myapp", []);
-    app.controller("usercontroller", function($scope, $http) {
+    app.controller("usercontroller", function($scope, $http, $rootScope) {
         $scope.btnName = "ADD";
         $scope.goalInsert = function() {
             if ($scope.goal == null) {
                 alert("Goal is required");
-            }
-            if ($scope.objective == null) {
-                alert("objective is required");
-            }else {
+            } else {
                 
                 $http.post(
                     "create.php", 
                     {
                         'goal': $scope.goal,
-                        'objective': $scope.objective,
                         'btnName': $scope.btnName,
                         'goal_id': $scope.goal_id
                     }
                 ).success(function(data) {
                     //alert(data);
                     $scope.goal = null;
-                    $scope.objective = null;
                     $scope.btnName = "ADD";
                     $scope.displayData();
                 });
@@ -172,28 +165,24 @@
             }
         }
         
-        // submitMessage is the add button messageInput is the field
-        // ng-click="submitMessage(messageInput); messageInput = null"
         $scope.submitRecord = function() {
-        $scope.progress = document.getElementById('recordField').value;
-                if ($scope.addRecord == null) {
-                    alert("Input is empty");
-                } else {
-
-                    $http.post(
-                        "insertRecord.php", 
-                        {
-                            'record': $scope.progress  ,
-                            'goal_id': $scope.goal_id
-                        }
+            $scope.record = document.getElementById('recordField').value;
+            if ($scope.recordInput == null) {
+                alert("Input is empty");
+            } else {
+                $http.post(
+                    "insertRecord.php",
+                    {
+                        'record': $scope.record,
+                        'goal_id': $scope.goal_id
+                    }
                     ).success(function(data) {
-
-                        $scope.record = '';
-                        // gets the ID from the click fetch function
-                        $scope.filterRecords($scope.goal_id);
-                    });
-                }
+                    $scope.record = '';
+                    $scope.filterRecords($scope.goal_id);
+                });
+            }
         }
+
         
         $scope.goal_id;
         $scope.filterRecords = function(id){
@@ -202,6 +191,12 @@
                 $scope.records = records;
             });
         }
-        setInterval(function(){$scope.filterRecords($scope.goal_id);}, 1000); 
+        setInterval(function(){$scope.filterRecords($scope.goal_id);}, 1000);
+        
+        $scope.progress_record = false;
+        $scope.showProgress = function() {
+        $scope.progress_record = true;
+        };
+        
     });
 </script>
