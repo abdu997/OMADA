@@ -1,7 +1,7 @@
 <?php
 
 
-include "../connection/connect.php";
+include "connect.php";
 $data = json_decode(file_get_contents("php://input"));
 
 session_start();
@@ -16,7 +16,7 @@ if(count($data) > 0){
 			echo $return;
 		}
 	else{
-		echo "no";
+		 echo "Error: " . $sql . "<br>" . mysqli_error($connect);
 	}
 }
 

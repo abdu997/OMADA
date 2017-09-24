@@ -1,10 +1,10 @@
 <?php
-include "connect.php";
+include "php/connect.php";
 if(isset($_GET['token'])){
     $token = $_GET['token'];
 }
-$sql = "SELECT idusers FROM user WHERE password = '$token'";
-$result = mysqli_query($sql);
+$sql = "SELECT idusers FROM users WHERE password = '$token'";
+$result = mysqli_query($connect,$sql);
 $count = mysqli_num_rows($result);
 
 ?>
@@ -53,7 +53,7 @@ $count = mysqli_num_rows($result);
 							
                     })
                     .success(function(data) {
-                        alert("okay");
+                        alert(data);
 
                     });
 
