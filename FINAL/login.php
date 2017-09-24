@@ -21,6 +21,8 @@
         <form id="registerForm" class="hidden">
             <label>Email</label>
             <input type="email" ng-model="registerEmail">
+            <input type="text" ng-model="firstName">
+            <input type="text" ng-model="lastName">
             <input ng-click="register()" type="submit" value="register">
         </form>
     </body>
@@ -40,38 +42,45 @@
         var app = angular.module('loginApp', []);
         app.controller('loginController', function($scope) {
             $scope.login = function() {
-                if ($scope.email == "") {
+                if ($scope.email == null) {
                     alert("Email invalid");
                 } else if ($scope.password == ""){
                     alert("Password is needed");
                 } else {
-                    //alert("okay");
-                    $http.post(
-                        "php/loginRequest.php", {
-                            'email': $scope.email,
-                            'password': $scope.password
-                        }
-                    ).success(function(data) {
-                        alert(data);
-                        $scope.email = null;
-                        $scope.password = null;
-                    });
+                    alert("okay");
+//                    $http.post(
+//                        "php/loginRequest.php", {
+//                            'email': $scope.email,
+//                            'password': $scope.password
+//                        }
+//                    ).success(function(data) {
+//                        alert(data);
+//                        $scope.email = null;
+//                        $scope.password = null;
+//                    });
                 }
             }
             
             $scope.register = function() {
                 if ($scope.registerEmail == null) {
-                    alert("valid email is required")
+                    alert("valid email is required");
+                } else if($scope.firstName == ""){
+                    alert("First name is required");  
+                } else if($scope.lastName == "") {
+                    alert("Last name is required");
                 } else {
                     alert("okay");
-                    $scope.registerEmail = null;
                     $http.post(
                         "php/registerRequest.php", {
-                            'email': $scope.registerEmail
+                            'email': $scope.registerEmail,
+                            'first_name': $scope.firstName,
+                            'last_name': $scope.lastName
                         }
                     ).success(function(data) {
                         alert(data);
                         $scope.registerEmail = null;
+                        $scope.firstName = null;
+                        $scope.lastName = null;
                     });
                 }
             }
