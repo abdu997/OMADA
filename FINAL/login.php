@@ -21,7 +21,9 @@
         <form id="registerForm" class="hidden">
             <label>Email</label>
             <input type="email" ng-model="registerEmail">
+            <label>First Name</label>
             <input type="text" ng-model="firstName">
+            <label>Last Name</label>
             <input type="text" ng-model="lastName">
             <input ng-click="register()" type="submit" value="register">
         </form>
@@ -40,7 +42,7 @@
     </script>
     <script>
         var app = angular.module('loginApp', []);
-        app.controller('loginController', function($scope) {
+        app.controller('loginController', function($scope, $http) {
             $scope.login = function() {
                 if ($scope.email == null) {
                     alert("Email invalid");
@@ -81,6 +83,7 @@
                         $scope.registerEmail = null;
                         $scope.firstName = null;
                         $scope.lastName = null;
+                                            
                     });
                 }
             }

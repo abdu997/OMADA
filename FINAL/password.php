@@ -5,6 +5,7 @@ if(isset($_GET['token'])){
 }
 $sql = "SELECT idusers FROM users WHERE password = '$token'";
 $result = mysqli_query($connect,$sql);
+
 $count = mysqli_num_rows($result);
 
 ?>
@@ -13,6 +14,7 @@ $count = mysqli_num_rows($result);
 <html>
     <head>
         <script src="js/angular.min.js"></script>
+        <script src="js/jquery.js"></script>
     </head>
 	
     <body ng-app="registerApp" ng-controller="registerController">
@@ -27,7 +29,7 @@ $count = mysqli_num_rows($result);
             <input id="password" ng-model="password" type="password" autocomplete="off">
             <label>Repeat Password</label>
             <input id="repeatPassword" ng-model="repeatPassword" type="password" autocomplete="off">
-            <input ng-click="passwordInsert(<?php echo $id ?>)" type="submit">
+            <input ng-click="passwordInsert(10)" id="passwordInsert" type="submit">
         </form>
 			<?php
 		}
@@ -39,6 +41,11 @@ $count = mysqli_num_rows($result);
 			?>
     </body>
     <script>
+        $("#passwordInsert").click(function(event){
+            event.preventDefault();
+        });
+    </script>
+    <script>
         var app = angular.module('registerApp', []);
         app.controller('registerController', function($scope, $http) {
             
@@ -46,7 +53,7 @@ $count = mysqli_num_rows($result);
             $scope.passwordInsert = function(id) {
                 if ($scope.pwdpattern.test($scope.password)) { 
                     if (password.value == repeatPassword.value){
-                        
+                        alert("kk");
 						$http.post("php/update_pass.php", {
                         	'id': id,
 							'password':$scope.password
