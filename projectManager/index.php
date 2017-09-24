@@ -59,7 +59,7 @@
             </div>
         </div>
         
-        <div ng-show="progress_record" class="col-sm-4" style="overflow-y: auto; height: 400px">
+        <div ng-show="progress_record" class="col-sm-2" style="overflow-y: auto; height: 400px">
             <h3>Progress Record</h3>
             <form name="recordForm" id="recordForm">
                 <input type="text" id="recordField" ng-model="recordInput" name="progress" placeholder="Add record" autocomplete="off" autofocus required>
