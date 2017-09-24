@@ -8,8 +8,11 @@ if (count($data) > 0){
     $first_name = mysqli_real_escape_string($connect, $data->first_name);
     $last_name = mysqli_real_escape_string($connect, $data->last_name);
 //    $hashed_pass = password_hash($password, PASSWORD_DEFAULT); 
-    $sql = "INSERT INTO test.users (username,email,password ,first_name, last_name)
-    VALUES ('ybce','$email', '$hashed_pass', '$first_name', '$last_name')";
+    $temp_pass = bin2hex(random_bytes(16));
+    $sql = "INSERT INTO test.users (email,password ,first_name, last_name)
+    VALUES ($email', '$temp_pass', '$first_name', '$last_name')";
+    /*EMAIL($email, $temp_pass)*/
+	/*https://www.omadahq.com/password.php/?token=$temp_pass*/
     if (mysqli_query($connect, $sql)) {
         echo "New record created successfully";
     } else {

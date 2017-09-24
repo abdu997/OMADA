@@ -2,32 +2,22 @@
 
 
 include "../connection/connect.php";
+$data = json_decode(file_get_contents("php://input"));
 
 session_start();
 	
-	if(isset($_POST['password']) && isset($_POST['email'])){
-		
-		$pass = $_POST['password'];
-		$email = $_POST['email'];
+if(count($data) > 0){
+
+	$passHash = password_hash($data->password, PASSWORD_DEFAULT);
+     $mypassword = mysqli_real_escape_string($db,$passHash); 
+	$sql = "UPDATE `users` SET password = '$mypassword' WHERE idusers = '$data->id'";
+		if(mysqli_query($conn, $sql)){
+			$return  = "Success";
+			echo $return;
+		}
+	else{
+		echo "no";
 	}
-	
-/*echo $pass;
-echo $email;*/
-
-$passHash = password_hash($pass, PASSWORD_DEFAULT);
-
-	  $email = mysqli_real_escape_string($db, $email);
-      $mypassword = mysqli_real_escape_string($db,$passHash); 
-
-	
-
-	$sql = "UPDATE `users` SET password = '$mypassword' WHERE email = '$email'";
-	if(mysqli_query($conn, $sql)){
-		$return  = "Success";
-		echo $return;
-	}
-else{
-	echo "no";
 }
 
 	
