@@ -29,7 +29,7 @@ $count = mysqli_num_rows($result);
             <input id="password" ng-model="password" type="password" autocomplete="off">
             <label>Repeat Password</label>
             <input id="repeatPassword" ng-model="repeatPassword" type="password" autocomplete="off">
-            <input ng-click="passwordInsert(10)" id="passwordInsert" type="submit">
+            <input ng-click="passwordInsert(<?php echo $id ?>)" id="passwordInsert" type="submit">
         </form>
 			<?php
 		}
@@ -60,10 +60,9 @@ $count = mysqli_num_rows($result);
 							
                     })
                     .success(function(data) {
-                        alert(data);
+                            window.location = 'login.php';
 
                     });
-
                         $scope.password = null;
                         $scope.repeatPassword = null;
                     } else {

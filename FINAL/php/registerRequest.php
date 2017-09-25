@@ -8,7 +8,8 @@ if (count($data) > 0){
     $first_name = mysqli_real_escape_string($connect, $data->first_name);
     $last_name = mysqli_real_escape_string($connect, $data->last_name);
 //    $hashed_pass = password_hash($password, PASSWORD_DEFAULT); 
-    $temp_pass = "12";
+    $bytes = openssl_random_pseudo_bytes(16);
+    $temp_pass = bin2hex($bytes);
     $sql = "INSERT INTO test.users (email,password ,first_name, last_name)
     VALUES ('$email', '$temp_pass', '$first_name', '$last_name')";
     /*EMAIL($email, $temp_pass)*/
