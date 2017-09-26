@@ -7,7 +7,6 @@ error_reporting(E_ALL);
 //require_once('../lib/password.php');
 
 include "connect.php";
-session_start();
 	
 //	if(isset($_POST['email']) && isset($_POST['password'])){
 //		$email = $_POST['email'];
@@ -33,10 +32,10 @@ if (count($data) > 0) {
 	if($count == 1){
 		$bool = password_verify($mypassword, $row[2]);
 		if($bool == true){
-			$_SESSION['user'] = $email;
+			$_SESSION['user'] = $myemail;
             $_SESSION['user_id'] = $row[0];
             $_SESSION['name'] = $row[3];
-			$return = 'login';
+			$return = 'login as ';
 		 
 		}
 		else{

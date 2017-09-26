@@ -2,10 +2,9 @@
 
 
 include "connect.php";
+include "session.php";
 $data = json_decode(file_get_contents("php://input"));
 
-session_start();
-	
 if(count($data) > 0){
 
 	$passHash = password_hash($data->password, PASSWORD_DEFAULT);

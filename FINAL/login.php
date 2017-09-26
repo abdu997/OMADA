@@ -49,17 +49,16 @@
                 } else if ($scope.password == ""){
                     alert("Password is needed");
                 } else {
-                    alert("okay");
-//                    $http.post(
-//                        "php/loginRequest.php", {
-//                            'email': $scope.email,
-//                            'password': $scope.password
-//                        }
-//                    ).success(function(data) {
-//                        alert(data);
-//                        $scope.email = null;
-//                        $scope.password = null;
-//                    });
+                    $http.post(
+                        "php/loginRequest.php", {
+                            'email': $scope.email,
+                            'password': $scope.password
+                        }
+                    ).success(function(data) {
+                        alert(data);
+                        $scope.email = null;
+                        $scope.password = null;
+                        window.location.href = "php/session.php";                    });
                 }
             }
             
@@ -71,7 +70,6 @@
                 } else if($scope.lastName == "") {
                     alert("Last name is required");
                 } else {
-                    alert("okay");
                     $http.post(
                         "php/registerRequest.php", {
                             'email': $scope.registerEmail,
@@ -83,7 +81,7 @@
                         $scope.registerEmail = null;
                         $scope.firstName = null;
                         $scope.lastName = null;
-                                            
+                        alert("okay");                    
                     });
                 }
             }
