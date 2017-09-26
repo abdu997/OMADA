@@ -21,7 +21,7 @@ $count = mysqli_num_rows($result);
 		<?php
 		if($count == 1){
 			$row = mysqli_fetch_assoc($result);
-			$id = $row['idusers']
+			$user_id = $row['idusers']
 		
 		?>
         <form name="passwordForm">
@@ -29,7 +29,7 @@ $count = mysqli_num_rows($result);
             <input id="password" ng-model="password" type="password" autocomplete="off">
             <label>Repeat Password</label>
             <input id="repeatPassword" ng-model="repeatPassword" type="password" autocomplete="off">
-            <input ng-click="passwordInsert(<?php echo $id ?>)" id="passwordInsert" type="submit">
+            <input ng-click="passwordInsert(<?php echo $user_id ?>)" id="passwordInsert" type="submit">
         </form>
 			<?php
 		}
@@ -50,12 +50,12 @@ $count = mysqli_num_rows($result);
         app.controller('registerController', function($scope, $http) {
             
             $scope.pwdpattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
-            $scope.passwordInsert = function(id) {
+            $scope.passwordInsert = function(user_id) {
                 if ($scope.pwdpattern.test($scope.password)) { 
                     if (password.value == repeatPassword.value){
                         alert("kk");
 						$http.post("php/update_pass.php", {
-                        	'id': id,
+                        	'user_id': user_id,
 							'password':$scope.password
 							
                     })

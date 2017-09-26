@@ -1,0 +1,161 @@
+/*
+$font: "Raleway", sans-serif;
+$background: #f1f1f1!important;
+$tile: whitesmoke;
+$padding: 25px;
+*/
+
+html,
+body,
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Raleway", sans-serif;
+}
+
+@media (max-width: 991px) {
+    .left {
+        margin-right: 15px
+    }
+}
+a,
+a:link,
+a:hover,
+a:active,
+a:visited {
+    text-decoration: none;
+}
+
+a,
+a:hover, 
+a:link,
+a:hover {
+    color: #000!important;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.w3-top {
+    position: static;
+}
+
+input {
+    margin-bottom: 15px;
+}
+
+.asterisk {
+    color: red;
+    margin-left: 5px;
+    font-size: 15px;
+}
+
+.tile-bg {
+    background: white;
+    padding: 25px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+/*CHAT CSS*/
+    .panel {
+        background: black;
+        max-width: 700px;
+        height: 500px;
+        border-radius: 0px;
+        overflow-y: auto;
+        margin-bottom: 0px
+    }
+    .smessage,
+    .rmessage {
+        background: white;
+        padding: 10px;
+        max-width: 700px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+    .rmessage {
+        margin-left: 45px;
+        margin-right: 15px;
+    }
+    .smessage {
+        margin-right: 45px;
+        margin-left: 15px;
+    }
+    .sender {
+        color: blue;
+        font-size: 13px;
+        float: left;
+    }
+    .receiver {
+        color: green;
+        font-size: 13px;
+        float: left;
+    }
+    .time {
+        font-size: 10px;
+        color: grey;
+        float: right
+    }
+    .message {
+        font: 16px;
+        color: black;
+    }
+    ul {
+        color: transparent;
+        padding-left: 0px
+    }
+    .panel-head,
+    .panel-foot {
+        height: 40px;
+        background: grey;
+        max-width: 700px
+    }
+    .message-input {
+        width: 75%;
+        height: 40px
+    }
+    #chat-toggle {
+        margin: 6px;
+    }
+    .chat-list {
+        height: 500px;
+        background: black;
+        position: absolute;
+        width: 225px;
+        overflow-y: auto;
+    }
+    .chat-list#clist {
+        height: 499px;
+        background: black;
+        position: absolute;
+        width: 200px;
+        overflow-y: auto;
+        display: initial
+    }
+    #clist {
+        position: absolute;
+        display: none
+    }
+    .chat {
+        color: white;
+        padding: 15px;
+    }
+    .chat:hover,
+    .chat:active {
+        color: black;
+        background: white;
+    }
+    .search-chat {
+        width: 200px;
+        background: black
+    }
+
+/*Calendar*/
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
