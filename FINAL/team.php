@@ -1,3 +1,10 @@
+<?php
+session_start();
+include "php/connect.php";
+if(!isset($_SESSION['name'])){
+header('Location: login.php');
+}
+?>
 <html>
 <head>
     <title>OmadaHQ</title>
@@ -21,20 +28,19 @@
     
     <!--Angular Scripts-->
     <script src="js/angular.min.js"></script>
+    <script src="js/omadaApp.js"></script>
     
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-    
-    
 </head>
 
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4; position: fixed">
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey w3-right" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
-    <span class="w3-bar-item">Dashboard</span>
+    <span class="w3-bar-item">OmadaHQ</span>
 </div>
 
-<body class="w3-light-grey" style="margin-top: 43px" ng-app="DashApp" ng-controller="SessionController">
+<body class="w3-light-grey" style="margin-top: 43px" ng-app="omadaApp">
     <!-- Sidebar/menu -->
     <? include 'nav-sidebar.php';?>
 

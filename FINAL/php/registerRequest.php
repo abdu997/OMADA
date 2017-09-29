@@ -26,7 +26,7 @@ if (count($data) > 0){
     }
 	}
 	else{
-		echo "Email already exists!";
+		echo "error";
 	}
 }
 ?>

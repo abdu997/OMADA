@@ -1,24 +1,25 @@
-    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar" ng-controller="SessionController">
+    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar" ng-controller="SessionController" ng-init="userTeams(); userinfo()">
         <br>
-        <div class="w3-container w3-row" ng-repeat="x in profile">
+        <div class="w3-container w3-row" ng-repeat="x in user" >
             <div class="w3-col s4">
-                <img src="{{x.user_image}}" class="w3-circle w3-margin-right" style="width:55px; height: 55px;">
+<!--                <img src="{{x.user_image}}" class="w3-circle w3-margin-right" style="width:55px; height: 55px;">-->
             </div>
             <div class="w3-col s8 w3-bar">
-                <h4 style="text-transform: capitalize;">Welcome, <strong>{{x.user_fname}}</strong></h4>
+                <h4 style="text-transform: capitalize;">Welcome, <strong>{{x.first_name}}</strong></h4>
             </div>
         </div>
         <hr>
         <div class="w3-bar-block">
             <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i>&nbsp; Personal Dashboard</a>
+            <div ng-repeat="x in teams | filter : {'type':'personal'} " style="text-transform: capitalize; color: white;">
+                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i>&nbsp; {{x.team_id}}</a>
+            </div>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>&nbsp; Account Settings</a>
             <a onclick="document.getElementById('team_create').style.display='block'" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus fa-fw"></i>&nbsp; Create Team</a>
             <a href="php/logout.php" class="w3-bar-item w3-button w3-padding logout"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Log Out</a>
             <hr>
-            <div ng-repeat="x in user_teams" style="text-transform: capitalize; color: white;">
-                <a href="index.php?teamname={{x.team_name}}'" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; {{x.team_name}}</a>
-<!--                onclick="window.location.href='index.php?teamname={{x.team_name}}'" -->
+            <div ng-repeat="x in teams | filter : {'type':'team'} " style="text-transform: capitalize; color: white;">
+                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; {{x.team_name}}</a>
             </div>
             <br>
             <br>
