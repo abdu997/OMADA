@@ -20,6 +20,15 @@ if (count($data) > 0){
     /*EMAIL($email, $temp_pass)*/
 	/*https://www.omadahq.com/password.php/?token=$temp_pass*/
     if (mysqli_query($connect, $sql)) {
+        $sql2 = "INSERT INTO team (team_name, type) VALUES('Personal Dashboard', 'personal')";
+        if (mysqli_query($connect, $sql2)){
+            $team_id = mysqli_insert_id($connect);
+            $sql3 = "INSERT INTO team_user (t_id, u_id, admin) VALUES('$team_id', '$data->user_id', 'Y')";
+            mysqli_query($connect, $sql3);
+        } else {
+            $return  = "Success";
+            echo $return;
+        }
         echo "New record created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($connect);
