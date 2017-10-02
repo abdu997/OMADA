@@ -145,10 +145,10 @@
                         $scope.goals = data;
                     });
         }
-        //setInterval(function(){$scope.displayData();}, 500);
 
         $scope.updateData = function(goal_id, goal) {
             $scope.goal_id = goal_id;
+            $scope.project_id = project_id;
             $scope.goal = goal;
             $scope.btnName = "Update";
         }

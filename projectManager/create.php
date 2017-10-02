@@ -25,8 +25,9 @@ if (count($data) > 0) {
     } 
     if ($btn_name == 'Update') {
         $goal_id = $data->goal_id;
+        $project_id = $data->project_id;
         $query = "UPDATE team_goal SET goal = '$goal' WHERE goal_id = '$goal_id'";
-        $query2 = "INSERT INTO progress_record(user_id, team_id, goal_id, record, initial_record, timestamp) VALUES ('$user_id', '$team_id', '$goal_id', 'Goal name changed to $goal', 'N', '$timestamp')";
+        $query2 = "INSERT INTO progress_record(user_id, team_id, goal_id, project_id, record, initial_record, timestamp) VALUES ('$user_id', '$team_id', '$goal_id', '$project_id', 'Goal name changed to $goal', 'N', '$timestamp')";
         mysqli_query($connect, $query2);
         if (mysqli_query($connect, $query)) {
             echo 'Data Updated...';

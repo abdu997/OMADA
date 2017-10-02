@@ -150,7 +150,7 @@
                 <div id="comments" ng-repeat="x in records | filter : {'initial_record':'N'} | orderBy : '-record_id'">
                     <p style="margin-bottom: 0px">{{x.record}}</p>
                     <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
-                    <span style="font-size: 10px; float: right;"> By {{x.user}}</span>
+                    <span style="font-size: 10px; float: right;"> By {{x.user_id}}</span>
                 </div>
                 <div id="first-comment" width="100px" ng-repeat="x in records | filter : {'initial_record':'Y'} | orderBy : '-record_id'">
                     <h4 style="margin-bottom: 0px">{{x.record}} {{x.user}}</h4>

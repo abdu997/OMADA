@@ -1,8 +1,8 @@
 <?php
 include("connect.php");
 session_start();
-$user_id = $_SESSION['user_id'];
 $output = array();
+$user_id = $_SESSION['user_id'];
 $query  = "SELECT * FROM team_user WHERE u_id='$user_id'";
 $result = mysqli_query($connect, $query);
 if (mysqli_num_rows($result) > 0) {
