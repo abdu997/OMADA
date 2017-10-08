@@ -55,17 +55,30 @@
                 <span onclick="document.getElementById('edit_user').style.display='none'" class="w3-button w3-display-topright" style="font-size: 20px">&times;</span>
                 <div class="w3-container">
                     <h4>Edit Personal Profile</h4>
-                    <form ng-repeat="x in user">
-                        <label>First Name</label>
+                    <form ng-repeat="x in user" autocomplete='off'>
+                        <label>First Name</label><span class="asterisk">*</span>
                         <input value="{{x.first_name}}" id="firstName" class="w3-input w3-border-0" type="text">
                         <small ng-show="firstNameError" style="color: red;">First name cannot be empty!<br></small>
-                        <label>Last Name</label>
+                        <label>Last Name</label><span class="asterisk">*</span>
                         <input value="{{x.last_name}}" id="lastName" class="w3-input w3-border-0" type="text">
                         <small ng-show="lastNameError" style="color: red;">Last name cannot be empty!<br></small>
-                        <label>Email</label>
+                        <label>Email</label><span class="asterisk">*</span>
                         <input value="{{x.email}}" id="email" class="w3-input w3-border-0" type="email">
                         <small ng-show="emailError" style="color: red;">Email must be valid!<br></small>
                         <input ng-click="editProfile()" class="w3-button" type="submit" value="Update" style="background: white; margin-top: 10px">
+                        <br>
+                        <h4>Password Update</h4>
+                        <label>Old Password</label><span class="asterisk">*</span>
+                        <input ng-model="oldPassword" id="oldPassword" class="w3-input w3-border-0" autocomplete="off" type="password">
+                        <small ng-show="oldPasswordError" style="color: red;">Old password is incorrect!<br></small>
+                        <label>New Password</label><span class="asterisk">*</span>
+                        <input ng-model="newPassword" id="newPassword" class="w3-input w3-border-0" autocomplete="off" type="password">
+                        <small ng-show="newPasswordError" style="color: red;">You need to follow the pattern!<br></small>
+                        <label>Repeat New Password</label><span class="asterisk">*</span>
+                        <input ng-model="repeatNewPassword" id="repeatNewPassword" class="w3-input w3-border-0" autocomplete="off" type="password">
+                        <small ng-show="repeatNewPasswordError" style="color: red;">The passwords dont match!<br></small>
+                        <input ng-click="editPassword()" class="w3-button" type="submit" value="Update Password" style="background: white; margin-top: 10px">
+                        <small ng-show="passwordChangeSuccess" style="color: green;">Password Successfully Updated!<br></small>
                     </form>
                 </div>
             </div>

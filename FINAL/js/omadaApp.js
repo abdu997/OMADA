@@ -11,6 +11,7 @@ app.controller('SessionController', function($scope, $http) {
             $scope.teams = data;
         });
     }
+    setInterval(function() {$scope.userTeams();}, 1000);
     
     $scope.emailpattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
     $scope.editProfile = function() {
@@ -36,5 +37,46 @@ app.controller('SessionController', function($scope, $http) {
         } else {
             $scope.emailError = true;
         }
+    }
+    
+    $scope.pwdpattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
+    $scope.editPassword = function() {
+        $http.post(
+            "php/passwordCheck.php", {
+                'old_password': document.getElementById('oldPassword').value,
+            }
+        ).success(function(data) {
+            if(data == "success") {
+                if ($scope.pwdpattern.test(document.getElementById('newPassword').value)) {
+                    if (newPassword.value == repeatNewPassword.value){
+                        $http.post(
+                            "php/passwordChange.php", {
+                                'new_password': document.getElementById('newPassword').value,
+                            }
+                        ).success(function(data){
+                            $scope.passwordChangeSuccess = true;
+                            $scope.newPasswordError = false;
+                            $scope.repeatNewPasswordError = false;
+                            $scope.oldPasswordError = false;
+                        });
+                    } else {
+                        $scope.passwordChangeSuccess = false;
+                        $scope.newPasswordError = false;
+                        $scope.repeatNewPasswordError = true;
+                        $scope.oldPasswordError = false;
+                    }
+                } else {
+                    $scope.passwordChangeSuccess = false;
+                    $scope.newPasswordError = true;
+                    $scope.repeatNewPasswordError = false;
+                    $scope.oldPasswordError = false;
+                }
+            } else {
+                $scope.passwordChangeSuccess = false;
+                $scope.oldPasswordError = true;
+                $scope.newPasswordError = false;
+                $scope.repeatNewPasswordError = false;
+            }
+        });  
     }
 });
