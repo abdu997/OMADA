@@ -27,6 +27,11 @@ a:visited {
     text-decoration: none;
 }
 
+.active {
+    color: #fff!important;
+    background-color: #2196F3!important;
+}
+
 a,
 a:hover, 
 a:link,
@@ -159,3 +164,4 @@ input {
 		max-width: 900px;
 		margin: 0 auto;
 	}
+

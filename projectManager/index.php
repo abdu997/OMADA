@@ -71,7 +71,6 @@
 
 <body>
     <div ng-app="myapp" ng-controller="usercontroller" ng-init="displayProject()">
-        <h1>Project Manager - Taj version</h1>
         <div class="col-sm-2">
             <form name="projectEnter" style="margin-bottom: -35px;">
                 <label>Project</label><br>

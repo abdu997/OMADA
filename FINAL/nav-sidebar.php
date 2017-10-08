@@ -1,4 +1,4 @@
-    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:250px;" id="mySidebar" ng-controller="SessionController" ng-init="userTeams(); userinfo()">
+    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:200px;" id="mySidebar" ng-controller="SessionController" ng-init="userTeams(); userinfo()">
         <br>
         <div class="w3-container w3-row" ng-repeat="x in user" >
             <div class="w3-col s4">
@@ -10,16 +10,16 @@
         </div>
         <hr>
         <div class="w3-bar-block">
-            <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
+            <a class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
             <div ng-repeat="x in teams | filter : {'type':'personal'} " style="text-transform: capitalize; color: white;">
-                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i>&nbsp; {{x.team_name}}</a>
+                <a class="w3-bar-item w3-button w3-padding active"><i class="fa fa-user fa-fw"></i>&nbsp; {{x.team_name}}</a>
             </div>
-            <a onclick="document.getElementById('edit_user').style.display='block'" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>&nbsp; Account Settings</a>
+            <a onclick="document.getElementById('edit_user').style.display='block'" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>&nbsp; Edit Account</a>
             <a onclick="document.getElementById('team_create').style.display='block'" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus fa-fw"></i>&nbsp; Create Team</a>
             <a href="php/logout.php" class="w3-bar-item w3-button w3-padding logout"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Log Out</a>
             <hr>
             <div ng-repeat="x in teams | filter : {'type':'team'} " style="text-transform: capitalize; color: white;">
-                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; {{x.team_name}}</a>
+                <a class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; {{x.team_name}}</a>
             </div>
             <br>
             <br>
@@ -57,12 +57,15 @@
                     <h4>Edit Personal Profile</h4>
                     <form ng-repeat="x in user">
                         <label>First Name</label>
-                        <input value="{{x.first_name}}" class="w3-input w3-border-0" type="text" required>
+                        <input value="{{x.first_name}}" id="firstName" class="w3-input w3-border-0" type="text">
+                        <small ng-show="firstNameError" style="color: red;">First name cannot be empty!<br></small>
                         <label>Last Name</label>
-                        <input value="{{x.last_name}}" class="w3-input w3-border-0" type="text" required>
+                        <input value="{{x.last_name}}" id="lastName" class="w3-input w3-border-0" type="text">
+                        <small ng-show="lastNameError" style="color: red;">Last name cannot be empty!<br></small>
                         <label>Email</label>
-                        <input value="{{x.email}}" class="w3-input w3-border-0" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
-                        <input class="w3-button" type="submit" value="Update" style="background: white; margin-top: 10px">
+                        <input value="{{x.email}}" id="email" class="w3-input w3-border-0" type="email">
+                        <small ng-show="emailError" style="color: red;">Email must be valid!<br></small>
+                        <input ng-click="editProfile()" class="w3-button" type="submit" value="Update" style="background: white; margin-top: 10px">
                     </form>
                 </div>
             </div>

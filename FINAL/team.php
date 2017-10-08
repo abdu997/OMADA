@@ -47,15 +47,17 @@ header('Location: login.php');
     <!-- Overlay effect when opening sidebar on small screens -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-    <div class="w3-main" style="margin-left:300px;">
-        <header class="w3-container">
-            <h3 style="padding-top: 25px; padding-bottom: 25px;"><b><i class="fa fa-dashboard"></i> Team Name Dashboard</b></h3>
-        </header>
-
-
+    <div class="w3-main" style="margin-left: 200px">
         <div class="w3-container">
             <div class="row">
-                <div class="col-md-8 left" style="padding-right: 0px">
+                <div class="col-md-12 left">
+                    <h3><b><i class="fa fa-dashboard"></i> Team Name Dashboard</b></h3>
+                </div>
+            </div>
+        </div>
+        <div class="w3-container">
+            <div class="row">
+                <div class="col-md-12">
                     <div class="tile-bg">
                         <h3><i class="fa fa-comments fa-fw icon"></i>Chat</h3>
                     </div>

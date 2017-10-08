@@ -15,6 +15,7 @@
             }
             input {
                 width: 200px;
+                margin-bottom: -10px;
             }
             button {
                 width: 100px;
@@ -35,21 +36,21 @@
         <br>
         <form id="loginForm">
             <label>Email</label><br>
-            <input type="email" ng-model="email"><br>
+            <input type="email" ng-model="email" class="w3-input w3-border-0"><br>
             <label>Password</label><br>
-            <input type="password" ng-model="password"><br><br>
+            <input type="password" ng-model="password" class="w3-input w3-border-0"><br><br>
             <small style="color: red;" ng-show="loginError">Email/password do not match our records. Please try again<br></small>
             <input type="submit" value="login" class="w3-button" ng-click="login()">
         </form>
         <form id="registerForm" class="hidden">
             <label>Email</label><br>
-            <input type="email" ng-model="registerEmail"><br>
+            <input type="email" ng-model="registerEmail" class="w3-input w3-border-0"><br>
             <small style="color: red;" ng-show="emailInvalid">Valid email is required<br></small>
             <label>First Name</label><br>
-            <input type="text" ng-model="firstName"><br>
+            <input type="text" ng-model="firstName" class="w3-input w3-border-0"><br>
             <small style="color: red;" ng-show="firstEmpty">First name is required<br></small>
             <label>Last Name</label><br>
-            <input type="text" ng-model="lastName"><br><br>
+            <input type="text" ng-model="lastName" class="w3-input w3-border-0"><br><br>
             <small style="color: red;" ng-show="lastEmpty">Last name is required<br></small>
             <small style="color: red;" ng-show="registerError">Email is already being used, try loging in or reseting your password<br></small>
             <small style="color: green;" ng-show="registerSuccess">Registration successful, check your email for confirmation and password setup link!<br></small>
@@ -121,6 +122,7 @@
                             $scope.firstName = null;
                             $scope.lastName = null;
                             $scope.registerSuccess = true;
+                            $scope.registerError = false;
                         }
                     });
                 }
