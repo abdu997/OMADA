@@ -97,34 +97,48 @@
                 }
             }
             
+            $scope.emailpattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
             $scope.register = function() {
-                if ($scope.registerEmail == null) {
-                    $scope.emailInvalid = true;
-                } else if($scope.firstName == null){
-                    $scope.firstEmpty = true;
-                    $scope.emailInvalid = false;
-                } else if($scope.lastName == null) {
-                    $scope.lastEmpty = true;
-                    $scope.firstEmpty = false;
-                    $scope.emailInvalid = false;
+                if($scope.emailpattern.test($scope.registerEmail)) {
+                    if($scope.firstName ==  null){
+                        $scope.firstEmpty = true;
+                        $scope.emailInvalid = false;
+                        $scope.lastEmpty = false;
+                        $scope.registerError = false;
+                        $scope.registerSuccess = false;
+                    } else if($scope.lastName == null){
+                        $scope.lastEmpty = true;
+                        $scope.firstEmpty = false;
+                        $scope.emailInvalid = false;
+                        $scope.registerError = false;
+                        $scope.registerSuccess = false;
+                    } else {
+                        $http.post(
+                            "php/registerRequest.php", {
+                                'email': $scope.registerEmail,
+                                'first_name': $scope.firstName,
+                                'last_name': $scope.lastName
+                            }
+                        ).success(function(data) {
+                            if (data == "error"){
+                                $scope.registerError = true;
+                                $scope.lastEmpty = false;
+                                $scope.firstEmpty = false;
+                                $scope.emailInvalid = false;
+                                $scope.registerSuccess = false;
+                            } else {
+                                $scope.registerEmail = null;
+                                $scope.firstName = null;
+                                $scope.lastName = null;
+                                $scope.registerSuccess = true;
+                                $scope.registerError = false;
+                                $scope.lastEmpty = false;
+                                $scope.emailInvalid = false;
+                            }
+                        });
+                    }
                 } else {
-                    $http.post(
-                        "php/registerRequest.php", {
-                            'email': $scope.registerEmail,
-                            'first_name': $scope.firstName,
-                            'last_name': $scope.lastName
-                        }
-                    ).success(function(data) {
-                        if (data == "error"){
-                            $scope.registerError = true;
-                        } else {
-                            $scope.registerEmail = null;
-                            $scope.firstName = null;
-                            $scope.lastName = null;
-                            $scope.registerSuccess = true;
-                            $scope.registerError = false;
-                        }
-                    });
+                    $scope.emailInvalid = true;
                 }
             }
         });
