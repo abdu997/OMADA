@@ -26,19 +26,24 @@
             form {
                 max-width: 200px
             }
+            a:hover {
+                text-decoration: none;
+                cursor: pointer;
+            }
         </style>
     </head>
     <body ng-app="loginApp" ng-controller="loginController" class="w3-display-middle">
         <center>
+            <h1 style="margin-bottom: 30px">OmadaHQ</h1>
             <button id="loginTab" class="w3-button">Login</button>
             <button id="registerTab" class="w3-button">Register</button>
-        </center>
-        <br>
+        </center><br>
         <form id="loginForm">
             <label>Email</label><br>
             <input type="email" ng-model="email" class="w3-input w3-border-0"><br>
             <label>Password</label><br>
-            <input type="password" ng-model="password" class="w3-input w3-border-0"><br><br>
+            <input type="password" ng-model="password" class="w3-input w3-border-0"><br>
+            <a id="resetTab">Forgot password?</a><br><br>
             <small style="color: red;" ng-show="loginError">Email/password do not match our records. Please try again<br></small>
             <input type="submit" value="login" class="w3-button" ng-click="login()">
         </form>
@@ -50,16 +55,24 @@
             <input type="text" ng-model="firstName" class="w3-input w3-border-0"><br>
             <small style="color: red;" ng-show="firstEmpty">First name is required<br></small>
             <label>Last Name</label><br>
-            <input type="text" ng-model="lastName" class="w3-input w3-border-0"><br><br>
-            <small style="color: red;" ng-show="lastEmpty">Last name is required<br></small>
+            <input type="text" ng-model="lastName" class="w3-input w3-border-0"><br>
+            <small style="color: red;" ng-show="lastEmpty">Last name is required<br><br></small>
             <small style="color: red;" ng-show="registerError">Email is already being used, try loging in or reseting your password<br></small>
             <small style="color: green;" ng-show="registerSuccess">Registration successful, check your email for confirmation and password setup link!<br></small>
             <input ng-click="register()" type="submit" class="w3-button" value="register">
+        </form>
+        <form id="passwordReset" class="hidden">
+            <h4>Password Reset</h4>
+            <label>Email Address</label>
+            <input ng-model="resetEmail" class="w3-input w3-border-0" type="email">
+            <br><br>
+            <input ng-click="passwordReset()" class="w3-button" type="submit" value="Reset">
         </form>
     </body>
     <script>
         $("#registerTab").click(function(e) {
             e.preventDefault();
+            $("#passwordReset").addClass("hidden");
             $("#loginForm").addClass("hidden");
             $("#registerForm").removeClass("hidden");
         });
@@ -67,6 +80,13 @@
             e.preventDefault();
             $("#loginForm").removeClass("hidden");
             $("#registerForm").addClass("hidden");
+            $("#passwordReset").addClass("hidden");
+        });
+        $("#resetTab").click(function(e) {
+            e.preventDefault();
+            $("#loginForm").addClass("hidden");
+            $("#registerForm").addClass("hidden");
+            $("#passwordReset").removeClass("hidden");
         });
     </script>
     <script>
@@ -87,7 +107,6 @@
                         if (data == "error") {
                             $scope.loginError = true;
                         } else {
-                            alert(data);
                             $scope.email = null;
                             $scope.password = null;
                             window.location.href = "team.php";
@@ -100,13 +119,13 @@
             $scope.emailpattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
             $scope.register = function() {
                 if($scope.emailpattern.test($scope.registerEmail)) {
-                    if($scope.firstName ==  null){
+                    if($scope.firstName ==  ""){
                         $scope.firstEmpty = true;
                         $scope.emailInvalid = false;
                         $scope.lastEmpty = false;
                         $scope.registerError = false;
                         $scope.registerSuccess = false;
-                    } else if($scope.lastName == null){
+                    } else if($scope.lastName == ""){
                         $scope.lastEmpty = true;
                         $scope.firstEmpty = false;
                         $scope.emailInvalid = false;
@@ -140,6 +159,16 @@
                 } else {
                     $scope.emailInvalid = true;
                 }
+            }
+            
+            $scope.passwordReset = function() {
+                $http.post(
+                    "php/passwordReset.php", {
+                        'resetEmail': $scope.resetEmail
+                    }
+                ).success(function(data) {
+                    alert(data);
+                });
             }
         });
     </script>

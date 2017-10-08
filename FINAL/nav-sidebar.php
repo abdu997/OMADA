@@ -74,6 +74,7 @@
                         <label>New Password</label><span class="asterisk">*</span>
                         <input ng-model="newPassword" id="newPassword" class="w3-input w3-border-0" autocomplete="off" type="password">
                         <small ng-show="newPasswordError" style="color: red;">You need to follow the pattern!<br></small>
+                        <small>Must contain an uppercase and lowercase letter, number and min. 8 characters</small><br>
                         <label>Repeat New Password</label><span class="asterisk">*</span>
                         <input ng-model="repeatNewPassword" id="repeatNewPassword" class="w3-input w3-border-0" autocomplete="off" type="password">
                         <small ng-show="repeatNewPasswordError" style="color: red;">The passwords dont match!<br></small>

@@ -48,9 +48,12 @@ a:hover {
 }
 
 input {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
+.w3-input {
+    padding: 4px;
+}
 .asterisk {
     color: red;
     margin-left: 5px;
