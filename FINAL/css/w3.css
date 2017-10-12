@@ -360,6 +360,7 @@ a {
     transition: opacity 0s
 }
 .w3-input {
+    padding: 6px;
     display: block;
     border: none;
     border-bottom: 1px solid #ccc;
