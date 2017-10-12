@@ -1,3 +1,35 @@
+<head>
+    <script src="js/angular.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--Fonts-->
+    <link rel="stylesheet" href="css/raleway.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        body {
+            background: #f1f1f1!important;
+        }
+        input {
+            width: 200px;
+            margin-bottom: -10px;
+        }
+        button {
+            width: 100px;
+        }
+        .w3-button {
+            background: #bdc3c7;
+        }
+        form {
+            max-width: 200px
+        }
+        .error {
+            color: #e74c3c;
+        }
+    </style>
+</head>
 <?php
 error_reporting(E_ERROR);
 include "php/connect.php";
@@ -7,65 +39,53 @@ if(isset($_GET['token'])){
 $sql = "SELECT idusers FROM users WHERE password = '$token'";
 $result = mysqli_query($connect,$sql);
 $count = mysqli_num_rows($result);
+if($count == 1){
+    $row = mysqli_fetch_assoc($result);
+    $user_id = $row['idusers'];
+} else if ($count == 0){
+    $sql2 = "SELECT user_email, expiration, status FROM password_reset WHERE token = '$token'";
+    $result2 = mysqli_query($connect,$sql2);
+    $count2 = mysqli_num_rows($result2);
+    if ($count2 == 1){
+        $row2 = mysqli_fetch_assoc($result2);
+        $status = $row2['status'];
+        $user_email = $row2['user_email'];
+        $expiration = $row2['expiration'];
+        if ($expiration >= $timestamp){
+            if($status == "active"){
+                $sql3 = "SELECT idusers FROM users WHERE email='$user_email'";
+                $result3 = mysqli_query($connect,$sql3);
+                $count3 = mysqli_num_rows($result3);
+                if($count3 == 1){
+                    $row3 = mysqli_fetch_assoc($result3);
+                    $user_id1 = $row3['idusers'];
+                }
+            } else {
+                echo "Password reset link has been used already, try reseting password again"; 
+            }
+        } else {
+            $sql4 = "UPDATE password_reset SET status = 'expired' WHERE token = '$token'";
+            mysqli_query($connect, $sql4);
+            echo "Password reset link has expired, try reseting password again";
+        }
+    } else {
+        echo "Password link is invlaid";
+    }
+}
 ?>
 <html>
-    <head>
-        <script src="js/angular.min.js"></script>
-        <script src="js/jquery.js"></script>
-        <link rel="stylesheet" href="css/w3.css">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!--Fonts-->
-        <link rel="stylesheet" href="css/raleway.css">
-        <style>
-            .hidden {
-                display: none;
-            }
-            body {
-                background: #f1f1f1!important;
-            }
-            input {
-                width: 200px;
-                margin-bottom: -10px;
-            }
-            button {
-                width: 100px;
-            }
-            .w3-button {
-                background: #bdc3c7;
-            }
-            form {
-                max-width: 200px
-            }
-            .error {
-                color: #e74c3c;
-            }
-        </style>
-    </head>
-	
     <body ng-app="registerApp" ng-controller="registerController"  class="w3-display-middle">
-		<?php
-		if($count == 1){
-			$row = mysqli_fetch_assoc($result);
-			$user_id = $row['idusers'];
-		
-		?>
+        <h1>OmadaHQ</h1>
         <form name="passwordForm">
             <label>Password</label><br>
             <input id="password" ng-model="password" type="password" autocomplete="off" class="w3-input w3-border-0">
-            <small>Must contain an uppercase and lowercase letter, number and min. 8 characters</small><br>
+            <small><br>Must contain an uppercase and lowercase letter, number and min. 8 characters</small><br>
             <small class="error" ng-show="patternError">Password must meet requirements<br></small>
             <label>Repeat Password</label><br>
             <input id="repeatPassword" ng-model="repeatPassword" type="password" autocomplete="off" class="w3-input w3-border-0"><br>
             <small class="error" ng-show="repeatError">Passwords must match!<br></small>
-            <input ng-click="passwordInsert(<?php echo $user_id ?>)" id="passwordInsert" class="w3-button" value="update" type="submit">
+            <input ng-click="passwordInsert(<?php echo $user_id ?><?php echo $user_id1 ?>);" id="passwordInsert" class="w3-button" value="update" type="submit">
         </form>
-        <?php
-        } else {
-			?>
-		<p>YOUR LINK IS NOT VALID!</p>
-		<?php
-		}
-			?>
     </body>
     <script>
         $("#passwordInsert").click(function(event){

@@ -23,3 +23,12 @@ CREATE TABLE `users` (
   UNIQUE KEY `idusers_UNIQUE` (`idusers`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1
+
+CREATE TABLE `password_reset` (
+  `request_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_email` varchar(45) NOT NULL,
+  `token` varchar(45) NOT NULL,
+  `timestamp` varchar(45) NOT NULL,
+  `expiration` varchar(45) NOT NULL,
+  PRIMARY KEY (`request_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1
