@@ -1,9 +1,11 @@
 <?php
 session_start();
+$team_name = $_SESSION['team_name'];
 include "php/connect.php";
 if(!isset($_SESSION['name'])){
 header('Location: login.php');
 }
+
 ?>
 <html>
 <head>
@@ -35,11 +37,6 @@ header('Location: login.php');
 </head>
 
 <!-- Top container -->
-<div class="w3-bar w3-top w3-black w3-large" style="z-index:4; position: fixed">
-    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey w3-right" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
-    <span class="w3-bar-item">OmadaHQ</span>
-</div>
-
 <body class="w3-light-grey" style="margin-top: 43px" ng-app="omadaApp">
     <!-- Sidebar/menu -->
     <? include 'nav-sidebar.php';?>
@@ -51,7 +48,7 @@ header('Location: login.php');
         <div class="w3-container">
             <div class="row">
                 <div class="col-md-12 left">
-                    <h3><b><i class="fa fa-dashboard"></i> Team Name Dashboard</b></h3>
+                    <h3 style="margin-top: 0px"><b><i class="fa fa-dashboard"></i>&nbsp;<?php echo $team_name; ?></b></h3>
                 </div>
             </div>
         </div>
@@ -59,7 +56,7 @@ header('Location: login.php');
             <div class="row">
                 <div class="col-md-12">
                     <div class="tile-bg">
-                        <h3><i class="fa fa-comments fa-fw icon"></i>Chat</h3>
+                        <h3>Project Manager</h3>
                     </div>
                 </div>
             </div>
@@ -87,15 +84,6 @@ header('Location: login.php');
             overlayBg.style.display = "none";
         }
     </script>
-    <script for="modal">
-        var modal = document.getElementById('team_create');
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
 </body>
 
 </html> 
