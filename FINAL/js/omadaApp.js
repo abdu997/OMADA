@@ -11,7 +11,29 @@ app.controller('SessionController', function($scope, $http) {
             $scope.teams = data;
         });
     }
-    setInterval(function() {$scope.userTeams();}, 1000);
+    setInterval(function() {$scope.userTeams();}, 2000);
+    
+    $scope.teamName = function(){
+        $http.get("php/userTeam.php").success(function(data) {
+            $scope.teamNames = data;
+        });
+    }
+    
+    $scope.teamSelect = function(team_id, admin, type, team_name) {
+        $scope.team_id = team_id;
+        $scope.admin_status = admin;
+        $scope.team_type = type;;
+        $scope.team_name = team_name
+        $http.post(
+            "php/teamSelect.php", {
+                'team_id': $scope.team_id,
+                'admin_status': $scope.admin_status,
+                'team_type': $scope.team_type,
+                'team_name': $scope.team_name
+            }
+        ).success(function(data){
+        });
+    }
     
     $scope.emailpattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
     $scope.editProfile = function() {
@@ -29,7 +51,6 @@ app.controller('SessionController', function($scope, $http) {
                     'email': document.getElementById('email').value
                 }
             ).success(function(data) {
-                alert(data);
                 $scope.userinfo();
                 $scope.firstNameError = false;
                 $scope.emailError = false;
@@ -78,5 +99,33 @@ app.controller('SessionController', function($scope, $http) {
                 $scope.repeatNewPasswordError = false;
             }
         });  
+    }
+    
+    $scope.changeTeamName = function (team_id){
+        $scope.team_id = team_id;
+        if(document.getElementById('teamName').value == ''){
+            $scope.nullTeamError = true;
+            $scope.teamLengthError = false;
+            $scope.changeTeamSuccess = false;
+        } else if(document.getElementById('teamName').value.length > 20){
+            $scope.teamLengthError = true;
+            $scope.nullTeamError = false;
+            $scope.changeTeamSuccess = false;
+        } else {
+            $http.post(
+                "php/changeTeamName.php", {
+                    'team_id': $scope.team_id,
+                    'team_name': document.getElementById('teamName').value
+                }
+            ).success(function(data){
+                if(data == 'success'){
+                    $scope.changeTeamSuccess = true;
+                    $scope.nullTeamError = false;
+                    $scope.teamLengthError = false;
+                } else {
+                    alert(data);
+                }    
+            });
+        }
     }
 });
