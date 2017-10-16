@@ -69,15 +69,17 @@
     </style>
 </head>
 
-<body>
+<body style="margin-top: -20px">
     <div ng-app="myapp" ng-controller="usercontroller" ng-init="displayProject()">
         <div class="col-sm-2">
-            <form name="projectEnter" style="margin-bottom: -35px;">
+            <form name="projectEnter" style="margin-bottom: -60px;">
                 <label>Project</label><br>
                 <input style="width: 68%;" type="text" name="project" ng-model="project" autocomplete="off" autofocus required>
                 <button type="submit" name="btnProject" ng-click="projectInsert();" value="{{btnProject}}" ng-disabled="projectEnter.$invalid" >{{btnProject}}</button>
+<!--
                 <li ng-repeat="x in tagColors" class="color-tag" style="background: {{x.color}};" ng-class="{ 'tagClicked': $index == selectedColor }" ng-click="tagClicked($index); projectInsert(x.color);">
                 </li>
+-->
                 <small style="color: red;" ng-show="projectError">Project cannot be more than 25 characters</small>
             </form><br><br>
             <h3 style="padding-top:23px"><i class="fa fa-folder-open fw"></i> Projects</h3>
@@ -88,7 +90,7 @@
         </div>
         
         <div>
-            <form name="goalEnter" ng-show="goalForm" style="margin-bottom: -5px; margin-top: 25px">
+            <form name="goalEnter" ng-show="goalForm" style="margin-bottom: -5px; margin-top: 60px">
                 <label style="margin-left: 15px;">Goal</label>
                 <input style="width: 55%;" type="text" name="goal" ng-model="goal" autocomplete="off" autofocus required>
                 <button type="submit" name="btnInsert" ng-click="goalInsert();" value="{{btnName}}" ng-disabled="goalEnter.$invalid">{{btnName}}
