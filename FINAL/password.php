@@ -54,7 +54,7 @@ if($count == 1){
                             <label>Repeat Password</label><br>
                             <input id='repeatPassword' ng-model='repeatPassword' type='password' autocomplete='off' class='w3-input w3-border-0'><br>
                             <small class='error' ng-show='repeatError'>Passwords must match!<br></small>
-                            <input ng-click='passwordInsert(". $user_id . $user_id1 .");' id='passwordInsert' class='w3-button' value='update' type='submit'>
+                            <input ng-click='passwordInsert(". $user_id .");' id='passwordInsert' class='w3-button' value='update' type='submit'>
                         </form>";
                     print $form;
 } else if ($count == 0){
@@ -83,9 +83,8 @@ if($count == 1){
                             <label>Repeat Password</label><br>
                             <input id='repeatPassword' ng-model='repeatPassword' type='password' autocomplete='off' class='w3-input w3-border-0'><br>
                             <small class='error' ng-show='repeatError'>Passwords must match!<br></small>
-                            <input ng-click='passwordInsert(". $user_id . $user_id1 .");' id='passwordInsert' class='w3-button' value='update' type='submit'>
+                            <input ng-click='passwordInsert(". $user_id1 .");' id='passwordInsert' class='w3-button' value='update' type='submit'>
                         </form>";
-                    print $form;
                 }
             } else {
                 $error = "Password reset link has been used already, try reseting password again"; 
@@ -106,7 +105,7 @@ if($count == 1){
         <h1>OmadaHQ</h1>
         <?php echo $error; ?>
         <?php 
-
+        print $form;
         ?>
     </body>
     <script>
