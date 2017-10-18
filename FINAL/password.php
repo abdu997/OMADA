@@ -104,10 +104,12 @@ if($count == 1){
                         	'user_id': user_id,
 							'password':$scope.password
 							
-                    })
-                    .success(function(data) {
-                            window.location = 'login.php';
-
+                    }).success(function(data) {
+                            if(data == "success"){
+                                window.location = 'login.php';
+                            } else {
+                                alert(data);
+                            }
                     });
                         $scope.password = null;
                         $scope.repeatPassword = null;
