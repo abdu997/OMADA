@@ -2,7 +2,13 @@
 $team_id = $_SESSION['team_id'];
 $admin_status = $_SESSION['admin_status'];
 $team_type = $_SESSION['team_type'];
+$plan = $_SESSION['plan'];
 ?>
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4; position: fixed;">
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey w3-right" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
     <span class="w3-bar-item">OmadaHQ<small style="font-size: 10px">BETA</small></span>
@@ -20,14 +26,14 @@ $team_type = $_SESSION['team_type'];
     <hr>
     <div class="w3-bar-block">
         <a class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
-        <div onClick="window.location.reload()" ng-click="teamSelect(x.t_id, x.admin, x.type, x.team_name)" ng-repeat="x in teams | filter : {'type':'personal'} " style="text-transform: capitalize; color: white;">
+        <div onClick="window.location.reload()" ng-click="teamSelect(x.t_id, x.admin, x.type, x.team_name, x.plan)" ng-repeat="x in teams | filter : {'type':'personal'} " style="text-transform: capitalize; color: white;">
             <a ng-class="{'active': x.t_id == <?php echo $team_id;?>}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i>&nbsp; {{x.team_name}}</a>
         </div>
         <a onclick="document.getElementById('edit_user').style.display='block'" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>&nbsp; Edit Account</a>
         <a onclick="document.getElementById('team_create').style.display='block'" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus fa-fw"></i>&nbsp; Create Team</a>
         <a href="php/logout.php" class="w3-bar-item w3-button w3-padding logout"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Log Out</a>
         <hr>
-        <div onClick="window.location.reload()" ng-click="teamSelect(x.t_id, x.admin, x.type, x.team_name)" ng-repeat="x in teams | filter : {'type':'team'}" style="text-transform: capitalize; color: white;">
+        <div onClick="window.location.reload()" ng-click="teamSelect(x.t_id, x.admin, x.type, x.team_name, x.plan)" ng-repeat="x in teams | filter : {'type':'team'}" style="text-transform: capitalize; color: white;">
             <a ng-class="{'active': x.t_id == <?php echo $team_id;?>}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; {{x.team_name}}</a>
         </div>
         <br>
@@ -107,6 +113,35 @@ $team_type = $_SESSION['team_type'];
                 <small ng-show="changeTeamSuccess" style="color: green">Team name successfully changed!<br></small>
                 <input ng-disabled="changeTeamName.$invalid" ng-click="changeTeamName(<?php echo $team_id;?>)" class="w3-button" style="background: white; margin-top: 4px" type="submit" value="Change">
             </form>
+            <h4>Edit Members</h4>
+            <form name="insertMemberForm">
+                <label>New Member Email</label>
+                <input ng-model="insertMemberInput" class="w3-input w3-border-0" type="email" autocomplete="off" required>
+                <select id="insertAdminStatus">
+                  <option value="N" selected>Member</option>
+                  <option value="Y" ng-hide="'free' == '<?php echo $plan;?>'">Admin</option>
+                </select>
+                <input ng-click="insertMember()" class="w3-button" type="submit" ng-disabled="insertMemberForm.$invalid" value="Add Member" style="background: white; margin-top: 4px">
+            </form>
+            <h4>Team Administrators <small ng-click="getTeamEmails()" style="cursor: pointer">edit</small></h4>
+            <form ng-show="editAdminForm" id="editAdminForm">
+                <label>Old Admin</label><br>
+                <select id="oldAdmin">
+                    <option ng-repeat="x in teamEmails | filter : {'admin':'Y'}" value="{{x.member_email}}">{{x.member_email}}</option>
+                </select><br>
+                <label>New Admin</label><br>
+                <select id="newAdmin">
+                    <option ng-repeat="x in teamEmails | filter : {'admin':'N'}" value="{{x.member_email}}">{{x.member_email}}</option>
+                </select><br>
+                <input ng-click="switchAdmins()" class="w3-button" type="submit" value="Switch Admins" style="background: white; margin-top: 4px">
+            </form>
+            <div ng-repeat="x in teamMembers | filter : {'admin': 'Y'}">
+                <p>{{x.member_name}} ({{x.member_email}})&nbsp;<i>admin</i></p>
+            </div>
+            <h4>Team Members</h4>
+            <div ng-repeat="x in teamMembers | filter : {'admin': 'N'}">
+                <p>{{x.member_name}} ({{x.member_email}})&nbsp;<i href="" ng-click="removeMember(x.team_connect_id, x.email)" style="color:red; cursor: pointer;">remove</i></p>
+            </div>
         </div>
     </div>
 </div>
@@ -126,5 +161,11 @@ window.onclick = function(event) {
         modal.style.display = "none";
     } 
 }
+</script>
+<script>
+    $("#showAdminForm").click(function(e) {
+        e.preventDefault();
+        $("#editAdminForm").removeClass("hidden");
+    });
 </script>
 

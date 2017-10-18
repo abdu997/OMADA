@@ -19,17 +19,73 @@ app.controller('SessionController', function($scope, $http) {
         });
     }
     
-    $scope.teamSelect = function(team_id, admin, type, team_name) {
+    $scope.getTeamMembers = function(){
+        $http.get("php/getTeamMembers.php").success(function(data){
+            $scope.teamMembers = data;
+        });
+    }
+    setInterval(function() {$scope.getTeamMembers();}, 2000);
+    
+    $scope.getTeamEmails = function(){
+        $http.get("php/getTeamMembers.php").success(function(data){
+            $scope.teamEmails = data;
+            $scope.editAdminForm = true;
+        });
+    }
+    setInterval(function() {$scope.getTeamEmails();}, 20000);
+
+    $scope.switchAdmins = function(){
+        $http.post(
+            "php/switchAdmins.php", {
+                'new_admin_email': document.getElementById('newAdmin').value,
+                'old_admin_email': document.getElementById('oldAdmin').value
+            }
+        ).success(function(data){
+            alert(data);
+        });
+    }
+    
+    $scope.insertMember = function(){
+        if($scope.emailpattern.test($scope.insertMemberInput)){      
+            $http.post(
+                "php/freeAddMember.php", {
+                    'email': $scope.insertMemberInput,
+                    'admin': document.getElementById('insertAdminStatus').value
+                }
+            ).success(function(data){
+                alert(data);
+            });
+        } else {
+            alert("email must be valid");
+        }
+    }
+    
+    $scope.removeMember = function(team_connect_id, email){
+        $scope.team_connect_id = team_connect_id;
+        $scope.memberEmail = email;
+        $http.post(
+            "php/removeMember.php", {
+                'team_connect_id': $scope.team_connect_id,
+                'email': $scope.memberEmail
+            }
+        ).success(function(data){
+            alert(data);
+        });
+    }
+    
+    $scope.teamSelect = function(team_id, admin, type, team_name, plan) {
         $scope.team_id = team_id;
         $scope.admin_status = admin;
-        $scope.team_type = type;;
-        $scope.team_name = team_name
+        $scope.team_type = type;
+        $scope.team_name = team_name;
+        $scope.plan = plan;
         $http.post(
             "php/teamSelect.php", {
                 'team_id': $scope.team_id,
                 'admin_status': $scope.admin_status,
                 'team_type': $scope.team_type,
-                'team_name': $scope.team_name
+                'team_name': $scope.team_name,
+                'plan': $scope.plan
             }
         ).success(function(data){
         });
@@ -51,9 +107,15 @@ app.controller('SessionController', function($scope, $http) {
                     'email': document.getElementById('email').value
                 }
             ).success(function(data) {
-                $scope.userinfo();
-                $scope.firstNameError = false;
-                $scope.emailError = false;
+                if(data == 'error') {
+                    alert(data);
+                } else {
+                    $scope.userinfo();
+                    alert(data);
+                    $scope.firstNameError = false;
+                    $scope.emailError = false;
+                    $scope.lastNameError = false;
+                }
             });           
         } else {
             $scope.emailError = true;
