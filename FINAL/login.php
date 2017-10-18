@@ -53,10 +53,10 @@
                 <input type="email" ng-model="registerEmail" class="w3-input w3-border-0"><br>
                 <small style="color: red;" ng-show="emailInvalid">Valid email is required<br></small>
                 <label>First Name</label><br>
-                <input type="text" ng-model="firstName" class="w3-input w3-border-0"><br>
+                <input type="text" ng-model="firstName" class="w3-input w3-border-0" pattern="[a-zA-Z]+" ng-pattern-restrict><br>
                 <small style="color: red;" ng-show="firstEmpty">First name is required<br></small>
                 <label>Last Name</label><br>
-                <input type="text" ng-model="lastName" class="w3-input w3-border-0"><br>
+                <input type="text" ng-model="lastName" class="w3-input w3-border-0" pattern="[a-zA-Z]+" ng-pattern-restrict><br>
                 <small style="color: red;" ng-show="lastEmpty">Last name is required<br><br></small>
                 <small style="color: red;" ng-show="registerError">Email is already being used, try loging in or reseting your password<br></small>
                 <input ng-click="register()" type="submit" class="w3-button" value="register">
@@ -128,13 +128,14 @@
             $scope.emailpattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
             $scope.register = function() {
                 if($scope.emailpattern.test($scope.registerEmail)) {
-                    if($scope.firstName ==  ""){
+                    if($scope.firstName == null){
                         $scope.firstEmpty = true;
                         $scope.emailInvalid = false;
                         $scope.lastEmpty = false;
                         $scope.registerError = false;
                         $scope.registerSuccess = false;
-                    } else if($scope.lastName == ""){
+                    } else if($scope.lastName == null){
+                        alert($scope.firstName);
                         $scope.lastEmpty = true;
                         $scope.firstEmpty = false;
                         $scope.emailInvalid = false;
@@ -154,7 +155,14 @@
                                 $scope.firstEmpty = false;
                                 $scope.emailInvalid = false;
                                 $scope.registerSuccess = false;
-                            } else {
+                            } else if(data != "Success"){
+                                alert(data);
+                                $scope.registerError = false;
+                                $scope.lastEmpty = false;
+                                $scope.firstEmpty = false;
+                                $scope.emailInvalid = false;
+                                $scope.registerSuccess = false;
+                            } else if (data = "success") {
                                 $scope.registerEmail = null;
                                 $scope.firstName = null;
                                 $scope.lastName = null;
@@ -199,11 +207,13 @@
                             $scope.recordError = true;
                             $scope.resetPasswordSuccess = false;
                             $scope.resetEmailEmpty = false;
-                        } else {
+                        } else if(data == "success"){
                             $scope.recordError = false;
                             $scope.resetEmailEmpty = false;
                             $scope.resetPasswordSuccess = true;
                             $scope.passwordResetForm = true;
+                        } else {
+                            alert(data);
                         }
                     });
                 }
