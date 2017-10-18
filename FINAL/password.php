@@ -30,6 +30,9 @@
         }
     </style>
 </head>
+
+
+
 <?php
 error_reporting(E_ERROR);
 include "php/connect.php";
@@ -42,6 +45,18 @@ $count = mysqli_num_rows($result);
 if($count == 1){
     $row = mysqli_fetch_assoc($result);
     $user_id = $row['idusers'];
+                    $form = "
+                        <form name='passwordForm'>
+                            <label>Password</label><br>
+                            <input id='password' ng-model='password' type='password' autocomplete='off' class='w3-input w3-border-0'>
+                            <small><br>Must contain an uppercase and lowercase letter, number and min. 8 characters</small><br>
+                            <small class='error' ng-show='patternError'>Password must meet requirements<br></small>
+                            <label>Repeat Password</label><br>
+                            <input id='repeatPassword' ng-model='repeatPassword' type='password' autocomplete='off' class='w3-input w3-border-0'><br>
+                            <small class='error' ng-show='repeatError'>Passwords must match!<br></small>
+                            <input ng-click='passwordInsert(". $user_id . $user_id1 .");' id='passwordInsert' class='w3-button' value='update' type='submit'>
+                        </form>";
+                    print $form;
 } else if ($count == 0){
     $sql2 = "SELECT user_email, expiration, status FROM password_reset WHERE token = '$token'";
     $result2 = mysqli_query($connect,$sql2);
@@ -59,33 +74,40 @@ if($count == 1){
                 if($count3 == 1){
                     $row3 = mysqli_fetch_assoc($result3);
                     $user_id1 = $row3['idusers'];
+                    $form = "
+                        <form name='passwordForm'>
+                            <label>Password</label><br>
+                            <input id='password' ng-model='password' type='password' autocomplete='off' class='w3-input w3-border-0'>
+                            <small><br>Must contain an uppercase and lowercase letter, number and min. 8 characters</small><br>
+                            <small class='error' ng-show='patternError'>Password must meet requirements<br></small>
+                            <label>Repeat Password</label><br>
+                            <input id='repeatPassword' ng-model='repeatPassword' type='password' autocomplete='off' class='w3-input w3-border-0'><br>
+                            <small class='error' ng-show='repeatError'>Passwords must match!<br></small>
+                            <input ng-click='passwordInsert(". $user_id . $user_id1 .");' id='passwordInsert' class='w3-button' value='update' type='submit'>
+                        </form>";
+                    print $form;
                 }
             } else {
-                echo "Password reset link has been used already, try reseting password again"; 
+                $error = "Password reset link has been used already, try reseting password again"; 
+
             }
         } else {
             $sql4 = "UPDATE password_reset SET status = 'expired' WHERE token = '$token'";
             mysqli_query($connect, $sql4);
-            echo "Password reset link has expired, try reseting password again";
+            $error = "Password reset link has expired, try reseting password again";
         }
     } else {
-        echo "Password link is invlaid";
+        $error = "Password link is invlaid";
     }
 }
 ?>
 <html>
     <body ng-app="registerApp" ng-controller="registerController"  class="w3-display-middle">
         <h1>OmadaHQ</h1>
-        <form name="passwordForm">
-            <label>Password</label><br>
-            <input id="password" ng-model="password" type="password" autocomplete="off" class="w3-input w3-border-0">
-            <small><br>Must contain an uppercase and lowercase letter, number and min. 8 characters</small><br>
-            <small class="error" ng-show="patternError">Password must meet requirements<br></small>
-            <label>Repeat Password</label><br>
-            <input id="repeatPassword" ng-model="repeatPassword" type="password" autocomplete="off" class="w3-input w3-border-0"><br>
-            <small class="error" ng-show="repeatError">Passwords must match!<br></small>
-            <input ng-click="passwordInsert(<?php echo $user_id ?><?php echo $user_id1 ?>);" id="passwordInsert" class="w3-button" value="update" type="submit">
-        </form>
+        <?php echo $error; ?>
+        <?php 
+
+        ?>
     </body>
     <script>
         $("#passwordInsert").click(function(event){
