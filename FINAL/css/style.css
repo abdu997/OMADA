@@ -39,6 +39,12 @@ a:hover {
     color: #000!important;
 }
 
+.team-name {
+    margin-top: -30px;
+    z-index: 3;
+    text-transform: capitalize;
+}
+
 .icon {
     margin-right: 10px;
 }

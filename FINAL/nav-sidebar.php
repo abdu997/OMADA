@@ -42,7 +42,7 @@ $plan = $_SESSION['plan'];
 </nav>
 <!--modal-->
 <div id="team_create" class="w3-modal">
-    <div class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important; width: 30%;">
+    <div class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important; width: 40%;">
         <span onclick="document.getElementById('team_create').style.display='none'" class="w3-button w3-display-topright" style="font-size: 20px">&times;</span>
         <div class="w3-container">
             <h4>Create a Team</h4>
@@ -66,7 +66,7 @@ $plan = $_SESSION['plan'];
     </div>
 </div>
 <div id="edit_user" class="w3-modal">
-    <div ng-controller="SessionController" ng-init="userinfo()" class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important; width: 30%;">
+    <div ng-controller="SessionController" ng-init="userinfo()" class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important; width: 40%;">
         <span onclick="document.getElementById('edit_user').style.display='none'" class="w3-button w3-display-topright" style="font-size: 20px">&times;</span>
         <div class="w3-container">
             <h4>Edit Personal Profile</h4>
@@ -101,7 +101,7 @@ $plan = $_SESSION['plan'];
     </div>
 </div>
 <div id="edit_team" class="w3-modal">
-    <div ng-controller="SessionController" ng-init="teamName()" class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important; width: 30%;">
+    <div ng-controller="SessionController" ng-init="teamName()" class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important; width: 40%;">
         <span onclick="document.getElementById('edit_team').style.display='none'" class="w3-button w3-display-topright" style="font-size: 20px">&times;</span>
         <div class="w3-container">
             <h4>Edit Team</h4>
@@ -145,15 +145,29 @@ $plan = $_SESSION['plan'];
         </div>
     </div>
 </div>
-<div ng-hide="'personal' == '<?php echo $team_type;?>'" style="float: right; margin-right: 15px;" ng-controller="SessionController">
+<div ng-hide="'personal' == '<?php echo $team_type;?>'" style="float: right; margin-right: 15px; margin-top: 10px" ng-controller="SessionController">
     <a href="#" data-toggle="editTeamTooltip" data-placement="bottom" title="Only team admins can edit a team"><i class="fa fa-question-circle fw" style="font-size: 17px"></i></a> &nbsp;
-    <button onclick="document.getElementById('edit_team').style.display='block'" ng-disabled="'N' == '<?php echo $admin_status;?>' || 'personal' == '<?php echo $team_type;?>'" style="background: white" class="w3-button">Edit Team</button>
+    <button onclick="document.getElementById('edit_team').style.display='block'" ng-disabled="'N' == '<?php echo $admin_status;?>' || 'personal' == '<?php echo $team_type;?>'" style="background: white;" class="w3-button">Edit Team</button>
     <script>
     $(document).ready(function(){
         $('[data-toggle="editTeamTooltip"]').tooltip();   
     });
     </script>
 </div>
+<div class="team-title">
+    <h3 class="team-name"><b><i class="fa fa-dashboard"></i>&nbsp;<?php echo $team_name; ?></b></h3>
+</div>
+<style>
+    .team-title {
+        margin-top: 45px;
+        margin-left: 220px;
+    }
+    @media(max-width: 991px) {
+        .team-title {
+            margin-left: 20px;
+        }
+    }
+</style>
 <script for="modal">
 var modal = document.getElementById('team_create');
 window.onclick = function(event) {

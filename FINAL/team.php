@@ -47,9 +47,11 @@ header('Location: login.php');
     <div class="w3-main" style="margin-left: 200px">
         <div class="w3-container">
             <div class="row">
+<!--
                 <div class="col-md-12 left">
-                    <h3 style="margin-top: 0px"><b><i class="fa fa-dashboard"></i>&nbsp;<?php echo $team_name; ?></b></h3>
+                    <h3 class="team-name"><b><i class="fa fa-dashboard"></i>&nbsp;<?php echo $team_name; ?></b></h3>
                 </div>
+-->
             </div>
         </div>
         <div class="w3-container">
