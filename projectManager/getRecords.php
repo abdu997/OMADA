@@ -8,10 +8,10 @@ if (isset($_GET['goal_id'])) {
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_array($result)) {
                 $user_id = $row[1];
-                $sql = "SELECT * FROM users WHERE idusers = '$user_id'";
+                $sql = "SELECT first_name, last_name FROM users WHERE idusers = '$user_id'";
                 $res = mysqli_query($connect,$sql);
                 $names = mysqli_fetch_array($res);
-                $row["user"] = $names[3].' '.$names[4];
+                $row["user"] = $names[0].' '.$names[1];
                 $output[] = $row;
             }
             echo json_encode($output);
