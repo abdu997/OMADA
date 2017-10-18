@@ -7,7 +7,7 @@ session_start();
 if (count($data) > 0) {
     $myemail = mysqli_real_escape_string($connect, $data->email);
     $mypassword = mysqli_real_escape_string($connect, $data->password); 
-	$sql = "SELECT idusers, password, first_name FROM `test`.`users` WHERE email = '$myemail'";
+	$sql = "SELECT idusers, password, first_name FROM users WHERE email = '$myemail'";
 	$result = mysqli_query($connect, $sql);
 	$count = mysqli_num_rows($result);
 	$row = $result -> fetch_row();
@@ -19,18 +19,20 @@ if (count($data) > 0) {
             $_SESSION['name'] = $row[2];
             $user_id = $_SESSION['user_id']; 
             
-            $sql2 = "SELECT min(t_id), admin FROM team_user WHERE u_id = '$user_id'";
+            $sql2 = "SELECT team_id, team_name, type, plan FROM team WHERE type = 'personal' AND team_id IN (SELECT t_id FROM team_user WHERE u_id = '$user_id')";
             $result2 = mysqli_query($connect, $sql2);
             $row2 = $result2 -> fetch_row();
             $_SESSION['team_id'] = $row2[0];
-            $_SESSION['admin_status'] = $row2[1];
+            $_SESSION['team_name'] = $row2[1];
+            $_SESSION['team_type'] = $row2[2];
+            $_SESSION['plan'] = $row2[3];
+            
             $team_id = $_SESSION['team_id'];
             
-            $sql3 = "SELECT team_name, type FROM team WHERE team_id = '$team_id'";
+            $sql3 = "SELECT admin FROM team_user WHERE t_id = '$team_id'";
             $result3 = mysqli_query($connect, $sql3);
             $row3 = $result3 -> fetch_row();
-            $_SESSION['team_name'] = $row3[0];
-            $_SESSION['team_type'] = $row3[1];            
+            $_SESSION['admin_status'] = $row3[0];
 		} else {
             echo "error";
 		}	
@@ -38,6 +40,5 @@ if (count($data) > 0) {
 	else{
 		echo "error";
 	}
-
 }
 ?>

@@ -8,5 +8,6 @@ if(count($data) > 0){
     $_SESSION['admin_status'] = $data->admin_status;
     $_SESSION['team_type'] = $data->team_type;
     $_SESSION['team_name'] = $data->team_name;
+    $_SESSION['plan'] = $data->plan;
 }
 ?>
