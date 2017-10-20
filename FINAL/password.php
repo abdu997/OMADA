@@ -39,12 +39,12 @@ include "php/connect.php";
 if(isset($_GET['token'])){
     $token = $_GET['token'];
 }
-$sql = "SELECT idusers FROM users WHERE password = '$token'";
+$sql = "SELECT user_id FROM users WHERE password = '$token'";
 $result = mysqli_query($connect,$sql);
 $count = mysqli_num_rows($result);
 if($count == 1){
     $row = mysqli_fetch_assoc($result);
-    $user_id = $row['idusers'];
+    $user_id = $row['user_id'];
     $form = "
         <form name='passwordForm'>
             <label>Password</label><br>
@@ -56,7 +56,7 @@ if($count == 1){
             <small class='error' ng-show='repeatError'>Passwords must match!<br></small>
             <input ng-click='passwordInsert(". $user_id .");' id='passwordInsert' class='w3-button' value='update' type='submit'>
         </form>";
-    print $form;
+//    print $form;
 } else if ($count == 0){
     $sql2 = "SELECT user_email, expiration, status FROM password_reset WHERE token = '$token'";
     $result2 = mysqli_query($connect,$sql2);
@@ -68,12 +68,12 @@ if($count == 1){
         $expiration = $row2['expiration'];
         if ($expiration >= $timestamp){
             if($status == "active"){
-                $sql3 = "SELECT idusers FROM users WHERE email='$user_email'";
+                $sql3 = "SELECT user_id FROM users WHERE email='$user_email'";
                 $result3 = mysqli_query($connect,$sql3);
                 $count3 = mysqli_num_rows($result3);
                 if($count3 == 1){
                     $row3 = mysqli_fetch_assoc($result3);
-                    $user_id1 = $row3['idusers'];
+                    $user_id1 = $row3['user_id'];
                     $form = "
                         <form name='passwordForm'>
                             <label>Password</label><br>
@@ -95,13 +95,13 @@ if($count == 1){
             $error = "Password reset link has expired, try reseting password again";
         }
     } else {
-        $error = "Password link is invlaid";
+        $error = "Password reset link is invalid";
     }
 }
 ?>
 <html>
     <body ng-app="registerApp" ng-controller="registerController"  class="w3-display-middle">
-        <h1>OmadaHQ</h1>
+        <center><h1>OmadaHQ</h1></center>
         <?php echo $error; ?>
         <?php print $form; ?>
     </body>

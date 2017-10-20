@@ -6,7 +6,7 @@ $first_name = mysqli_real_escape_string($connect, $data->first_name);
 $last_name = mysqli_real_escape_string($connect, $data->last_name);
 if (count($data) > 0){
     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-        if(preg_match("/^[a-zA-Z ].{1,}$/",$first_name) && preg_match("/^[a-zA-Z ].{1,}$/",$last_name)){
+        if(preg_match("/^[a-zA-Z ].{2,}$/",$first_name) && preg_match("/^[a-zA-Z ].{2,}$/",$last_name)){
             $sql = "SELECT email from test.users WHERE email = '$email'";
             $result = mysqli_query($connect,$sql);
             $count = mysqli_num_rows($result);
@@ -25,8 +25,8 @@ if (count($data) > 0){
                     if($count4 > 0){
                         while($row4 = mysqli_fetch_array($result4)){
                             $team_id1 = $row4["0"];
-                            $admin = $row4["1"]; 
-                            $sql6 = "INSERT INTO team_user(t_id, u_id, admin) VALUE('$team_id1', '$user_id', '$admin')";
+                            $admin = $row4["1"];
+                            $sql6 = "INSERT INTO team_user(team_id, user_id, admin) VALUE('$team_id1', '$user_id', '$admin')";
                             if(mysqli_query($connect, $sql6)){
                             $sql7 = "UPDATE team_nonuser SET status = 'registered' WHERE email = '$email'";
                             mysqli_query($connect, $sql7);
@@ -37,7 +37,7 @@ if (count($data) > 0){
                     }
                     if (mysqli_query($connect, $sql2)){
                         $team_id = mysqli_insert_id($connect);
-                        $sql3 = "INSERT INTO team_user (t_id, u_id, admin) VALUES('$team_id', '$user_id', 'Y')";
+                        $sql3 = "INSERT INTO team_user (team_id, user_id, admin) VALUES('$team_id', '$user_id', 'Y')";
                         mysqli_query($connect, $sql3);
                     } else {
                         $return  = "Success";
@@ -49,7 +49,7 @@ if (count($data) > 0){
                 }
             } else {
                 echo "error";
-            }  
+            }
         } else {
             echo"Names cannot have numbers or symbols";
         }

@@ -4,7 +4,7 @@ include "session.php";
 $data = json_decode(file_get_contents("php://input"));
 $old_password = mysqli_real_escape_string($connect, $data->old_password);
 if(count($data) > 0){
-    $query = "SELECT password FROM users WHERE idusers='$user_id'";
+    $query = "SELECT password FROM users WHERE user_id='$user_id'";
     $result = mysqli_query($connect, $query);
     $count = mysqli_num_rows($result);
     $row = mysqli_fetch_assoc($result);
@@ -15,5 +15,5 @@ if(count($data) > 0){
     } else {
         echo "error";
     }
-}	
+}
 ?>

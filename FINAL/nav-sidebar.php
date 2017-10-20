@@ -26,47 +26,45 @@ $plan = $_SESSION['plan'];
     <hr>
     <div class="w3-bar-block">
         <a class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
-        <div onClick="window.location.reload()" ng-click="teamSelect(x.t_id, x.admin, x.type, x.team_name, x.plan)" ng-repeat="x in teams | filter : {'type':'personal'} " style="text-transform: capitalize; color: white;">
-            <a ng-class="{'active': x.t_id == <?php echo $team_id;?>}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i>&nbsp; {{x.team_name}}</a>
+        <div onClick="window.location.reload()" ng-click="teamSelect(x.team_id, x.admin, x.type, x.team_name, x.plan)" ng-repeat="x in teams | filter : {'type':'personal'} " style="text-transform: capitalize; color: white;">
+            <a ng-class="{'active': x.team_id == <?php echo $team_id;?>}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i>&nbsp; {{x.team_name}}</a>
         </div>
         <a onclick="document.getElementById('edit_user').style.display='block'" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>&nbsp; Edit Account</a>
         <a onclick="document.getElementById('team_create').style.display='block'" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus fa-fw"></i>&nbsp; Create Team</a>
         <a href="php/logout.php" class="w3-bar-item w3-button w3-padding logout"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Log Out</a>
         <hr>
-        <div onClick="window.location.reload()" ng-click="teamSelect(x.t_id, x.admin, x.type, x.team_name, x.plan)" ng-repeat="x in teams | filter : {'type':'team'}" style="text-transform: capitalize; color: white;">
-            <a ng-class="{'active': x.t_id == <?php echo $team_id;?>}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; {{x.team_name}}</a>
+        <div onClick="window.location.reload()" ng-click="teamSelect(x.team_id, x.admin, x.type, x.team_name, x.plan)" ng-repeat="x in teams | filter : {'type':'team'}" style="text-transform: capitalize; color: white;">
+            <a ng-class="{'active': x.team_id == <?php echo $team_id;?>}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; {{x.team_name}}</a>
         </div>
         <br>
         <br>
     </div>
 </nav>
 <!--modal-->
-<div id="team_create" class="w3-modal">
+<div id="team_create" class="w3-modal" ng-controller="SessionController">
     <div class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important; width: 40%;">
-        <span onclick="document.getElementById('team_create').style.display='none'" class="w3-button w3-display-topright" style="font-size: 20px">&times;</span>
+        <span onclick="document.getElementById('team_create').style.display='none';window.location.reload()" class="w3-button w3-display-topright" style="font-size: 20px">&times;</span>
         <div class="w3-container">
             <h4>Create a Team</h4>
-            <form>
+            <form name="createTeamFrom">
                 <label>Team Name<span class="asterisk">*</span>
                 </label>
-                <input class="w3-input w3-border-0" type="text" required>
-                <label>Member #1</label>
-                <input class="w3-input w3-border-0" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="e-mail" required>
-                <label>Member #2</label>
-                <input class="w3-input w3-border-0" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="e-mail" required>
-                <label>Member #3</label>
-                <input class="w3-input w3-border-0" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="e-mail" required>
-                <label>Member #4</label>
-                <input class="w3-input w3-border-0" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="e-mail" required>
-                <input class="w3-button" type="submit" value="Create" style="background: white; margin-top: 10px">
+                <input ng-model="newTeamName" class="w3-input w3-border-0" type="text" required>
+                <input ng-click="createTeam()" class="w3-button" type="submit" value="Create Team" style="background: white; margin-top: 10px" ng-disabled="createTeamFrom.$invalid">
+                <small ng-show="teamCreateSuccess" style="color: green">Team successfully created!<br></small>
                 <p><small>NOTE: You will be the Admin for the team. You can set up a team without members, and add members later.</small>
                 </p>
+            </form>
+            <form name="newTeamMemberInsertForm" ng-hide="newTeamMemberInsertForm">
+                <label>New Member Email</label>
+                <input ng-model="insertMemberInput" class="w3-input w3-border-0" type="email" autocomplete="off" required>
+                <input ng-click="insertMember()" class="w3-button" type="submit" ng-disabled="newTeamMemberInsertForm.$invalid" value="Add Member" style="background: white; margin-top: 4px">
             </form>
         </div>
     </div>
 </div>
 <div id="edit_user" class="w3-modal">
-    <div ng-controller="SessionController" ng-init="userinfo()" class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important; width: 40%;">
+    <div ng-controller="SessionController"  ng-init="userinfo()" class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important; width: 40%;">
         <span onclick="document.getElementById('edit_user').style.display='none'" class="w3-button w3-display-topright" style="font-size: 20px">&times;</span>
         <div class="w3-container">
             <h4>Edit Personal Profile</h4>
@@ -105,13 +103,13 @@ $plan = $_SESSION['plan'];
         <span onclick="document.getElementById('edit_team').style.display='none'" class="w3-button w3-display-topright" style="font-size: 20px">&times;</span>
         <div class="w3-container">
             <h4>Edit Team</h4>
-            <form name="teamNameChange" ng-repeat="x in teamNames | filter : {'t_id': '<?php echo $team_id; ?>'}">
+            <form name="teamNameChange" ng-repeat="x in teamNames | filter : {'team_id': '<?php echo $team_id; ?>'}">
                 <label>Team Name</label>
-                <input id="teamName" value="{{x.team_name}}" class="w3-input w3-border-0" autocomplete="off" type="text">
+                <input id="teamName" value="{{x.team_name}}" class="w3-input w3-border-0" autocomplete="off" type="text" required>
                 <small ng-show="nullTeamError" style="color: red">New team name cannot be empty<br></small>
                 <small ng-show="teamLengthError" style="color: red">Team name cannot be larger than 20 characters<br></small>
                 <small ng-show="changeTeamSuccess" style="color: green">Team name successfully changed!<br></small>
-                <input ng-disabled="changeTeamName.$invalid" ng-click="changeTeamName(<?php echo $team_id;?>)" class="w3-button" style="background: white; margin-top: 4px" type="submit" value="Change">
+                <input ng-disabled="teamNameChange.$invalid" ng-click="changeTeamName(<?php echo $team_id;?>)" class="w3-button" style="background: white; margin-top: 4px" type="submit" value="Change">
             </form>
             <h4>Edit Members</h4>
             <form name="insertMemberForm">

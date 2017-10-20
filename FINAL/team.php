@@ -37,28 +37,20 @@ header('Location: login.php');
 </head>
 
 <!-- Top container -->
-<body class="w3-light-grey" style="margin-top: 43px" ng-app="omadaApp">
+<body onload="myFunction()" class="w3-light-grey" style="margin-top: 43px" ng-app="omadaApp">
     <!-- Sidebar/menu -->
     <? include 'nav-sidebar.php';?>
-
     <!-- Overlay effect when opening sidebar on small screens -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
     <div class="w3-main" style="margin-left: 200px">
         <div class="w3-container">
-            <div class="row">
-<!--
-                <div class="col-md-12 left">
-                    <h3 class="team-name"><b><i class="fa fa-dashboard"></i>&nbsp;<?php echo $team_name; ?></b></h3>
-                </div>
--->
-            </div>
         </div>
         <div class="w3-container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="tile-bg">
-                        <h3>Project Manager</h3>
+                    <div class="tile-bg" style="display:none;" id="app" class="animate-bottom">
+                        <?php include'projectManager.php';?>
                     </div>
                 </div>
             </div>
@@ -84,6 +76,17 @@ header('Location: login.php');
         function w3_close() {
             mySidebar.style.display = "none";
             overlayBg.style.display = "none";
+        }
+    </script>
+    <script>
+        var myVar;
+
+        function myFunction() {
+            myVar = setTimeout(showPage, 500);
+        }
+
+        function showPage() {
+          document.getElementById("app").style.display = "block";
         }
     </script>
 </body>

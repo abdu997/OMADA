@@ -2,14 +2,14 @@
 include'connect.php';
 session_start();
 $team_id = $_SESSION['team_id'];
-$sql = "SELECT * FROM team_user WHERE t_id = '$team_id'";
+$sql = "SELECT * FROM team_user WHERE team_id = '$team_id'";
 $result = mysqli_query($connect, $sql);
 $sql2 = "SELECT email, admin FROM team_nonuser WHERE team_id = '$team_id' AND status = 'pending'";
 $result2 = mysqli_query($connect, $sql2);
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_array($result)) {
         $users_id =  $row[2];
-        $sql3 = "SELECT email, first_name, last_name FROM users WHERE idusers='$users_id'";
+        $sql3 = "SELECT email, first_name, last_name FROM users WHERE user_id='$users_id'";
         $result3 = mysqli_query($connect, $sql3);
         $member = mysqli_fetch_array($result3);
         $row["member_email"] = $member[0];

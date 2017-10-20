@@ -3,7 +3,7 @@ include("connect.php");
 session_start();
 $output = array();
 $user_id = $_SESSION['user_id'];
-$query  = "SELECT * FROM team_user WHERE u_id='$user_id'";
+$query  = "SELECT * FROM team_user WHERE user_id='$user_id'";
 $result = mysqli_query($connect, $query);
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_array($result)) {
@@ -18,4 +18,4 @@ if (mysqli_num_rows($result) > 0) {
     }
     echo json_encode($output);
 }
-?> 
+?>

@@ -1,5 +1,5 @@
 <?php
-include("../php/connect.php");
+include("../connect.php");
 $data = json_decode(file_get_contents("php://input"));
 if (count($data) > 0) {
     $project_id = $data->project_id;

@@ -22,14 +22,13 @@
                 $scope.projectError = true;
             } else {
                 $http.post(
-                    "insertProject.php", {
+                    "php/projectManager/insertProject.php", {
                         'project': $scope.project,
                         'btnName': $scope.btnName,
                         'project_id': $scope.project_id,
                         'tag_color': $scope.color,
                     }
                 ).success(function(data) {
-                    //alert(data);
                     $scope.project = null;
                     $scope.btnName = "ADD";            
                     $scope.displayProject();
@@ -42,7 +41,7 @@
         $scope.project_id;
         $scope.filterGoals = function(id, projectName) {
             $scope.project_id = id;
-            $http.get("getGoals.php?project_id=" + id).success(function(goals) {
+            $http.get("php/projectManager/getGoals.php?project_id=" + id).success(function(goals) {
                 $scope.goals = goals;
             });
         }
@@ -51,7 +50,7 @@
         }, 500);
 
         $scope.displayProject = function() {
-            $http.get("readProjects.php")
+            $http.get("php/projectManager/readProjects.php")
                 .success(function(data) {
                     $scope.projects = data;
                 });
@@ -62,7 +61,7 @@
 
         $scope.deleteProject = function(project_id) {
             if (confirm("Are you sure you want to delete this project?")) {
-                $http.post("deleteProject.php", {
+                $http.post("php/projectManager/deleteProject.php", {
                         'project_id': project_id
                     })
                     .success(function(data) {
@@ -92,7 +91,7 @@
                 $scope.goalError = true;
             } else {
                 $http.post(
-                    "create.php", {
+                    "php/projectManager/create.php", {
                         'goal': $scope.goal,
                         'btnName': $scope.btnName,
                         'goal_id': $scope.goal_id,
@@ -117,7 +116,7 @@
             } else if (status == 'inReview') {
                 status = 'completed';
             }
-            $http.post("updateStatus.php", {
+            $http.post("php/projectManager/updateStatus.php", {
                 'status': status,
                 'goal_id': goal_id
             }).success(function(data) {});
@@ -131,7 +130,7 @@
             } else if (status == 'completed') {
                 status = 'inReview';
             }
-            $http.post("updateStatus.php", {
+            $http.post("php/projectManager/updateStatus.php", {
                 'status': status,
                 'goal_id': goal_id
             }).success(function(data) {
@@ -140,7 +139,7 @@
         }
 
         $scope.displayData = function() {
-                $http.get("read.php")
+                $http.get("php/projectManager/read.php")
                     .success(function(data) {
                         $scope.goals = data;
                     });
@@ -155,7 +154,7 @@
 
         $scope.deleteData = function(goal_id) {
             if (confirm("Are you sure you want to delete this goal?")) {
-                $http.post("delete.php", {
+                $http.post("php/projectManager/delete.php", {
                         'goal_id': goal_id
                     })
                     .success(function(data) {
@@ -172,7 +171,7 @@
                 alert("Input is empty");
             } else {
                 $http.post(
-                    "insertRecord.php", {
+                    "php/projectManager/insertRecord.php", {
                         'record': $scope.record,
                         'goal_id': $scope.goal_id,
                         'project_id': $scope.project_id
@@ -187,7 +186,7 @@
         $scope.goal_id;
         $scope.filterRecords = function(id) {
             $scope.goal_id = id;
-            $http.get("getRecords.php?goal_id=" + id).success(function(records) {
+            $http.get("php/projectManager/getRecords.php?goal_id=" + id).success(function(records) {
                 $scope.records = records;
             });
         }
