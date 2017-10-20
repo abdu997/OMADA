@@ -27,7 +27,7 @@
         }
         .projectClicked {
             background: #d4d8d8;
-            border-right: 8px solid #F6C800;
+            border-right: 8px solid #2196F3!important;
         }
         .goal {
             padding: 10px;
