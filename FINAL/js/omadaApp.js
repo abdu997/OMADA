@@ -53,10 +53,7 @@ app.controller('SessionController', function($scope, $http) {
             $scope.editAdminForm = true;
         });
     }
-    setInterval(function() {
-        $scope.getTeamEmails();
-    }, 20000);
-
+    
     $scope.switchAdmins = function() {
         $http.post(
             "php/switchAdmins.php", {
@@ -64,7 +61,14 @@ app.controller('SessionController', function($scope, $http) {
                 'old_admin_email': document.getElementById('oldAdmin').value
             }
         ).success(function(data) {
-            alert(data);
+            $scope.getTeamEmails();
+            if(data == 'success1'){
+                location.reload();
+            } else if(data == 'succcess2'){
+    
+            } else {
+                alert(data);
+            }
         });
     }
 
@@ -77,6 +81,7 @@ app.controller('SessionController', function($scope, $http) {
                 }
             ).success(function(data) {
                 alert(data);
+                $scope.insertMemberInput = null;
             });
         } else {
             alert("email must be valid");
@@ -115,7 +120,7 @@ app.controller('SessionController', function($scope, $http) {
 
     $scope.emailpattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
     $scope.editProfile = function() {
-        if (document.getElementById('firstName').value == "") {
+        if (document.getElementById('firstName').value == null) {
             $scope.firstNameError = true;
             $scope.lastNameError = false;
         } else if (document.getElementById('lastName').value == "") {
@@ -130,10 +135,22 @@ app.controller('SessionController', function($scope, $http) {
                 }
             ).success(function(data) {
                 if (data == 'error') {
-                    alert(data);
-                } else {
+                    $scope.usedEmailError = true;
+                    $scope.editProfileSuccess = false;
+                    $scope.emailError = false;
+                    $scope.lastNameError = false;
+                    $scope.firstNameError = false;
+                } else if(data == 'success') {
+                    $scope.editProfileSuccess = true;
                     $scope.userinfo();
+                    $scope.firstNameError = false;
+                    $scope.usedEmailError = false;
+                    $scope.emailError = false;
+                    $scope.lastNameError = false;
+                } else {
                     alert(data);
+                    $scope.usedEmailError = false;
+                    $scope.editProfileSuccess = false;
                     $scope.firstNameError = false;
                     $scope.emailError = false;
                     $scope.lastNameError = false;
@@ -350,9 +367,8 @@ app.controller("pmController", function($scope, $http, $rootScope) {
             });
     }
 
-    $scope.updateData = function(goal_id, goal, project_id) {
+    $scope.updateData = function(goal_id, goal) {
         $scope.goal_id = goal_id;
-        $scope.project_id = project_id;
         $scope.goal = goal;
         $scope.btnName = "Update";
     }
@@ -397,7 +413,7 @@ app.controller("pmController", function($scope, $http, $rootScope) {
     }
     setInterval(function() {
         $scope.filterRecords($scope.goal_id);
-    }, 1000);
+    }, 500);
 
     $scope.progress_record = false;
     $scope.showProgress = function() {

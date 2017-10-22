@@ -9,7 +9,7 @@ $plan = $_SESSION['plan'];
         display: none;
     }
 </style>
-<div class="w3-bar w3-top w3-black w3-large" style="z-index:4; position: fixed;">
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4; position: fixed; background: #2196F3!important;">
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey w3-right" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
     <span class="w3-bar-item">OmadaHQ<small style="font-size: 10px">BETA</small></span>
 </div>
@@ -78,6 +78,8 @@ $plan = $_SESSION['plan'];
                 <label>Email</label><span class="asterisk">*</span>
                 <input value="{{x.email}}" id="email" class="w3-input w3-border-0" type="email">
                 <small ng-show="emailError" style="color: red;">Email must be valid!<br></small>
+                <small ng-show="usedEmailError" style="color: red;">Email is being used by another user<br></small>
+                <small ng-show="editProfileSuccess" style="color: Green;">Profile update successful!<br></small>
                 <input ng-click="editProfile()" class="w3-button" type="submit" value="Update" style="background: white; margin-top: 10px">
                 <br>
                 <h4>Password Update</h4>
@@ -121,7 +123,7 @@ $plan = $_SESSION['plan'];
                 </select>
                 <input ng-click="insertMember()" class="w3-button" type="submit" ng-disabled="insertMemberForm.$invalid" value="Add Member" style="background: white; margin-top: 4px">
             </form>
-            <h4>Team Administrators <small ng-click="getTeamEmails()" style="cursor: pointer">edit</small></h4>
+            <h4>Team Administrators <small ng-click="getTeamEmails()" style="cursor: pointer">edit</small></h4><a href="#" data-toggle="editTeamTooltip" data-placement="bottom" title="If you can only see a members email, that means they havent registered to OmadaHQ yet."><i class="fa fa-question-circle fw" style="font-size: 17px"></i></a> &nbsp;
             <form ng-show="editAdminForm" id="editAdminForm">
                 <label>Old Admin</label><br>
                 <select id="oldAdmin">
@@ -129,7 +131,7 @@ $plan = $_SESSION['plan'];
                 </select><br>
                 <label>New Admin</label><br>
                 <select id="newAdmin">
-                    <option ng-repeat="x in teamEmails | filter : {'admin':'N'}" value="{{x.member_email}}">{{x.member_email}}</option>
+                    <option ng-repeat="x in teamEmails | filter : {'admin':'N', 'member': 'Y'}" value="{{x.member_email}}">{{x.member_email}}</option>
                 </select><br>
                 <input ng-click="switchAdmins()" class="w3-button" type="submit" value="Switch Admins" style="background: white; margin-top: 4px">
             </form>

@@ -14,6 +14,7 @@ if (mysqli_num_rows($result) > 0) {
         $member = mysqli_fetch_array($result3);
         $row["member_email"] = $member[0];
         $row["member_name"] = $member[1].' '.$member[2];
+        $row["member"] = 'Y';
         $output[] = $row;
     }
 }
@@ -21,6 +22,7 @@ if(mysqli_num_rows($result2) > 0) {
     while ($row2 = mysqli_fetch_array($result2)) {
         $row2["member_email"] = $row2[0];
         $row2["admin"] = $row2[1];
+        $row2["member"] = 'N';
         $output[] = $row2;
     }
 }
