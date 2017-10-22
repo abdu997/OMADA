@@ -9,13 +9,13 @@ if (count($data) > 0) {
     $email = mysqli_real_escape_string($connect, $data->email);
 
     if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        if(preg_match("/^[a-zA-Z ]*{2,}$/",$first_name) && preg_match("/^[a-zA-Z ]*{2,}$/",$last_name)){
+        if(preg_match("/^[a-zA-Z ]{2,}$/",$first_name) && preg_match("/^[a-zA-Z ]{2,}$/",$last_name)){
             $query = "UPDATE users SET email = '$email', first_name = '$first_name', last_name = '$last_name' WHERE user_id = '$user_id'";
             if (mysqli_query($connect, $query)) {
-                echo 'Data Updated...';
+                echo 'success';
             } else {
                 //This error would occur because email column in MySQL is Unique
-                echo 'Email is already being used with another account';
+                echo 'error';
             }
         } else {
             echo"Names cannot have numbers or symbols";

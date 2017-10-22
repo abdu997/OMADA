@@ -19,7 +19,7 @@ if (count($data) > 0) {
             $_SESSION['name'] = $row[2];
             $user_id = $_SESSION['user_id'];
 
-            $sql2 = "SELECT team_id, team_name, type, plan FROM team WHERE type = 'personal' AND team_id IN (SELECT user_id FROM team_user WHERE user_id = '$user_id')";
+            $sql2 = "SELECT team_id, team_name, type, plan FROM team WHERE type = 'personal' AND team_id IN (SELECT team_id FROM team_user WHERE user_id = '$user_id')";
             $result2 = mysqli_query($connect, $sql2);
             $row2 = $result2 -> fetch_row();
             $_SESSION['team_id'] = $row2[0];
@@ -33,6 +33,8 @@ if (count($data) > 0) {
             $result3 = mysqli_query($connect, $sql3);
             $row3 = $result3 -> fetch_row();
             $_SESSION['admin_status'] = $row3[0];
+            
+            echo"success";
 		} else {
             echo "error";
 		}
