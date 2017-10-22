@@ -1,5 +1,6 @@
 <html>
     <head>
+        <title>OmadaHQ</title>
         <script src="js/angular.min.js"></script>
         <script src="js/jquery.js"></script>
         <link rel="stylesheet" href="css/w3.css">
@@ -35,8 +36,8 @@
     <body ng-app="loginApp" ng-controller="webEntranceController" class="w3-display-middle">
         <center>
             <h1 style="margin-bottom: 30px">OmadaHQ</h1>
-            <button ng-click="navButton()" id="loginTab" class="w3-button">Login</button>
-            <button ng-click="navButton()" id="registerTab" class="w3-button">Register</button>
+            <button ng-click="navButton()" id="loginTab" class="w3-button" style="width: 96px">Login</button>
+            <button ng-click="navButton()" id="registerTab" class="w3-button" style="width: 96px">Register</button>
         </center><br>
         <form id="loginForm">
             <label>Email</label><br>
@@ -115,11 +116,13 @@
                     ).success(function(data) {
                         if (data == "error") {
                             $scope.loginError = true;
-                        } else {
+                        } else if(data == "success") {
                             $scope.email = null;
                             $scope.password = null;
-                            window.location.href = "team.php";
+                            window.location.href = "index.php";
                             $scope.loginError = false;
+                        } else {
+                            alert(data);
                         }
                     });
                 }
@@ -149,20 +152,13 @@
                                 'last_name': $scope.lastName
                             }
                         ).success(function(data) {
-                            if (data == "error"){
+                            if(data == "error"){
                                 $scope.registerError = true;
                                 $scope.lastEmpty = false;
                                 $scope.firstEmpty = false;
                                 $scope.emailInvalid = false;
                                 $scope.registerSuccess = false;
-                            } else if(data != "Success"){
-                                alert(data);
-                                $scope.registerError = false;
-                                $scope.lastEmpty = false;
-                                $scope.firstEmpty = false;
-                                $scope.emailInvalid = false;
-                                $scope.registerSuccess = false;
-                            } else if (data = "success") {
+                            } else if(data == "success"){
                                 $scope.registerEmail = null;
                                 $scope.firstName = null;
                                 $scope.lastName = null;
@@ -171,6 +167,13 @@
                                 $scope.registerError = false;
                                 $scope.lastEmpty = false;
                                 $scope.emailInvalid = false;
+                            } else {
+                                alert(data);
+                                $scope.registerError = false;
+                                $scope.lastEmpty = false;
+                                $scope.firstEmpty = false;
+                                $scope.emailInvalid = false;
+                                $scope.registerSuccess = false;
                             }
                         });
                     }

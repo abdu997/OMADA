@@ -1,4 +1,5 @@
 <head>
+    <title>OmadaHQ</title>
     <script src="js/angular.min.js"></script>
     <script src="js/jquery.js"></script>
     <link rel="stylesheet" href="css/w3.css">
