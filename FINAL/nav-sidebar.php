@@ -3,6 +3,7 @@ $team_id = $_SESSION['team_id'];
 $admin_status = $_SESSION['admin_status'];
 $team_type = $_SESSION['team_type'];
 $plan = $_SESSION['plan'];
+$user_id = $_SESSION['user_id'];
 ?>
 <style>
     .hidden {
@@ -104,7 +105,7 @@ $plan = $_SESSION['plan'];
     <div ng-controller="SessionController" ng-init="teamName()" class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important; width: 40%;">
         <span onclick="document.getElementById('edit_team').style.display='none'" class="w3-button w3-display-topright" style="font-size: 20px">&times;</span>
         <div class="w3-container">
-            <h4>Edit Team</h4>
+            <h2>Edit Team</h2>
             <form name="teamNameChange" ng-repeat="x in teamNames | filter : {'team_id': '<?php echo $team_id; ?>'}">
                 <label>Team Name</label>
                 <input id="teamName" value="{{x.team_name}}" class="w3-input w3-border-0" autocomplete="off" type="text" required>
@@ -113,7 +114,8 @@ $plan = $_SESSION['plan'];
                 <small ng-show="changeTeamSuccess" style="color: green">Team name successfully changed!<br></small>
                 <input ng-disabled="teamNameChange.$invalid" ng-click="changeTeamName(<?php echo $team_id;?>)" class="w3-button" style="background: white; margin-top: 4px" type="submit" value="Change">
             </form>
-            <h4>Edit Members</h4>
+            <h3>Members</h3>
+            <h4>Add Members </h4>
             <form name="insertMemberForm">
                 <label>New Member Email</label>
                 <input ng-model="insertMemberInput" class="w3-input w3-border-0" type="email" autocomplete="off" required>
@@ -123,7 +125,6 @@ $plan = $_SESSION['plan'];
                 </select>
                 <input ng-click="insertMember()" class="w3-button" type="submit" ng-disabled="insertMemberForm.$invalid" value="Add Member" style="background: white; margin-top: 4px">
             </form>
-            <h4>Team Administrators <small ng-click="getTeamEmails()" style="cursor: pointer">edit</small></h4><a href="#" data-toggle="editTeamTooltip" data-placement="bottom" title="If you can only see a members email, that means they havent registered to OmadaHQ yet."><i class="fa fa-question-circle fw" style="font-size: 17px"></i></a> &nbsp;
             <form ng-show="editAdminForm" id="editAdminForm">
                 <label>Old Admin</label><br>
                 <select id="oldAdmin">
@@ -135,14 +136,33 @@ $plan = $_SESSION['plan'];
                 </select><br>
                 <input ng-click="switchAdmins()" class="w3-button" type="submit" value="Switch Admins" style="background: white; margin-top: 4px">
             </form>
+            <h4>Admins <a data-toggle="editTeamTooltip" data-placement="bottom" title="You cannot remove yourself from a team."><i class="fa fa-question-circle fw" style="font-size: 13px;"></i></a> <small ng-click="getTeamEmails()" style="cursor: pointer">edit</small></h4>
             <div ng-repeat="x in teamMembers | filter : {'admin': 'Y'}">
-                <p>{{x.member_name}} ({{x.member_email}})&nbsp;<i>admin</i></p>
+                <p>{{x.member_name}} ({{x.member_email}})&nbsp;<i>admin</i>&nbsp;<i ng-hide="x.user_id == '<?php echo $user_id;?>'" ng-click="removeMember(x.team_connect_id, x.email)" style="color:red; cursor: pointer;">remove</i></p>
             </div>
-            <h4>Team Members</h4>
+            <h4>Members <a data-toggle="editTeamTooltip" data-placement="bottom" title="If you can only see a members email, that means they havent registered to OmadaHQ yet."><i class="fa fa-question-circle fw" style="font-size: 13px;"></i></a></h4>
             <div ng-repeat="x in teamMembers | filter : {'admin': 'N'}">
                 <p>{{x.member_name}} ({{x.member_email}})&nbsp;<i href="" ng-click="removeMember(x.team_connect_id, x.email)" style="color:red; cursor: pointer;">remove</i></p>
             </div>
         </div>
+        <br>
+        <center>
+            <button ng-click="deleteTeam()" class="deleteTeam"><i class="fa fa-trash fw"></i>&nbsp;Delete Team</button>
+        </center>
+        <style>
+            .deleteTeam,
+            .deleteTeam > fa-trash {
+                width: 165px;
+                height: 35px;
+                background: red;
+                color: white;
+                border: none;
+            }
+            .deleteTeam:hover {
+                background: white;
+                color: red;
+            }
+        </style>
     </div>
 </div>
 <div ng-hide="'personal' == '<?php echo $team_type;?>'" style="float: right; margin-right: 15px; margin-top: 10px" ng-controller="SessionController">

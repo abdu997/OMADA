@@ -4,6 +4,7 @@ $data = json_decode(file_get_contents("php://input"));
 session_start();
 $team_id = $_SESSION['team_id'];
 $admin_status = $_SESSION['admin_status'];
+$user_id = $_SESSION['user_id'];
 if($admin_status == 'Y'){
     if(count($data)>0){
         if($data -> team_connect_id == null){

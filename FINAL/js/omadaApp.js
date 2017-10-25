@@ -31,6 +31,15 @@ app.controller('SessionController', function($scope, $http) {
             }
         });
     }
+    
+    $scope.deleteTeam = function() {
+        if (confirm("Are you sure you want to delete this team?")){
+            $http.get("php/deleteTeam.php").success(function(data){
+                alert(data);
+                location.reload();
+            });
+        }
+    }
 
     $scope.teamName = function() {
         $http.get("php/userTeam.php").success(function(data) {
