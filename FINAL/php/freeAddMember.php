@@ -43,7 +43,7 @@ if($admin_status == 'Y'){
                             echo "This user is already in this team";
                         } else if($count2 == 0) {
                             //user is not in team, create connection
-                            if ($new_admin_status = 'Y'){
+                            if ($new_admin_status == 'Y'){
                                 //Check admin counts
                                 $sql7 = "SELECT user_id FROM team_user WHERE team_id = '$team_id' AND admin = 'Y'";
                                 $result7 = mysqli_query($connect, $sql7);
@@ -56,7 +56,7 @@ if($admin_status == 'Y'){
                                         echo"success"; 
                                     }
                                 }
-                            } else if ($new_admin_status = 'N'){
+                            } else if ($new_admin_status == 'N'){
                                 $sql3 = "INSERT INTO team_user(team_id, user_id, admin) VALUE('$team_id', '$user_id', '$new_admin_status')";
                                 if(mysqli_query($connect, $sql3)){
                                     echo "success";
@@ -70,15 +70,15 @@ if($admin_status == 'Y'){
                             echo "serious error2";
                         }
                     } else if($count == 0) {
-                        if($new_admin_status = 'Y'){
+                        if($new_admin_status == 'Y'){
                             echo"This email is not an OmadaHQ user, therefore this member cannot be an admin";
-                        } else if($new_admin_status = 'N'){
+                        } else if($new_admin_status == 'N'){
                             //check if email is already in team_nonuser
                             $sql4 = "SELECT email, team_id FROM team_nonuser WHERE email = '$email' AND team_id = '$team_id'";
                             $result4 = mysqli_query($connect, $sql4);
                             $count4 = mysqli_num_rows($result4);
                             if($count4 == 0){
-                                $sql5 = "INSERT INTO team_nonuser(email, team_id, admin, status) VALUE('$email', '$team_id', 'N', 'pending')";
+                                $sql5 = "INSERT INTO team_nonuser(email, team_id, admin, status) VALUE('$email', '$team_id', '$new_admin_status', 'pending')";
                                 if(mysqli_query($connect, $sql5)){
                                     echo"An invitation has been sent to ".$email.", please advise your member to register to OmadaHQ";
                                 } else {
