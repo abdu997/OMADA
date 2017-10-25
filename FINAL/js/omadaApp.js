@@ -64,7 +64,7 @@ app.controller('SessionController', function($scope, $http) {
             $scope.getTeamEmails();
             if(data == 'success1'){
                 location.reload();
-            } else if(data == 'succcess2'){
+            } else if(data == 'success2'){
     
             } else {
                 alert(data);
@@ -97,7 +97,12 @@ app.controller('SessionController', function($scope, $http) {
                 'email': $scope.memberEmail
             }
         ).success(function(data) {
-            alert(data);
+            $scope.getTeamMembers();
+            if(data == "success"){
+                $scope.getTeamMembers();
+            } else {
+                alert(data);
+            }
         });
     }
 
