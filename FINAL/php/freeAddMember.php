@@ -70,21 +70,24 @@ if($admin_status == 'Y'){
                             echo "serious error2";
                         }
                     } else if($count == 0) {
-                        //check if email is already in team_nonuser
-                        $sql4 = "SELECT email, team_id FROM team_nonuser WHERE email = '$email' AND team_id = '$team_id'";
-                        $result4 = mysqli_query($connect, $sql4);
-                        $count4 = mysqli_num_rows($result4);
-                        if($count4 == 0){
-                            $sql5 = "INSERT INTO team_nonuser(email, team_id, admin, status) VALUE('$email', '$team_id', 'N', 'pending')";
-                            if(mysqli_query($connect, $sql5)){
-                                echo"An invitation has been sent to ".$email.", please advise your member to register to OmadaHQ";
-                            } else {
-                                echo"serious error3";
+                        if($new_admin_status = 'Y'){
+                            echo"This email is not an OmadaHQ user, therefore this member cannot be an admin";
+                        } else if($new_admin_status = 'N'){
+                            //check if email is already in team_nonuser
+                            $sql4 = "SELECT email, team_id FROM team_nonuser WHERE email = '$email' AND team_id = '$team_id'";
+                            $result4 = mysqli_query($connect, $sql4);
+                            $count4 = mysqli_num_rows($result4);
+                            if($count4 == 0){
+                                $sql5 = "INSERT INTO team_nonuser(email, team_id, admin, status) VALUE('$email', '$team_id', 'N', 'pending')";
+                                if(mysqli_query($connect, $sql5)){
+                                    echo"An invitation has been sent to ".$email.", please advise your member to register to OmadaHQ";
+                                } else {
+                                    echo"serious error3";
+                                }
+                            } else if($count4 > 0){
+                                echo"This email is already a member in this team";
                             }
-                        } else if($count4 > 0){
-                            echo"This email is already a member in this team";
                         }
-
                     } else {
                         echo "serious error4";
                     }
