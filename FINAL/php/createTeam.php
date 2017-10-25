@@ -20,6 +20,8 @@ if(count($data) > 0){
                 echo"Team Created";
                 $_SESSION['team_id'] = $team_id;
                 $_SESSION['team_type'] = 'team';
+                $_SESSION['admin_status'] = 'Y';
+                $_SESSION['plan'] = 'Y';
             }
         } else {
             echo"SQL error";

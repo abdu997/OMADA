@@ -7,6 +7,7 @@ $team_id = $_SESSION['team_id'];
 $team_type = $_SESSION['team_type'];
 $plan = $_SESSION['plan'];
 $admin_status = $_SESSION['admin_status'];
+$new_admin_status = mysqli_real_escape_string($connect, $data->admin);
 if($admin_status == 'Y'){
     $email = mysqli_real_escape_string($connect, $data->email);
     if($data->admin == 'N' || $data->admin == 'Y'){
@@ -24,7 +25,7 @@ if($admin_status == 'Y'){
                 $result7 = mysqli_query($connect, $sql7);
                 $count7 = mysqli_num_rows($result7);
                 $member_count = $count6+$count7;
-                if($member_count < 6){
+                if($member_count < 16){
                     //check if email is in use in users table
                     $sql = "SELECT user_id FROM users WHERE email = '$email'";
                     $result = mysqli_query($connect, $sql);
@@ -42,12 +43,28 @@ if($admin_status == 'Y'){
                             echo "This user is already in this team";
                         } else if($count2 == 0) {
                             //user is not in team, create connection
-                            //Admin status will always be 'N' with the free plan for new members, to change admin user can use change Admin
-                            $sql3 = "INSERT INTO team_user(team_id, user_id, admin) VALUE('$team_id', '$user_id', 'N')";
-                            if(mysqli_query($connect, $sql3)){
-                                echo "success";
+                            if ($new_admin_status = 'Y'){
+                                //Check admin counts
+                                $sql7 = "SELECT user_id FROM team_user WHERE team_id = '$team_id' AND admin = 'Y'";
+                                $result7 = mysqli_query($connect, $sql7);
+                                $admin_count = mysqli_num_rows($result7);
+                                if($admin_count > 3){
+                                    echo"You cannot have more than 3 admins on the free plan";
+                                } else {
+                                    $sql8 = "INSERT INTO team_user(team_id, user_id, admin) VALUE('$team_id', '$user_id', '$new_admin_status')";
+                                    if(mysqli_query($connect, $sql8)){
+                                        echo"success"; 
+                                    }
+                                }
+                            } else if ($new_admin_status = 'N'){
+                                $sql3 = "INSERT INTO team_user(team_id, user_id, admin) VALUE('$team_id', '$user_id', '$new_admin_status')";
+                                if(mysqli_query($connect, $sql3)){
+                                    echo "success";
+                                } else {
+                                    echo "serious error3";
+                                }
                             } else {
-                                echo "serious error3";
+                                echo"serious error 6";
                             }
                         } else {
                             echo "serious error2";

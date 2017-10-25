@@ -119,7 +119,7 @@ $plan = $_SESSION['plan'];
                 <input ng-model="insertMemberInput" class="w3-input w3-border-0" type="email" autocomplete="off" required>
                 <select id="insertAdminStatus">
                   <option value="N" selected>Member</option>
-                  <option value="Y" ng-hide="'free' == '<?php echo $plan;?>'">Admin</option>
+                  <option value="Y">Admin</option>
                 </select>
                 <input ng-click="insertMember()" class="w3-button" type="submit" ng-disabled="insertMemberForm.$invalid" value="Add Member" style="background: white; margin-top: 4px">
             </form>
