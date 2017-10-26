@@ -14,7 +14,6 @@ if (count($data) > 0){
                 $bytes = openssl_random_pseudo_bytes(16);
                 $temp_pass = bin2hex($bytes);
                 $sql = "INSERT INTO users (email,password ,first_name, last_name) VALUES ('$email', '$temp_pass', '$first_name', '$last_name')";
-                /*https://www.omadahq.com/password.php?token=$temp_pass*/
                 if (mysqli_query($connect, $sql)) {
                     $user_id = mysqli_insert_id($connect);
                     $sql2 = "INSERT INTO team (team_name, type, plan) VALUES('Personal Dashboard', 'personal', 'free')";
@@ -44,6 +43,8 @@ if (count($data) > 0){
                         echo $return;
                     }
                     echo "success";
+                    $link = 'https://www.omadahq.com/password.php?token='.$temp_pass;
+                    mail($email, 'OmadaHQ Registration link', $link, 'FROM: no-reply@omadahq.com');
                 } else {
                     echo "error1";
                 }
