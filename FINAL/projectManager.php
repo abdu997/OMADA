@@ -211,12 +211,12 @@
                     <input type="submit" name="recordInsert" ng-click="submitRecord(recordInput); recordInput = null" ng-disabled="recordForm.$invalid">
                 </form> 
                 <div style="overflow-y: auto; height: 400px;">
-                    <div id="comments" style="border: 1px solid black" ng-repeat="x in records | filter : {'initial_record':'N'} | orderBy : '-record_id'">
+                    <div id="comments" style="border-bottom: 1px solid white" ng-repeat="x in records | filter : {'initial_record':'N'} | orderBy : '-record_id'">
                         <p style="margin-bottom: 0px">{{x.record}}</p>
                         <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
                         <span style="font-size: 10px; float: right;"> By {{x.user}}</span>
                     </div>
-                    <div style="border: 2px solid black" id="first-comment" width="100px" ng-repeat="x in records | filter : {'initial_record':'Y'} | orderBy : '-record_id'">
+                    <div style="border-bottom: 2px solid white" id="first-comment" width="100px" ng-repeat="x in records | filter : {'initial_record':'Y'} | orderBy : '-record_id'">
                         <h4 style="margin-bottom: 0px">{{x.record}} {{x.user}}</h4>
                         <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
                     </div>  

@@ -125,6 +125,15 @@ $user_id = $_SESSION['user_id'];
                 </select>
                 <input ng-click="insertMember()" class="w3-button" type="submit" ng-disabled="insertMemberForm.$invalid" value="Add Member" style="background: white; margin-top: 4px">
             </form>
+            <h4>Admins <a data-toggle="editTeamTooltip" data-placement="bottom" title="You cannot remove yourself from a team."><i class="fa fa-question-circle fw" style="font-size: 13px;"></i></a></h4>
+            <div ng-repeat="x in teamMembers | filter : {'admin': 'Y'}">
+                <p>{{x.member_name}} ({{x.member_email}})&nbsp;<i>admin</i>&nbsp;<i ng-hide="x.user_id == '<?php echo $user_id;?>'" ng-click="removeMember(x.team_connect_id, x.email)" style="color:red; cursor: pointer;">remove</i></p>
+            </div>
+            <h4>Members <a data-toggle="editTeamTooltip" data-placement="bottom" title="If you can only see a members email, that means they havent registered to OmadaHQ yet."><i class="fa fa-question-circle fw" style="font-size: 13px;"></i></a></h4>
+            <div ng-repeat="x in teamMembers | filter : {'admin': 'N'}">
+                <p>{{x.member_name}} ({{x.member_email}})&nbsp;<i href="" ng-click="removeMember(x.team_connect_id, x.email)" style="color:red; cursor: pointer;">remove</i></p>
+            </div>
+            <button class="w3-button" ng-click="getTeamEmails()" style="cursor: pointer">Switch members with admins</button>
             <form ng-show="editAdminForm" id="editAdminForm">
                 <label>Old Admin</label><br>
                 <select id="oldAdmin">
@@ -136,14 +145,6 @@ $user_id = $_SESSION['user_id'];
                 </select><br>
                 <input ng-click="switchAdmins()" class="w3-button" type="submit" value="Switch Admins" style="background: white; margin-top: 4px">
             </form>
-            <h4>Admins <a data-toggle="editTeamTooltip" data-placement="bottom" title="You cannot remove yourself from a team."><i class="fa fa-question-circle fw" style="font-size: 13px;"></i></a> <small ng-click="getTeamEmails()" style="cursor: pointer">edit</small></h4>
-            <div ng-repeat="x in teamMembers | filter : {'admin': 'Y'}">
-                <p>{{x.member_name}} ({{x.member_email}})&nbsp;<i>admin</i>&nbsp;<i ng-hide="x.user_id == '<?php echo $user_id;?>'" ng-click="removeMember(x.team_connect_id, x.email)" style="color:red; cursor: pointer;">remove</i></p>
-            </div>
-            <h4>Members <a data-toggle="editTeamTooltip" data-placement="bottom" title="If you can only see a members email, that means they havent registered to OmadaHQ yet."><i class="fa fa-question-circle fw" style="font-size: 13px;"></i></a></h4>
-            <div ng-repeat="x in teamMembers | filter : {'admin': 'N'}">
-                <p>{{x.member_name}} ({{x.member_email}})&nbsp;<i href="" ng-click="removeMember(x.team_connect_id, x.email)" style="color:red; cursor: pointer;">remove</i></p>
-            </div>
         </div>
         <br>
         <center>
