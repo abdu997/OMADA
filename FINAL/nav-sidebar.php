@@ -47,11 +47,11 @@ $user_id = $_SESSION['user_id'];
         <span onclick="document.getElementById('team_create').style.display='none';window.location.reload()" class="w3-button w3-display-topright" style="font-size: 20px">&times;</span>
         <div class="w3-container">
             <h4>Create a Team</h4>
-            <form name="createTeamFrom">
+            <form name="createTeamForm">
                 <label>Team Name<span class="asterisk">*</span>
                 </label>
                 <input ng-model="newTeamName" class="w3-input w3-border-0" type="text" required>
-                <input ng-click="createTeam()" class="w3-button" type="submit" value="Create Team" style="background: white; margin-top: 10px" ng-disabled="createTeamFrom.$invalid">
+                <input ng-click="createTeam()" class="w3-button" type="submit" value="Create Team" style="background: white; margin-top: 10px" ng-disabled="createTeamForm.$invalid">
                 <small ng-show="teamCreateSuccess" style="color: green">Team successfully created!<br></small>
                 <p><small>NOTE: You will be the Admin for the team. You can set up a team without members, and add members later.</small>
                 </p>
