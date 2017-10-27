@@ -18,7 +18,7 @@ if (count($data) > 0) {
             $sql2 = "INSERT INTO password_reset(user_id, user_email, token, timestamp, expiration, status) VALUE('$user_id', '$email', '$token', '$timestamp', '$expiration', 'active')";
             if(mysqli_query($connect, $sql2)) {
                 echo "success";
-                $link = 'https://www.omadahq.com/password.php?token='.$token;
+                $link = 'https://www.omadahq.com/dashboard/password.php?token='.$token;
                 mail($email, 'OmadaHQ Password Reset link', $link, 'FROM: no-reply@omadahq.com');
             } else {
                 echo "error2";

@@ -80,6 +80,11 @@ if($admin_status == 'Y'){
                             if($count4 == 0){
                                 $sql5 = "INSERT INTO team_nonuser(email, team_id, admin, status) VALUE('$email', '$team_id', '$new_admin_status', 'pending')";
                                 if(mysqli_query($connect, $sql5)){
+                                    $team_name = $_SESSION['team_name'];
+                                    $subject = "You Have Been Invited to OmadaHQ";
+                                    $link = "https://omadahq.com/dashboard"
+                                    $message = "You have been added to team ".$team_name." on OmadaHQ. To access the team, please register to OmadaHQ <a href=".$link.">here</a> And register using this email <i>".$email."</i>";
+                                    mail($email, $subject, $message, 'FROM: no-reply@omadahq.com');
                                     echo"An invitation has been sent to ".$email.", please advise your member to register to OmadaHQ";
                                 } else {
                                     echo"serious error3";

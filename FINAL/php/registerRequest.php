@@ -43,7 +43,7 @@ if (count($data) > 0){
                         echo $return;
                     }
                     echo "success";
-                    $link = 'https://www.omadahq.com/password.php?token='.$temp_pass;
+                    $link = 'https://www.omadahq.com/dashboard/password.php?token='.$temp_pass;
                     mail($email, 'OmadaHQ Registration link', $link, 'FROM: no-reply@omadahq.com');
                 } else {
                     echo "error1";
