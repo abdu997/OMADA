@@ -5,10 +5,10 @@ CREATE TABLE `users` (
   `first_name` varchar(45) NOT NULL,
   `last_name` varchar(45) NOT NULL,
   `status` varchar(45) NOT NULL,
-  PRIMARY KEY (`idusers`),
-  UNIQUE KEY `idusers_UNIQUE` (`user_id`),
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `password_reset` (
   `request_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -19,7 +19,7 @@ CREATE TABLE `password_reset` (
   `expiration` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`request_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `team` (
   `team_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -28,7 +28,7 @@ CREATE TABLE `team` (
   `plan` varchar(45) NOT NULL,
   PRIMARY KEY (`team_id`),
   UNIQUE KEY `team_id_UNIQUE` (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `team_user` (
   `team_connect_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -37,7 +37,7 @@ CREATE TABLE `team_user` (
   `admin` varchar(1) NOT NULL,
   PRIMARY KEY (`team_connect_id`),
   UNIQUE KEY `team_connect_id_UNIQUE` (`team_connect_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `team_nonuser` (
   `confirmation_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -46,7 +46,7 @@ CREATE TABLE `team_nonuser` (
   `admin` varchar(1) NOT NULL,
   `status` varchar(45) NOT NULL,
   PRIMARY KEY (`confirmation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `team_projects` (
   `project_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -54,7 +54,7 @@ CREATE TABLE `team_projects` (
   `project` varchar(45) NOT NULL,
   `tag_color` varchar(45) NOT NULL,
   PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `team_goal` (
   `goal_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -64,7 +64,7 @@ CREATE TABLE `team_goal` (
   `goal` varchar(200) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`goal_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=01 DEFAULT CHARSET=latin1
+) ENGINE=MyISAM AUTO_INCREMENT=01 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `progress_record` (
   `record_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -76,4 +76,4 @@ CREATE TABLE `progress_record` (
   `initial_record` varchar(1) NOT NULL,
   `timestamp` varchar(45) NOT NULL,
   PRIMARY KEY (`record_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1;
