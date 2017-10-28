@@ -245,61 +245,61 @@ app.controller('SessionController', function($scope, $http) {
     }
 });
 app.controller("pmController", function($scope, $http, $rootScope) {
-    $scope.projectClicked = function($index) {
+    $scope.boardClicked = function($index) {
         console.log($index);
-        $scope.selectedProject = $index;
+        $scope.selectedBoard = $index;
     }
 
-    $scope.projectError = false;
-    $scope.btnProject = "ADD";
-    $scope.projectInsert = function() {
-        if ($scope.project == null) {
+    $scope.boardError = false;
+    $scope.btnBoard = "ADD";
+    $scope.boardInsert = function() {
+        if ($scope.board == null) {
             alert("Project is required");
         }
-        if ($scope.project.length > 25) {
-            $scope.projectError = true;
+        if ($scope.board.length > 25) {
+            $scope.boardError = true;
         } else {
             $http.post(
-                "php/projectManager/insertProject.php", {
-                    'project': $scope.project,
+                "php/projectManager/insertBoard.php", {
+                    'board': $scope.board,
                     'btnName': $scope.btnName,
-                    'project_id': $scope.project_id,
+                    'board_id': $scope.board_id,
                     'tag_color': $scope.color,
                 }
             ).success(function(data) {
-                $scope.project = null;
+                $scope.board = null;
                 $scope.btnName = "ADD";
-                $scope.displayProject();
-                $scope.projectError = false;
+                $scope.displayBoard();
+                $scope.boardError = false;
             });
         }
     }
 
-    $scope.project_id;
-    $scope.filterGoals = function(id, projectName) {
-        $scope.project_id = id;
-        $http.get("php/projectManager/getGoals.php?project_id=" + id).success(function(goals) {
+    $scope.board_id;
+    $scope.filterGoals = function(id, boardName) {
+        $scope.board_id = id;
+        $http.get("php/projectManager/getGoals.php?board_id=" + id).success(function(goals) {
             $scope.goals = goals;
         });
     }
     setInterval(function() {
-        $scope.filterGoals($scope.project_id);
+        $scope.filterGoals($scope.board_id);
     }, 500);
 
-    $scope.displayProject = function() {
-        $http.get("php/projectManager/readProjects.php")
+    $scope.displayBoard = function() {
+        $http.get("php/projectManager/readBoards.php")
             .success(function(data) {
-                $scope.projects = data;
+                $scope.boards = data;
             });
     }
     setInterval(function() {
-        $scope.displayProject();
+        $scope.displayBoard();
     }, 500);
 
-    $scope.deleteProject = function(project_id) {
-        if (confirm("Are you sure you want to delete this project?")) {
-            $http.post("php/projectManager/deleteProject.php", {
-                    'project_id': project_id
+    $scope.deleteBoard = function(board_id) {
+        if (confirm("Are you sure you want to delete this board?")) {
+            $http.post("php/projectManager/deleteBoard.php", {
+                    'board_id': board_id
                 }).success(function(data){
                 $scope.displayData();                
                 });
@@ -331,13 +331,13 @@ app.controller("pmController", function($scope, $http, $rootScope) {
                     'goal': $scope.goal,
                     'btnName': $scope.btnName,
                     'goal_id': $scope.goal_id,
-                    'project_id': $scope.project_id
+                    'board_id': $scope.board_id
                 }
             ).success(function(data) {
                 //alert(data);
                 $scope.goal = null;
                 $scope.btnName = "ADD";
-                $scope.filterGoals($scope.project_id);
+                $scope.filterGoals($scope.board_id);
                 $scope.goalError = false;
             });
         }
@@ -409,7 +409,7 @@ app.controller("pmController", function($scope, $http, $rootScope) {
                 "php/projectManager/insertRecord.php", {
                     'record': $scope.record,
                     'goal_id': $scope.goal_id,
-                    'project_id': $scope.project_id
+                    'board_id': $scope.board_id
                 }
             ).success(function(data) {
                 $scope.record = '';

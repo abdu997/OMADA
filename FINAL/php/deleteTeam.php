@@ -11,7 +11,7 @@ if($team_type == 'personal'){
 } else if($admin_status == 'Y'){
     $sql = "DELETE FROM team_user WHERE team_id = '$team_id'";
     mysqli_query($connect, $sql);
-    $sql2 = "DELETE FROM team_user WHERE team_id = '$team_id'";
+    $sql2 = "DELETE FROM team_boards WHERE team_id = '$team_id'";
     mysqli_query($connect, $sql2);
     $sql3 = "DELETE FROM team_nonuser WHERE team_id = '$team_id'";
     mysqli_query($connect, $sql3);

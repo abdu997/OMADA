@@ -11,19 +11,19 @@
         #goalEnter {
             padding-top: 25px;
         }
-        .projects-column{
+        .boards-column{
             margin-top: -38px;
         }
-        .project {
+        .board {
             background: #ecf0f1;
             padding: 15px;
             box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.3);
             margin-bottom: 15px;
         }
-        .project:hover {
+        .board:hover {
             background: #d4d8d8;
         }
-        .projectClicked {
+        .boardClicked {
             background: #d4d8d8;
             border-right: 8px solid #2196F3!important;
         }
@@ -130,23 +130,23 @@
 </head>
 
 <body id="projectManager">
-    <div ng-init="displayProject()" ng-controller="pmController">
+    <div ng-init="displayBoard()" ng-controller="pmController">
         <div class="row">
             <div class="col-sm-3">
-                <form name="projectEnter">
-                    <label>Project</label><br>
-                    <input style="width: 68%;" type="text" name="project" ng-model="project" autocomplete="off" autofocus required>
-                    <button type="submit" name="btnProject" ng-click="projectInsert();" value="{{btnProject}}" ng-disabled="projectEnter.$invalid" >{{btnProject}}</button>
+                <form name="boardEnter">
+                    <label>Board</label><br>
+                    <input style="width: 68%;" type="text" name="board" ng-model="board" autocomplete="off" autofocus required>
+                    <button type="submit" name="btnBoard" ng-click="boardInsert();" value="{{btnBoard}}" ng-disabled="boardEnter.$invalid" >{{btnBoard}}</button>
     <!--
                     <li ng-repeat="x in tagColors" class="color-tag" style="background: {{x.color}};" ng-class="{ 'tagClicked': $index == selectedColor }" ng-click="tagClicked($index); projectInsert(x.color);">
                     </li>
     -->
-                    <small style="color: red;" ng-show="projectError">Project cannot be more than 25 characters</small>
+                    <small style="color: red;" ng-show="boardError">Board cannot be more than 25 characters</small>
                 </form><br><br>
-                <h3 class="projects-column"><i class="fa fa-folder-open fw"></i> Projects</h3>
-                <div class="project" ng-repeat="x in projects | filter : {'0':''}" ng-click="filterGoals(x.project_id); showGoal(); projectClicked($index); hideProgress()" ng-class="{ 'projectClicked': $index == selectedProject }" style="cursor:pointer;">
-                    <p>{{x.project}}</p>
-                    <i ng-click="deleteProject(x.project_id)" class="fa fa-trash fw"></i>
+                <h3 class="boards-column"><i class="fa fa-folder-open fw"></i> Boards</h3>
+                <div class="board" ng-repeat="x in boards | filter : {'0':''}" ng-click="filterGoals(x.board_id); showGoal(); boardClicked($index); hideProgress()" ng-class="{ 'boardClicked': $index == selectedBoard }" style="cursor:pointer;">
+                    <p>{{x.board}}</p>
+                    <i ng-click="deleteBoard(x.board_id)" class="fa fa-trash fw"></i>
                 </div>
             </div>
 
@@ -164,7 +164,7 @@
                     <div class="goal not-started-goal" ng-repeat="x in goals | filter : 'not_started'" ng-click="filterRecords(x.goal_id); showProgress()">
                         <p>{{x.goal}}</p>
                         <i ng-click="deleteData(x.goal_id)" class="goal-delete fa fa-trash fw"></i>
-                        <small ng-click="updateData(x.goal_id, x.goal, x.project_id)">edit</small>
+                        <small ng-click="updateData(x.goal_id, x.goal, x.board_id)">edit</small>
                         <i ng-click="advanceGoalStatus(x.goal_id, x.status)" class="fa fa-long-arrow-right fw"></i>
                     </div>
                 </div>
