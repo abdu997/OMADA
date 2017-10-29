@@ -8,6 +8,9 @@
                 margin-top: 30px;
             }
         }
+        input {
+            border: 1px solid black;
+        }
         #goalEnter {
             padding-top: 25px;
         }
@@ -132,7 +135,7 @@
 <body id="projectManager">
     <div ng-init="displayBoard()" ng-controller="pmController">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <form name="boardEnter">
                     <label>Board</label><br>
                     <input style="width: 68%;" type="text" name="board" ng-model="board" autocomplete="off" autofocus required>
@@ -165,7 +168,7 @@
                         <p>{{x.goal}}</p>
                         <i ng-click="deleteData(x.goal_id)" class="goal-delete fa fa-trash fw"></i>
                         <small ng-click="updateData(x.goal_id, x.goal, x.board_id)">edit</small>
-                        <i ng-click="advanceGoalStatus(x.goal_id, x.status)" class="fa fa-long-arrow-right fw"></i>
+                        <i ng-click="advanceGoalStatus(x.goal_id, x.status)" class="fa fa-long-arrow-right fw"></i> 
                     </div>
                 </div>
 
@@ -201,28 +204,28 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <br><br>
-        <div class="row">
-            <div ng-show="progress_record" class="col-sm-6" style="background: #f1f1f1!important; padding: 20px">
-                <h3><i class="fa fa-file-text fw"></i> Progress Record</h3>
-                <form name="recordForm" id="recordForm">
-                    <input type="text" id="recordField" ng-model="recordInput" name="progress" placeholder="Add record" autocomplete="off" autofocus required>
-                    <input type="submit" name="recordInsert" ng-click="submitRecord(recordInput); recordInput = null" ng-disabled="recordForm.$invalid">
-                </form> 
-                <div style="overflow-y: auto; height: 400px;">
-                    <div id="comments" style="border-bottom: 1px solid white" ng-repeat="x in records | filter : {'initial_record':'N'} | orderBy : '-record_id'">
-                        <p style="margin-bottom: 0px">{{x.record}}</p>
-                        <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
-                        <span style="font-size: 10px; float: right;"> By {{x.user}}</span>
+            <div style="right:15px; position: fixed; border: 1px dashed #2196F3;">
+                <div ng-show="progress_record" style="background: #f1f1f1!important; padding: 20px">
+                    <h3><i class="fa fa-file-text fw"></i> Progress Record<i ng-click="progress_record = false" class="fa fa-times fw" style="font-size: 20px;float: right; color:red; cursor: pointer"></i></h3>
+                    <form name="recordForm" id="recordForm">
+                        <input type="text" id="recordField" ng-model="recordInput" name="progress" placeholder="Add record" autocomplete="off" autofocus required>
+                        <input type="submit" name="recordInsert" ng-click="submitRecord(recordInput); recordInput = null" ng-disabled="recordForm.$invalid">
+                    </form> 
+                    <div style="overflow-y: auto;">
+                        <div id="comments" style="border-bottom: 1px solid #2196F3" ng-repeat="x in records | filter : {'initial_record':'N'} | orderBy : '-record_id'">
+                            <p style="margin-bottom: 0px">{{x.record}}</p>
+                            <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
+                            <span style="font-size: 10px; float: right;"> By {{x.user}}</span>
+                        </div>
+                        <div style="border-bottom: 2px solid #2196F3" id="first-comment" width="100px" ng-repeat="x in records | filter : {'initial_record':'Y'} | orderBy : '-record_id'">
+                            <h4 style="margin-bottom: 0px">{{x.record}} {{x.user}}</h4>
+                            <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
+                        </div>  
                     </div>
-                    <div style="border-bottom: 2px solid white" id="first-comment" width="100px" ng-repeat="x in records | filter : {'initial_record':'Y'} | orderBy : '-record_id'">
-                        <h4 style="margin-bottom: 0px">{{x.record}} {{x.user}}</h4>
-                        <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
-                    </div>  
                 </div>
             </div>
         </div>
+        <br><br>
     </div>
 </body>
 
