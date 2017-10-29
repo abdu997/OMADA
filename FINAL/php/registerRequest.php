@@ -12,7 +12,7 @@ if (count($data) > 0){
                 $result = mysqli_query($connect,$sql);
                 $count = mysqli_num_rows($result);
                 if($count == 0){
-                    $bytes = openssl_random_pseudo_bytes(16);
+                    $bytes = openssl_random_pseudo_bytes(40);
                     $temp_pass = bin2hex($bytes);
                     $sql = "INSERT INTO users (email,password ,first_name, last_name) VALUES ('$email', '$temp_pass', '$first_name', '$last_name')";
                     if (mysqli_query($connect, $sql)) {

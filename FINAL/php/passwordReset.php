@@ -10,7 +10,7 @@ if (count($data) > 0) {
         if($count == 1){
             $row = mysqli_fetch_assoc($result);
             $user_id = $row['user_id'];
-            $bytes = openssl_random_pseudo_bytes(40);
+            $bytes = openssl_random_pseudo_bytes(20 );
             $token = bin2hex($bytes);
             $date_expiration = date("Y-m-d", strtotime("+30 minutes"));
             $time_expiration = date("H:i:s", strtotime("+30 minutes"));
