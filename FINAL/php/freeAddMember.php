@@ -82,9 +82,14 @@ if($admin_status == 'Y'){
                                 if(mysqli_query($connect, $sql5)){
                                     $team_name = $_SESSION['team_name'];
                                     $subject = "You Have Been Invited to OmadaHQ";
+                                    $headers  = "From: OmadaHQ < no-reply@omadahq.com >\n";
+                                    $headers .= "X-Sender: OmadaHQ < no-reply@omadahq.com >\n";
+                                    $headers .= 'X-Mailer: PHP/' . phpversion();
+                                    $headers .= "MIME-Version: 1.0\r\n";
+                                    $headers .= "Content-Type: text/html; charset=iso-8859-1\n";
                                     $link = "https://omadahq.com/dashboard"
                                     $message = "You have been added to team ".$team_name." on OmadaHQ. To access the team, please register to OmadaHQ <a href=".$link.">here</a> And register using this email <i>".$email."</i>";
-                                    mail($email, $subject, $message, 'FROM: no-reply@omadahq.com');
+                                    mail($email, $subject, $message, $headers);
                                     echo"An invitation has been sent to ".$email.", please advise your member to register to OmadaHQ";
                                 } else {
                                     echo"serious error3";

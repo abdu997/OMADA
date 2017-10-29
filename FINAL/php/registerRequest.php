@@ -45,7 +45,12 @@ if (count($data) > 0){
                         }
                         echo "success";
                         $link = 'https://www.omadahq.com/dashboard/password.php?token='.$temp_pass;
-                        mail($email, 'OmadaHQ Registration link', $link);
+                        $headers  = "From: OmadaHQ < no-reply@omadahq.com >\n";
+                        $headers .= "X-Sender: OmadaHQ < no-reply@omadahq.com >\n";
+                        $headers .= 'X-Mailer: PHP/' . phpversion();
+                        $headers .= "MIME-Version: 1.0\r\n";
+                        $headers .= "Content-Type: text/html; charset=iso-8859-1\n";
+                        mail($email, 'OmadaHQ Registration link', $link, $headers);
                     } else {
                         echo "error1";
                     }

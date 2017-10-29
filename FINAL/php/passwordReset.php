@@ -19,7 +19,12 @@ if (count($data) > 0) {
             if(mysqli_query($connect, $sql2)) {
                 echo "success";
                 $link = 'https://www.omadahq.com/dashboard/password.php?token='.$token;
-                mail($email, 'OmadaHQ Password Reset link', $link, 'FROM: no-reply@omadahq.com');
+                $headers  = "From: OmadaHQ < no-reply@omadahq.com >\n";
+                $headers .= "X-Sender: OmadaHQ < no-reply@omadahq.com >\n";
+                $headers .= 'X-Mailer: PHP/' . phpversion();
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=iso-8859-1\n";
+                mail($email, 'OmadaHQ Password Reset link', $link, $headers);
             } else {
                 echo "error2";
             }
