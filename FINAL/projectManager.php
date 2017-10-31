@@ -215,10 +215,10 @@
                         <div id="comments" style="border-bottom: 1px solid #2196F3" ng-repeat="x in records | filter : {'initial_record':'N'} | orderBy : '-record_id'">
                             <p style="margin-bottom: 0px">{{x.record}}</p>
                             <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
-                            <span style="font-size: 10px; float: right;"> By {{x.user}}</span>
+                            <span style="font-size: 10px; float: right; text-transform: capitalize"> By {{x.user}}</span>
                         </div>
                         <div style="border-bottom: 2px solid #2196F3" id="first-comment" width="100px" ng-repeat="x in records | filter : {'initial_record':'Y'} | orderBy : '-record_id'">
-                            <h4 style="margin-bottom: 0px">{{x.record}} {{x.user}}</h4>
+                            <h4 style="margin-bottom: 0px; text-transform: capitalize">{{x.record}} {{x.user}}</h4>
                             <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
                         </div>  
                     </div>

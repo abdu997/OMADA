@@ -71,10 +71,10 @@ $user_id = $_SESSION['user_id'];
             <h4>Edit Personal Profile</h4>
             <form ng-repeat="x in user" autocomplete='off'>
                 <label>First Name</label><span class="asterisk">*</span>
-                <input value="{{x.first_name}}" id="firstName" class="w3-input w3-border-0" type="text">
+                <input value="{{x.first_name}}" id="firstName" class="w3-input w3-border-0" style="text-transform: capitalize" type="text">
                 <small ng-show="firstNameError" style="color: red;">First name cannot be empty!<br></small>
                 <label>Last Name</label><span class="asterisk">*</span>
-                <input value="{{x.last_name}}" id="lastName" class="w3-input w3-border-0" type="text">
+                <input style="text-transform: capitalize" value="{{x.last_name}}" id="lastName" class="w3-input w3-border-0" type="text">
                 <small ng-show="lastNameError" style="color: red;">Last name cannot be empty!<br></small>
                 <label>Email</label><span class="asterisk">*</span>
                 <input value="{{x.email}}" id="email" class="w3-input w3-border-0" type="email">

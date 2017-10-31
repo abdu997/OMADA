@@ -276,7 +276,7 @@ app.controller("pmController", function($scope, $http, $rootScope) {
     }
 
     $scope.board_id;
-    $scope.filterGoals = function(id, boardName) {
+    $scope.filterGoals = function(id) {
         $scope.board_id = id;
         $http.get("php/projectManager/getGoals.php?board_id=" + id).success(function(goals) {
             $scope.goals = goals;
@@ -284,7 +284,7 @@ app.controller("pmController", function($scope, $http, $rootScope) {
     }
     setInterval(function() {
         $scope.filterGoals($scope.board_id);
-    }, 500);
+    }, 100);
 
     $scope.displayBoard = function() {
         $http.get("php/projectManager/readBoards.php")
@@ -337,7 +337,6 @@ app.controller("pmController", function($scope, $http, $rootScope) {
                 //alert(data);
                 $scope.goal = null;
                 $scope.btnName = "ADD";
-                $scope.filterGoals($scope.board_id);
                 $scope.goalError = false;
             });
         }
@@ -413,7 +412,6 @@ app.controller("pmController", function($scope, $http, $rootScope) {
                 }
             ).success(function(data) {
                 $scope.record = '';
-                $scope.filterRecords($scope.goal_id);
             });
         }
     }
