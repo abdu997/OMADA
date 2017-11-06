@@ -1,4 +1,4 @@
-var app = angular.module('omadaApp',['ngSanitize']);
+var app = angular.module('omadaApp', []);
 app.controller('SessionController', function($scope, $http) {
     $scope.userinfo = function() {
         $http.get("php/getUser.php").success(function(data) {
@@ -284,7 +284,7 @@ app.controller("pmController", function($scope, $http, $rootScope) {
     }
     setInterval(function() {
         $scope.filterGoals($scope.board_id);
-    }, 100);
+    }, 1000);
 
     $scope.displayBoard = function() {
         $http.get("php/projectManager/readBoards.php")
@@ -294,7 +294,7 @@ app.controller("pmController", function($scope, $http, $rootScope) {
     }
     setInterval(function() {
         $scope.displayBoard();
-    }, 500);
+    }, 1000);
 
     $scope.deleteBoard = function(board_id) {
         if (confirm("Are you sure you want to delete this board?")) {
@@ -425,17 +425,15 @@ app.controller("pmController", function($scope, $http, $rootScope) {
     }
     setInterval(function() {
         $scope.filterRecords($scope.goal_id);
-    }, 3000);
+    }, 1000);
 
     $scope.progress_record = false;
     $scope.showProgress = function() {
         $scope.progress_record = true;
-        $scope.filterRecords($scope.goal_id);
     };
 
     $scope.hideProgress = function() {
         $scope.progress_record = false;
     };
 
-    
 });
