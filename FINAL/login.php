@@ -46,7 +46,9 @@
             <input type="password" ng-model="password" class="w3-input w3-border-0"><br>
             <a id="resetTab">Forgot password?</a><br><br>
             <small style="color: red;" ng-show="loginError">Email/password do not match our records. Please try again<br><br></small>
-            <input type="submit" value="login" class="w3-button" ng-click="login()">
+            <input type="submit" value="login" class="w3-button" ng-click="login()"><br><br>
+            <p>Don't have an account?</p>
+            <a id="registerTab2">Register here!</a><br>
         </form>
         <div id="registerForm" class="hidden" style="width: 200px">
             <form ng-hide="registerForm">
@@ -81,6 +83,12 @@
     </body>
     <script>
         $("#registerTab").click(function(e) {
+            e.preventDefault();
+            $("#passwordReset").addClass("hidden");
+            $("#loginForm").addClass("hidden");
+            $("#registerForm").removeClass("hidden");
+        });
+        $("#registerTab2").click(function(e) {
             e.preventDefault();
             $("#passwordReset").addClass("hidden");
             $("#loginForm").addClass("hidden");
