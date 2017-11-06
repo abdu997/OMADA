@@ -1,4 +1,4 @@
-var app = angular.module('omadaApp', []);
+var app = angular.module('omadaApp',['ngSanitize']);
 app.controller('SessionController', function($scope, $http) {
     $scope.userinfo = function() {
         $http.get("php/getUser.php").success(function(data) {
@@ -425,15 +425,17 @@ app.controller("pmController", function($scope, $http, $rootScope) {
     }
     setInterval(function() {
         $scope.filterRecords($scope.goal_id);
-    }, 500);
+    }, 3000);
 
     $scope.progress_record = false;
     $scope.showProgress = function() {
         $scope.progress_record = true;
+        $scope.filterRecords($scope.goal_id);
     };
 
     $scope.hideProgress = function() {
         $scope.progress_record = false;
     };
 
+    
 });

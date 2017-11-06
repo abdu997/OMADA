@@ -31,6 +31,7 @@ header('Location: login.php');
     <!--Angular Scripts-->
     <script src="js/angular.min.js"></script>
     <script src="js/omadaApp.js"></script>
+    <script src="https://code.angularjs.org/1.4.8/angular-sanitize.min.js"></script>
     
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
