@@ -213,7 +213,7 @@
                     </form> 
                     <div style="overflow-y: auto;">
                         <div ng-repeat="x in records | filter : {'initial_record':'N'} | orderBy : '-record_id'" id="comments" style="border-bottom: 1px solid #2196F3">
-                            <p ng-bind-html="x.record2" style="margin-bottom: 0px"></p>
+                            <p style="margin-bottom: 0px" ng-bind-html="x.record2"></p>
                             <span style="font-size: 10px;">{{x.timestamp | date : "EEE d MMM h:mm a"}}</span>
                             <span style="font-size: 10px; float: right; text-transform: capitalize"> By {{x.user}}</span>
                         </div>

@@ -1,4 +1,4 @@
-var app = angular.module('omadaApp', []);
+var app = angular.module('omadaApp', ['ngSanitize']);
 app.controller('SessionController', function($scope, $http) {
     $scope.userinfo = function() {
         $http.get("php/getUser.php").success(function(data) {
