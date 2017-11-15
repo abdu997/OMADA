@@ -354,7 +354,9 @@ app.controller("pmController", function($scope, $http, $rootScope) {
         $http.post("php/projectManager/updateStatus.php", {
             'status': status,
             'goal_id': goal_id
-        }).success(function(data) {});
+        }).success(function(data) {
+            $scope.filterGoals($scope.board_id)
+        });
     }
     $scope.reverseGoalStatus = function(goal_id, status) {
         console.log(status);
@@ -369,7 +371,7 @@ app.controller("pmController", function($scope, $http, $rootScope) {
             'status': status,
             'goal_id': goal_id
         }).success(function(data) {
-
+            $scope.filterGoals($scope.board_id)
         });
     }
 
