@@ -1,5 +1,6 @@
 <head>
     <title>OmadaHQ</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://omadahq.com/img/icon.png">
     <script src="js/angular.min.js"></script>
     <script src="js/jquery.js"></script>
     <link rel="stylesheet" href="css/w3.css">

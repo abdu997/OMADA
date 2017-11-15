@@ -4,7 +4,6 @@ $background: #f1f1f1!important;
 $tile: whitesmoke;
 $padding: 25px;
 */
-
 html,
 body,
 h1,
@@ -19,24 +18,24 @@ h4 {
         margin-right: 15px
     }
 }
-a,
-a:link,
-a:hover,
-a:active,
-a:visited {
+.w3-bar,
+.w3-bar:link,
+.w3-bar:hover,
+.w3-bar:active,
+.w3-bar:visited {
     text-decoration: none;
 }
 
-.active {
+.active.w3-bar{
     color: #fff!important;
     background-color: #2196F3!important;
 }
 
-a,
-a:hover, 
-a:link,
-a:hover {
+.w3-bar,
+.w3-bar:hover, 
+.w3-bar:hover {
     color: #000!important;
+    background: inherit;
 }
 
 .team-name {
@@ -107,4 +106,3 @@ input {
 #app {
   display: none;
 }
-

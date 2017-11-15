@@ -12,7 +12,7 @@ header('Location: login.php');
     <title>OmadaHQ</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="shortcut icon" type="image/x-icon" href="https://omadahq.com/img/icon.png">
     <!--UI FrameWorks-->
     <link rel="stylesheet" href="css/w3.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
