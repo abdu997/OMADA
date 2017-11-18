@@ -87,8 +87,26 @@ if($admin_status == 'Y'){
                                     $headers .= 'X-Mailer: PHP/' . phpversion();
                                     $headers .= "MIME-Version: 1.0\r\n";
                                     $headers .= "Content-Type: text/html; charset=iso-8859-1\n";
-                                    $link = "https://omadahq.com/dashboard";
-                                    $message = "You have been added to team ".$team_name." on OmadaHQ. To access the team, please register to OmadaHQ <a href=".$link.">here</a> And register using this email <i>".$email."</i>";
+                                    $link = "https://omadahq.com/dashboard/login.php?email=".$email;
+                                    $content = "<p>Hello! <br> You have been added to team ".$team_name." on OmadaHQ. To access the team, please register to OmadaHQ using this email <i>".$email."</i></p><br><br>
+                                    <a href='".$link."'><button style='background: #2196F3; padding: 10px 50px 10px 50px; color: white; border:none'>Register</button></a>";
+                                    $message = "
+                                        <html lang='en' style='font-size: 15px; font-family: Montserrat, sans-serif; line-height: 28px;'>
+                                            <center>
+                                                <body style='margin:0px; width: 100%'>
+                                                    <table style='border-spacing: 0px; min-width: 502px'>
+                                                        <thead>
+                                                            <td style='background: #2196f3; width: 100%; height: 70px'>
+                                                                <span style='margin: 25px 0px 25px 25px; color: #FDFFFC'>OmadaHQ</span><small style='font-size: 10px; color: white;'>BETA</small>
+                                                            </td>
+                                                        </thead>
+                                                        <tbody>
+                                                            <td style='background: #f1f1f1!important; width: 100%; min-height: 1000px; padding: 50px'>".$content."</td>
+                                                        </tbody>
+                                                    </table>
+                                                </body>
+                                            </center>
+                                        </html>";
                                     mail($email, $subject, $message, $headers);
                                     echo"An invitation has been sent to ".$email.", please advise your member to register to OmadaHQ";
                                 } else {
