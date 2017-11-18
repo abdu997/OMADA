@@ -5,7 +5,6 @@ include "php/connect.php";
 if(!isset($_SESSION['name'])){
 header('Location: login.php');
 }
-
 ?>
 <html>
 <head>

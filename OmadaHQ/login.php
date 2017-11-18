@@ -1,3 +1,10 @@
+<?php 
+error_reporting(E_ERROR);
+include "php/connect.php";
+if(isset($_GET['token'])){
+    $email = $_GET['email'];
+}
+?>
 <html>
     <head>
         <title>OmadaHQ</title>
@@ -54,7 +61,7 @@
         <div id="registerForm" class="hidden" style="width: 200px">
             <form ng-hide="registerForm">
                 <label>Email</label><br>
-                <input type="email" ng-model="registerEmail" class="w3-input w3-border-0"><br>
+                <input type="email" ng-model="registerEmail" value="<?php echo $email;?>" class="w3-input w3-border-0"><br>
                 <small style="color: red;" ng-show="emailInvalid">Valid email is required<br></small>
                 <label>First Name</label><br>
                 <input type="text" ng-model="firstName" class="w3-input w3-border-0" pattern="[a-zA-Z]+" ng-pattern-restrict><br>
