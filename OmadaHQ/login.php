@@ -5,6 +5,8 @@ if(isset($_GET['email'])){
     $email = $_GET['email'];
     $hidden = "hidden";
     $display = "display";
+} else {
+    $display = "hidden";
 }
 ?>
 <html>
@@ -62,7 +64,7 @@ if(isset($_GET['email'])){
             <p>Don't have an account?</p>
             <a id="registerTab2">Register here!</a><br>
         </form>
-        <div id="registerForm" class="hidden" style="width: 200px">
+        <div id="registerForm" class="<?php echo $display;?>" style="width: 200px">
             <form ng-hide="registerForm">
                 <label>Email</label><br>
                 <input type="email" id="registerEmail" value="<?php echo $email;?>" class="w3-input w3-border-0"><br>
