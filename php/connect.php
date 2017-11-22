@@ -1,5 +1,5 @@
 <?php
-$connect = mysqli_connect("localhost", "root", "", "test");
+$connect = mysqli_connect("localhost", "root", "", "omadaHQ");
 session_start();
 $team_id = $_SESSION['team_id'];
 $user_id = $_SESSION['user_id'];;
