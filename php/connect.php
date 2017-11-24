@@ -1,8 +1,5 @@
 <?php
 $connect = mysqli_connect("localhost", "root", "", "omadaHQ");
-session_start();
-$team_id = $_SESSION['team_id'];
-$user_id = $_SESSION['user_id'];;
 date_default_timezone_set('US/Eastern');
 $date = date("Y-m-d", strtotime("now"));
 $time = date("H:i:s", strtotime("now"));

@@ -1,6 +1,8 @@
 <?php
 include("../php/connect.php");
-
+session_start();
+$user_id = $_SESSION['user_id'];
+$team_id = $_SESSION['team_id'];
 $data = json_decode(file_get_contents("php://input"));
 
 if (count($data) > 0) {

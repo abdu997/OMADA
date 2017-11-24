@@ -1,6 +1,9 @@
 <?php
 include("../php/connect.php");
 $output = [];
+session_start();
+$user_id = $_SESSION['user_id'];
+$team_id = $_SESSION['team_id'];
 
 $query = "SELECT chatroom_id FROM chatroom_user WHERE user_id = '$user_id' AND team_id = '$team_id'";
 $result = mysqli_query($connect, $query);

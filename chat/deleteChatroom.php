@@ -1,6 +1,9 @@
 <?php
 include("../php/connect.php");
 $data = json_decode(file_get_contents("php://input"));
+session_start();
+$user_id = $_SESSION['user_id'];
+$team_id = $_SESSION['team_id'];
 if (count($data) > 0) {
     $chatroom_id   = $data->chatroom_id;
     $query = "DELETE FROM chatrooms WHERE chatroom_id='$chatroom_id'";

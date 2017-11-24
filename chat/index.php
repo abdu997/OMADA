@@ -1,7 +1,7 @@
-<div ng-app="myapp" ng-controller="ChatController" ng-init="getMembers()">
+<div ng-app="chatApp" ng-controller="ChatController" ng-init="getMembers()">
     <script src="../js/angular.min.js"></script>
     <script src="../js/jquery.js"></script>
-    <script src="chat.js"></script>
+    <script src="chatApp.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .chatPanel {
