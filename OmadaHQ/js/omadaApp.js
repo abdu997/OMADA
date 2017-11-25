@@ -129,7 +129,10 @@ app.controller('SessionController', function($scope, $http) {
                 'team_name': $scope.team_name,
                 'plan': $scope.plan
             }
-        ).success(function(data) {});
+        ).success(function(data) {
+            window.location.reload();
+            window.location.href = "index.php";
+        });
     }
 
     $scope.emailpattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
