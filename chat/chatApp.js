@@ -1,4 +1,4 @@
-var app = angular.module("chatApp", []);
+var app = angular.module("chatApp", ['ngSanitize']);
 app.controller('ChatController', function($scope, $http) {
     $scope.getMembers = function() {
         $http.get('readMembers.php').success(function(data) {

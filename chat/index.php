@@ -1,5 +1,6 @@
 <div ng-app="chatApp" ng-controller="ChatController" ng-init="getMembers()">
     <script src="../js/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.8/angular-sanitize.min.js"></script>
     <script src="../js/jquery.js"></script>
     <script src="chatApp.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -183,7 +184,7 @@
                         <span class="{{ x.status }}">{{ x.sender }}</span>
                         <span class="time">{{ x.timestamp | date : "EEE d MMM h:mm a"}}</span>
                         <br>
-                        <span id="message" class="message">{{ x.message }}</span>
+                        <span id="message" class="message" ng-bind-html="x.message"></span>
                     </li>
                 </ul>
             </div>

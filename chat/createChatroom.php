@@ -16,11 +16,11 @@ if (count($data) > 0) {
             foreach($members as $x){                
                 $sql2 = "INSERT INTO chatroom_user (chatroom_id, user_id, team_id) VALUES('$chat_id', '$x', '$team_id')";
                 mysqli_query($connect, $sql2);
-                 }
+            }
             $sql3 = "INSERT INTO messages (chatroom_id, class, sender, timestamp, message, initial_message) VALUES ('$chat_id', 'smessage', '$user_id', '$timestamp', '$chatroom_name', 'Y')";
-                if(mysqli_query($connect,$sql3)){
-                    echo "Success";
-                }
+            if(mysqli_query($connect,$sql3)){
+                echo "Success";
+            }
             else{
                 echo "Error";
             }
