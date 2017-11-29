@@ -1,14 +1,27 @@
 <?php 
-require_once '../php/connect.php'; // The mysql database connection script
-if(isset($_GET['itemID'])){
-	$status = $connect->real_escape_string($_GET['status']);
-	$itemID = $connect->real_escape_string($_GET['itemID']);
-
-	$query="UPDATE personal_todo set status='$status' where task_id='$itemID'";
-	$result = $connect->query($query) or die($connect->error.__LINE__);
-
-	$result = $connect->affected_rows;
-
-	$json_response = json_encode($result);
+include "../php/connect.php";
+session_start();
+$user_id = $_SESSION['user_id'];
+$data = json_decode(file_get_contents("php://input"));
+if(count($data) > 0){
+    $task_id = mysqli_real_escape_string($connect, $data->task_id);
+    $sql = "SELECT progress FROM personal_todo WHERE user_id = '$user_id' AND task_id = '$task_id'";
+    $result = mysqli_query($connect, $sql);
+    $row = mysqli_fetch_array($result);
+    $count = mysqli_num_rows($result);
+    if($count = 1){
+        if($row[0] == "complete"){
+            $progress = "incomplete";
+        } else {
+            $progress = "complete";
+        }
+        $sql2 = "UPDATE personal_todo SET progress = '$progress' WHERE  user_id = '$user_id' AND task_id = '$task_id'";
+        
+        if(mysqli_query($connect, $sql2)){
+            echo "success";
+        } else {
+            echo "error";
+        }
+    }
 }
 ?>

@@ -1,13 +1,21 @@
 <?php 
-require_once '../php/connect.php';
-if(isset($_GET['itemID'])){
-	$itemID = $connect->real_escape_string($_GET['itemID']);
-
-	$query="DELETE FROM personal_todo WHERE task_id = '$itemID'";
-	$result = $connect->query($query) or die($connect->error.__LINE__);
-
-	$result = $connect->affected_rows;
-
-	echo $json_response = json_encode($result);
+include "../php/connect.php";
+session_start();
+$data = json_decode(file_get_contents("php://input"));
+$user_id = $_SESSION['user_id'];
+if(count($data) > 0){
+    $task_id = mysqli_real_escape_string($connect, $data->task_id);
+    $sql = "SELECT * FROM personal_todo WHERE user_id = '$user_id' AND task_id = '$task_id'";
+    $result = mysqli_query($connect, $sql);
+    $count = mysqli_num_rows($result);
+    if($count = 1){
+        $sql2 = "UPDATE personal_todo SET status = 'deleted' WHERE user_id = '$user_id' AND task_id = '$task_id'";
+        if(mysqli_query($connect, $sql2)){
+            echo "success";
+        } else {
+            echo "update error";
+        }
+    }
 }
+
 ?>
