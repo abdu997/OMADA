@@ -1,27 +1,24 @@
-    var app = angular.module("myapp", []);
+    var app = angular.module("myapp", ['ngSanitize']);
     app.controller("linkRepository", function($scope, $http) {
         $scope.btnName = "ADD";
-        $scope.insertData = function() {
-            if ($scope.link == null) {
-                alert("Link is required");
-            } else if ($scope.note == null) {
-                alert("Note is required");
-            } else {
+        $scope.insertLink = function() {
                 $http.post(
                     "create.php", {
                         'link': $scope.link,
                         'note': $scope.note,
                         'btnName': $scope.btnName,
-                        'id': $scope.id
+                        'record_id': $scope.record_id
                     }
                 ).success(function(data) {
-                    //alert(data);
-                    $scope.firstname = null;
-                    $scope.lastname = null;
-                    $scope.btnName = "ADD";
-                    $scope.displayData();
+                    if(data == "success"){
+                        $scope.link = null;
+                        $scope.note = null;
+                        $scope.btnName = "ADD";
+                        $scope.displayData();
+                    } else {
+                        alert(data);
+                    }
                 });
-            }
         }
         $scope.displayData = function() {
             $http.get("read.php")
@@ -32,20 +29,23 @@
         
         setInterval(function(){$scope.displayData();}, 500);
         
-        $scope.updateData = function(id, link, note) {
-            $scope.id = id;
+        $scope.updateData = function(record_id, link, note) {
+            $scope.record_id = record_id;
             $scope.link = link;
             $scope.note = note;
             $scope.btnName = "Edit";
         }
-        $scope.deleteData = function(id) {
+        $scope.deleteData = function(record_id) {
             if (confirm("Are you sure you want to delete this data?")) {
                 $http.post("delete.php", {
-                        'id': id
+                        'record_id': record_id
                     })
                     .success(function(data) {
-                        alert(data);
-                        $scope.displayData();
+                        if(data == "success"){
+                            $scope.displayData();
+                        } else {
+                            alert(data);
+                        }
                     });
             } else {
                 return false;
