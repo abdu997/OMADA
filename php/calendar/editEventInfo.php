@@ -1,9 +1,9 @@
 <?php
 session_start();
-include dirname(__FILE__)."../../connection.php";
-//
-//$user_id = $_SESSION['user_id'];
-//$team_id = $_SESSION['team_id'];
+include "../connect.php";
+
+$user_id = $_SESSION['user_id'];
+$team_id = $_SESSION['team_id'];
 
 if (isset($_POST)){
     if (isset($_POST['delete']) && ($_POST['delete'] == "true")){
@@ -74,16 +74,16 @@ if (isset($_POST)){
     }
 
     if($delete == true && $id != NULL){
-      $sql = "DELETE FROM `test`.`calendar` WHERE `id`='$id'";
-      mysqli_query($conn, $sql);
+      $sql = "DELETE FROM calendar WHERE id = '$id'";
+      mysqli_query($connect, $sql);
     }
     elseif ($id != NULL){
-      $sql = ("UPDATE `test`.`calendar` SET `event`=$event_title, "
-              . "`all_day`=$all_day, `start_date`=$start_date, "
-              . "`start_time`=$start_time, `end_date`=$end_date, "
-              . "`end_time`=$end_time, `colour`=$colour, `url`=$url "
-              . "WHERE `id`=$id");
-      mysqli_query($conn, $sql);
+      $sql = ("UPDATE calendar SET event = '$event_title', "
+              . "all_day = '$all_day', start_date = '$start_date', "
+              . "start_time = '$start_time', end_date = '$end_date', "
+              . "end_time = '$end_time', colour = '$colour', url = '$url' "
+              . "WHERE id = '$id'");
+      mysqli_query($connect, $sql);
     }
   }
 ?>

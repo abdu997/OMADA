@@ -1,9 +1,9 @@
 <?php
 session_start();
-include dirname(__FILE__)."../../connection.php";
+include "../connect.php";
 
-//$user_id = $_SESSION['user_id'];
-//$team_id = $_SESSION['team_id'];
+$user_id = $_SESSION['user_id'];
+$team_id = $_SESSION['team_id'];
 
 if (isset($_POST)){
 
@@ -43,11 +43,11 @@ if (isset($_POST)){
       $end_date = 'NULL';
     }
     if ($id != NULL){
-      $sql = ("UPDATE `test`.`calendar` SET `all_day`=$all_day, "
-              . "`start_date`=$start_date, `start_time`=$start_time, "
-              . "`end_date`=$end_date, `end_time`=$end_time "
-              . "WHERE `id`=$id");
-      mysqli_query($conn, $sql);
+      $sql = ("UPDATE calendar SET all_day = '$all_day', "
+              . "start_date = '$start_date', start_time = '$start_time', "
+              . "end_date = '$end_date', end_time = '$end_time' "
+              . "WHERE id = '$id'");
+      mysqli_query($connect, $sql);
     }
   }
 ?>

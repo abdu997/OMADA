@@ -8,10 +8,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
         
-        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://omadahq.com/dashboard/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../OmadaHQ/css/style.css">
+        <link rel="stylesheet" href="https://omadahq.com/dashboard/css/style.css">
         <style>
             body {
                 background-color: #f1f1f1!important;
@@ -130,15 +130,15 @@
             <div class="container">
                 <div class="row" style="padding: 50px 0px 50px 0px">
                     <center>
+                        <div class="col-sm-6" class="logo">
+                            <br><br><br>
+                            <logo>OmadaHQ</logo><small>BETA</small>
+                        </div>
                         <div class="col-sm-6">
                             <h1><strong>Manage</strong> Your <b>Team</b>.<br><br> <strong>Manage</strong> Your <b>Life</b></h1>
                             <br>
                             <h5>OmadaHQ is FREE</h5>
                             <a href="dashboard"><button class="action">Try</button></a>
-                        </div>
-                        <div class="col-sm-6" class="logo">
-                            <br><br><br>
-                            <logo>OmadaHQ</logo><small>BETA</small>
                         </div>
                     </center>
                 </div>
@@ -211,11 +211,11 @@
                 </div>
             </div>
         </section>
-        <section id="content-one">
+        <section id="content-two">
             <div class="container">
                 <div class="row">
                     <center>
-                        <h1>Technologies Used</h1>
+                        <h1>Stack</h1>
                         <hr><br>
                         <div class="col-sm-3">
                             <div>

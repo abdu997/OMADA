@@ -1,8 +1,9 @@
 <?php
 session_start();
-include dirname(__FILE__)."../../connection.php";
- //$user_id = "1";
- //$team_id = "1";
+include "../connect.php";
+
+ $user_id = $_SESSION['user_id'];
+ $team_id = $_SESSION['team_id'];
 $db = 'test';
 $table = 'calendar';
 
@@ -75,12 +76,12 @@ if (isset($_POST)){
     }
 
     if ($event_title != NULL){
-        $sql = ("INSERT INTO `$db`.`$table` (user_id, team_id, event, all_day, "
+        $sql = ("INSERT INTO calendar (user_id, team_id, event, all_day, "
                 . "start_date, start_time, end_date, end_time, colour, url) VALUES "
-                . "($user_id, $team_id, $event_title, $all_day, $start_date, "
-                . "$start_time, $end_date, $end_time, $colour, $url)");
+                . "('$user_id', '$team_id', '$event_title', '$all_day', $start_date, "
+                . "'$start_time', '$end_date', '$end_time', '$colour', '$url')");
         echo $sql;
-        mysqli_query($conn, $sql);
+        mysqli_query($connect, $sql);
         // $return_address = dirname(__FILE__)."../../../calendar2.php";
         // header('Location: '.$return_address);
     }

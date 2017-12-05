@@ -2,7 +2,6 @@
 ini_set('display_errors', 1);
 error_reporting(0);
 include "connect.php";
-error_reporting(0);
 $data = json_decode(file_get_contents("php://input"));
 session_start();
 if (count($data) > 0) {

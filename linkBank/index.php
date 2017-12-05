@@ -32,7 +32,7 @@
             <th>Notes</th>
             <th></th>
         </tr>
-        <tr ng-repeat="x in links | filter: '.'">
+        <tr ng-repeat="x in links track by $index">
             <td>{{x.user}}</td>
             <td ng-bind-html="x.url"></td>
             <td>{{x.note}}</td>
