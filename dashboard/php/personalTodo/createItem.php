@@ -1,5 +1,5 @@
 <?php 
-include "../php/connect.php";
+include "../connect.php";
 session_start();
 $user_id = $_SESSION['user_id'];
 $data = json_decode(file_get_contents("php://input"));
@@ -14,6 +14,6 @@ if(count($data) > 0 && strlen($task) > 0){
         echo "insert error";
     }
 } else {
-    echo "task cannot be empty"
+    echo "task cannot be empty";
 }
 ?>

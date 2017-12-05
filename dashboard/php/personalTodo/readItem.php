@@ -1,5 +1,5 @@
 <?php 
-include "../php/connect.php";
+include "../connect.php";
 session_start();
 $user_id = $_SESSION['user_id'];
 $output = array();

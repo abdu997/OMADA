@@ -1,5 +1,5 @@
 <?php 
-include "../php/connect.php";
+include "../connect.php";
 session_start();
 $data = json_decode(file_get_contents("php://input"));
 $user_id = $_SESSION['user_id'];

@@ -50,7 +50,7 @@ header('Location: login.php');
             <div class="row">
                 <div class="col-md-12">
                     <div style="display:none;" id="app" class="animate-bottom">
-                        <?php include'linkBank.php';?>
+                        <?php include'personalTodo.php';?>
                     </div>
                 </div>
             </div>

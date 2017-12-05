@@ -1,7 +1,3 @@
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<script src="../js/angular.min.js"></script>
-<script src="personalTodo.js"></script>
-    
 <style>
     .trash {
         color: red;
@@ -26,10 +22,11 @@
     }
 </style>
 
-<div ng-controller="taskController" ng-app="personalToDo"> 
+<div ng-controller="taskController"> 
     <form name="taskForm">
-        <input type="text" ng-model="taskInput" placeholder="Add New Item" autocomplete="off" autofocus required />
-        <button type="submit" ng-click="createTask(); taskInput = null" ng-disabled="taskForm.$invalid">
+        <label>Task</label><span class="asterisk">*</span>
+        <input style="width: 200px" type="text" ng-model="taskInput" placeholder="Add New Item" class="w3-input w3-border-0" autocomplete="off" autofocus required />
+        <button class="w3-button"  style="background: #f1f1f1!important; margin-top: 10px" type="submit" ng-click="createTask(); taskInput = null" ng-disabled="taskForm.$invalid">
             <i class="fa fa-plus"></i>&nbsp;Add Task
         </button>
     </form>
