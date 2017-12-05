@@ -77,3 +77,27 @@ CREATE TABLE `progress_record` (
   `timestamp` varchar(45) NOT NULL,
   PRIMARY KEY (`record_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `pert_table` (
+  `record_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) DEFAULT NULL,
+  `team_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `start_message` varchar(255) DEFAULT NULL,
+  `start_time` date DEFAULT NULL,
+  `end_time` date DEFAULT NULL,
+  `expected_time` int(11) DEFAULT NULL,
+  `optimistic_time` int(11) DEFAULT NULL,
+  `realistic_time` int(11) DEFAULT NULL,
+  `pessimistic_time` int(11) DEFAULT NULL,
+  `goal_id` int(11) DEFAULT NULL,
+  `task_id` int(11) DEFAULT NULL,
+  `color` varchar(10) DEFAULT NULL,
+  `progress` varchar(20) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  UNIQUE KEY `record_id_UNIQUE` (`record_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

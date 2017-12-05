@@ -45,12 +45,10 @@ header('Location: login.php');
 
     <div class="w3-main" style="margin-left: 200px">
         <div class="w3-container">
-        </div>
-        <div class="w3-container">
             <div class="row">
                 <div class="col-md-12">
-                    <div style="display:none;" id="app" class="animate-bottom">
-                        <?php include'projectManager.php';?>
+                    <div ng-controller="PERTController" style="display:none;" id="app" class="animate-bottom">
+                        <?php include'view.php';?>
                     </div>
                 </div>
             </div>

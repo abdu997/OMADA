@@ -153,7 +153,7 @@
 </head>
 
 <body id="projectManager">
-    <div ng-init="displayBoard()" ng-controller="pmController">
+    <div class="tile-bg" ng-init="displayBoard()" ng-controller="pmController">
         <div class="row">
             <div class="col-sm-2">
                 <form name="boardEnter">

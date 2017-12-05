@@ -29,6 +29,15 @@ $user_id = $_SESSION['user_id'];
         <a class="w3-bar-item w3-bar w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
         <div ng-click="teamSelect(x.team_id, x.admin, x.type, x.team_name, x.plan)" ng-repeat="x in teams | filter : {'type':'personal'} " style="text-transform: capitalize; color: white;">
             <a ng-class="{'active': x.team_id == <?php echo $team_id;?>}" class="w3-bar-item w3-bar w3-button w3-padding"><i class="fa fa-user fa-fw"></i>&nbsp; {{x.team_name}}</a>
+            <ul ng-class="{'hidden': x.team_id != <?php echo $team_id;?>}" style="padding-left: 40px; padding-top: 5px;">
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Goals</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Boards</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Link Bank</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Chat</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Personal To Do</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Calendar</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Transaction Tracker</a></li>
+            </ul>
         </div>
         <a onclick="document.getElementById('edit_user').style.display='block'" class="w3-bar-item w3-bar w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>&nbsp; Edit Account</a>
         <a onclick="document.getElementById('team_create').style.display='block'" class="w3-bar-item w3-bar w3-button w3-padding"><i class="fa fa-plus fa-fw"></i>&nbsp; Create Team</a>
@@ -36,6 +45,15 @@ $user_id = $_SESSION['user_id'];
         <hr>
         <div ng-click="teamSelect(x.team_id, x.admin, x.type, x.team_name, x.plan)" ng-repeat="x in teams | filter : {'type':'team'}" style="text-transform: capitalize; color: white;">
             <a ng-class="{'active': x.team_id == <?php echo $team_id;?>}" class="w3-bar-item w3-bar w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; {{x.team_name}}</a>
+            <ul ng-class="{'hidden': x.team_id != <?php echo $team_id;?>}" style="padding-left: 40px; padding-top: 5px;">
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Goals</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Boards</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Link Bank</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Chat</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Personal To Do</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Calendar</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Transaction Tracker</a></li>
+            </ul>
         </div>
         <br>
         <br>
@@ -170,9 +188,9 @@ $user_id = $_SESSION['user_id'];
     <a href="#" data-toggle="editTeamTooltip" data-placement="bottom" title="Only team admins can edit a team"><i class="fa fa-question-circle fw" style="font-size: 17px"></i></a> &nbsp;
     <button onclick="document.getElementById('edit_team').style.display='block'" ng-disabled="'N' == '<?php echo $admin_status;?>' || 'personal' == '<?php echo $team_type;?>'" style="background: white;" class="w3-button">Edit Team</button>
     <script>
-    $(document).ready(function(){
-        $('[data-toggle="editTeamTooltip"]').tooltip();   
-    });
+        $(document).ready(function(){
+            $('[data-toggle="editTeamTooltip"]').tooltip();   
+        });
     </script>
 </div>
 <div class="team-title">
@@ -232,3 +250,4 @@ window.onclick = function(event) {
         document.getElementById("app").style.display = "block";
     }
 </script>
+
