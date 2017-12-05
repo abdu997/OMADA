@@ -8,10 +8,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
         
-        <link rel="stylesheet" href="https://omadahq.com/dashboard/css/bootstrap.min.css">
+        <link rel="stylesheet" href="dashboard/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://omadahq.com/dashboard/css/style.css">
+        <link rel="stylesheet" href="dashboard/css/style.css">
         <style>
             body {
                 background-color: #f1f1f1!important;
@@ -97,6 +97,9 @@
                 color: #2196F3;
                 font-size: 50px;
                 padding-top: 50px;
+            }
+            button {
+                border-radius: 0px;
             }
         </style>
     </head>
@@ -206,7 +209,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <center><h1>Preview</h1><hr></center><br>
-                        <img class="img-responsive" src="https://omadahq.com/img/screenshot.png" style="box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+                        <img class="img-responsive" src="img/screenshot.png" style="box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
                     </div>     
                 </div>
             </div>
@@ -219,22 +222,22 @@
                         <hr><br>
                         <div class="col-sm-3">
                             <div>
-                                <img class="img-responsive tech" src="https://omadahq.com/img/php.png">
+                                <img class="img-responsive tech" src="img/php.png">
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div>
-                                <img class="img-responsive tech" src="https://omadahq.com/img/mysql.png">
+                                <img class="img-responsive tech" src="img/mysql.png">
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div><br>
-                                <img class="img-responsive tech" src="https://omadahq.com/img/angular.png">
+                                <img class="img-responsive tech" src="img/angular.png">
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div><br>
-                                <img class="img-responsive tech" src="https://omadahq.com/img/bootstrap.png">
+                                <img class="img-responsive tech" src="img/bootstrap.png">
                             </div>
                         </div>
                     </center>

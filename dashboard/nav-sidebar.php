@@ -33,8 +33,8 @@ $user_id = $_SESSION['user_id'];
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Goals</a></li>
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Boards</a></li>
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Link Bank</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Chat</a></li>
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Personal To Do</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Chat</a></li>
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Calendar</a></li>
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Transaction Tracker</a></li>
             </ul>
@@ -49,8 +49,8 @@ $user_id = $_SESSION['user_id'];
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Goals</a></li>
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Boards</a></li>
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Link Bank</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Chat</a></li>
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Personal To Do</a></li>
+                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Chat</a></li>
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Calendar</a></li>
                 <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Transaction Tracker</a></li>
             </ul>

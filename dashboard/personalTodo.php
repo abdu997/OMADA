@@ -30,7 +30,7 @@
             <i class="fa fa-plus"></i>&nbsp;Add Task
         </button>
     </form>
-    <input type="text" ng-model="filterItem"placeholder="Filter Tasks" />
+    <input style="width: 200px" class="w3-input w3-border-0" type="text" ng-model="filterItem"placeholder="Filter Tasks" />
     <br>
     <table>
         <tr ng-repeat="x in items | filter : filterItem">
