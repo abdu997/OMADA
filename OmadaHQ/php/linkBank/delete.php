@@ -1,5 +1,5 @@
 <?php
-include("../php/connect.php");
+include("../connect.php");
 $data = json_decode(file_get_contents("php://input"));
 session_start();
 $team_id = $_SESSION['team_id'];

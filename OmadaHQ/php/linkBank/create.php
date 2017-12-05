@@ -1,5 +1,5 @@
 <?php
-include("../php/connect.php");
+include("../connect.php");
 session_start();
 error_reporting(0);
 $user_id = $_SESSION['user_id'];
@@ -26,7 +26,7 @@ if (count($data) > 0) {
             $record_id = mysqli_real_escape_string($connect, $data->record_id);
             $sql2 = "UPDATE link_bank SET link = '$link', note = '$note' WHERE record_id = '$record_id'";
             if (mysqli_query($connect, $sql2)) {
-                echo 'success';
+                echo "success";
             } else {
                 echo 'Error';
             }

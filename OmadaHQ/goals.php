@@ -25,7 +25,7 @@
         width: 50%;
     }
 </style>
-<div class="containter" ng-init="fetchGoals()">
+<div ng-controller="PERTController" class="containter" ng-init="fetchGoals()">
     <div class="row">
         <div class="col-sm-3" ng-repeat="x in goals">
             <div>

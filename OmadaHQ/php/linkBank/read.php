@@ -1,5 +1,5 @@
 <?php
-include("../php/connect.php");
+include("../connect.php");
 session_start();
 $output = array();
 $team_id = $_SESSION['team_id'];
