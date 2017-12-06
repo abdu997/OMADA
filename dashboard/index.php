@@ -1,6 +1,7 @@
 <?php
 session_start();
 $team_name = $_SESSION['team_name'];
+$page = $_SESSION["page"];
 include "php/connect.php";
 if(!isset($_SESSION['name'])){
 header('Location: login.php');
@@ -34,6 +35,14 @@ header('Location: login.php');
     
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    <script src='https://fullcalendar.io/js/fullcalendar-3.7.0/lib/jquery.min.js'></script>
+    
+    
+<link href='https://fullcalendar.io/js/fullcalendar-3.7.0/fullcalendar.min.css' rel='stylesheet' />
+<link href='https://fullcalendar.io/js/fullcalendar-3.7.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='https://fullcalendar.io/js/fullcalendar-3.7.0/lib/moment.min.js'></script>
+<script src='https://fullcalendar.io/js/fullcalendar-3.7.0/fullcalendar.min.js'></script>
+
 </head>
 
 <!-- Top container -->
@@ -50,7 +59,7 @@ header('Location: login.php');
             <div class="row">
                 <div class="col-md-12">
                     <div style="display:none;" id="app" class="animate-bottom">
-                        <?php include'personalTodo.php';?>
+                        <?php include $page.'.php';?>
                     </div>
                 </div>
             </div>

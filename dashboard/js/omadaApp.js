@@ -32,6 +32,22 @@ app.controller('SessionController', function($scope, $http) {
         });
     }
     
+    $scope.pageChange = function(page) {
+        $scope.page = page;
+        $http.post(
+            "php/pageChange.php", {
+            'page': $scope.page 
+            }
+        ).success(function(data){
+           if(data == "success"){
+               location.reload(); 
+           } else {
+               location.reload();
+               alert(data);
+           }
+        });
+    }
+    
     $scope.deleteTeam = function() {
         if (confirm("Are you sure you want to delete this team?")){
             $http.get("php/deleteTeam.php").success(function(data){

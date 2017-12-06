@@ -29,14 +29,14 @@ $user_id = $_SESSION['user_id'];
         <a class="w3-bar-item w3-bar w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
         <div ng-click="teamSelect(x.team_id, x.admin, x.type, x.team_name, x.plan)" ng-repeat="x in teams | filter : {'type':'personal'} " style="text-transform: capitalize; color: white;">
             <a ng-class="{'active': x.team_id == <?php echo $team_id;?>}" class="w3-bar-item w3-bar w3-button w3-padding"><i class="fa fa-user fa-fw"></i>&nbsp; {{x.team_name}}</a>
-            <ul ng-class="{'hidden': x.team_id != <?php echo $team_id;?>}" style="padding-left: 40px; padding-top: 5px;">
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Goals</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Boards</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Link Bank</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Personal To Do</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Chat</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Calendar</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Transaction Tracker</a></li>
+            <ul ng-class="{'hidden': x.team_id != <?php echo $team_id;?>}" style="padding-left: 40px; padding-top: 5px; color: black">
+                <li ng-click="pageChange('goals')" style="border-left: 1px solid  grey; padding-left: 5px">Goals</li>
+                <li ng-click="pageChange('boards')" style="border-left: 1px solid  grey; padding-left: 5px">Boards</li>
+                <li ng-click="pageChange('linkBank')" style="border-left: 1px solid  grey; padding-left: 5px">Link Bank</li>
+                <li ng-click="pageChange('personalTodo')" style="border-left: 1px solid  grey; padding-left: 5px">Personal To Do</li>
+                <li ng-click="pageChange('chat')" style="border-left: 1px solid  grey; padding-left: 5px">Chat</li>
+                <li ng-click="pageChange('calendar')" style="border-left: 1px solid  grey; padding-left: 5px">Calendar</li>
+                <li ng-click="pageChange('trantrack')" style="border-left: 1px solid  grey; padding-left: 5px">Transaction Tracker</li>
             </ul>
         </div>
         <a onclick="document.getElementById('edit_user').style.display='block'" class="w3-bar-item w3-bar w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>&nbsp; Edit Account</a>
@@ -45,14 +45,14 @@ $user_id = $_SESSION['user_id'];
         <hr>
         <div ng-click="teamSelect(x.team_id, x.admin, x.type, x.team_name, x.plan)" ng-repeat="x in teams | filter : {'type':'team'}" style="text-transform: capitalize; color: white;">
             <a ng-class="{'active': x.team_id == <?php echo $team_id;?>}" class="w3-bar-item w3-bar w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; {{x.team_name}}</a>
-            <ul ng-class="{'hidden': x.team_id != <?php echo $team_id;?>}" style="padding-left: 40px; padding-top: 5px;">
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Goals</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Boards</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Link Bank</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Personal To Do</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Chat</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Calendar</a></li>
-                <li style="border-left: 1px solid  grey; padding-left: 5px"><a href="#">Transaction Tracker</a></li>
+            <ul ng-class="{'hidden': x.team_id != <?php echo $team_id;?>}" style="padding-left: 40px; padding-top: 5px; color: black">
+                <li ng-click="pageChange('goals')" style="border-left: 1px solid  grey; padding-left: 5px">Goals</li>
+                <li ng-click="pageChange('boards')" style="border-left: 1px solid  grey; padding-left: 5px">Boards</li>
+                <li ng-click="pageChange('linkBank')" style="border-left: 1px solid  grey; padding-left: 5px">Link Bank</li>
+                <li ng-click="pageChange('personalTodo')" style="border-left: 1px solid  grey; padding-left: 5px">Personal To Do</li>
+                <li ng-click="pageChange('chat')" style="border-left: 1px solid  grey; padding-left: 5px">Chat</li>
+                <li ng-click="pageChange('calendar')" style="border-left: 1px solid  grey; padding-left: 5px">Calendar</li>
+                <li ng-click="pageChange('trantrack')" style="border-left: 1px solid  grey; padding-left: 5px">Transaction Tracker</li>
             </ul>
         </div>
         <br>
@@ -243,7 +243,7 @@ window.onclick = function(event) {
     var myVar;
 
     function myFunction() {
-        myVar = setTimeout(showPage, 500);
+        myVar = setTimeout(showPage, 1500);
     }
 
     function showPage() {

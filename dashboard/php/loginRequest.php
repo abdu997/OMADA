@@ -33,6 +33,7 @@ if (count($data) > 0) {
             $result3 = mysqli_query($connect, $sql3);
             $row3 = $result3 -> fetch_row();
             $_SESSION['admin_status'] = $row3[0];
+            $_SESSION["page"] = "goals"; 
             
             echo"success";
 		} else {
