@@ -9,7 +9,7 @@ if (count($data) > 0){
     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
         if(preg_match("/^[a-zA-Z ]{2,}$/",$first_name)){
             if(preg_match("/^[a-zA-Z ]{2,}$/",$last_name)){
-                $sql = "SELECT email from test.users WHERE email = '$email'";
+                $sql = "SELECT email from users WHERE email = '$email'";
                 $result = mysqli_query($connect,$sql);
                 $count = mysqli_num_rows($result);
                 if($count == 0){
@@ -52,7 +52,7 @@ if (count($data) > 0){
                         $headers .= "MIME-Version: 1.0\r\n";
                         $headers .= "Content-Type: text/html; charset=iso-8859-1\n";
                         
-                        $content = "<p>Hello ".$first_name."! <br> Thank you for Joining OmadaHQ. Click Bellow to set your password</p><br><br><a href='".$link."'><button style='background: #2196F3; padding: 10px 50px 10px 50px; color: white; border:none'>Set Password</button></a>";
+                        $content = "<p>Hello ".$first_name."! <br> Thank you for Joining OmadaHQ. Click Below to set your password</p><br><br><a href='".$link."'><button style='background: #2196F3; padding: 10px 50px 10px 50px; color: white; border:none'>Set Password</button></a>";
                         $message = "
                             <html lang='en' style='font-size: 15px; font-family: Montserrat, sans-serif; line-height: 28px;'>
                                 <center>
