@@ -1,5 +1,6 @@
 <head>
     <title>OmadaHQ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="https://omadahq.com/img/icon.png">
     <script src="js/angular.min.js"></script>
     <script src="js/jquery.js"></script>
@@ -30,11 +31,11 @@
         .error {
             color: #e74c3c;
         }
+        label, small, p, a {
+            float: left;
+        }
     </style>
 </head>
-
-
-
 <?php
 error_reporting(E_ERROR);
 include "php/connect.php";
@@ -102,10 +103,16 @@ if($count == 1){
 }
 ?>
 <html>
-    <body ng-app="registerApp" ng-controller="registerController"  class="w3-display-middle">
-        <center><h1>OmadaHQ</h1></center>
-        <?php echo $error; ?>
-        <?php print $form; ?>
+    <body>
+        <div class="col-sm-4"></div>
+        <div style="margin-top: 20.5%" class="col-sm-4" ng-app="registerApp" ng-controller="registerController">
+            <center>
+                <center><h1>OmadaHQ</h1></center>
+                <?php echo $error; ?>
+                <?php print $form; ?>
+            </center>
+        </div>
+        <div class="col-sm-4"></div>
     </body>
     <script>
         $("#passwordInsert").click(function(event){
