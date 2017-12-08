@@ -1,4 +1,7 @@
 <?php
+if(!isset($_SESSION['user_id']) && !isset($_SESSION['team_id'])){
+header('Location: login.php');
+}
 $team_id = $_SESSION['team_id'];
 $admin_status = $_SESSION['admin_status'];
 $team_type = $_SESSION['team_type'];
@@ -34,6 +37,7 @@ $user_id = $_SESSION['user_id'];
                 <li ng-click="pageChange('boards')" style="border-left: 1px solid  grey; padding-left: 5px">Boards</li>
                 <li ng-click="pageChange('linkBank')" style="border-left: 1px solid  grey; padding-left: 5px">Link Bank</li>
                 <li ng-click="pageChange('personalTodo')" style="border-left: 1px solid  grey; padding-left: 5px">Personal To Do</li>
+                <li ng-click="pageChange('map')" style="border-left: 1px solid  grey; padding-left: 5px">POI Map</li>
                 <li ng-click="pageChange('chat')" style="border-left: 1px solid  grey; padding-left: 5px">Chat</li>
                 <li ng-click="pageChange('calendar')" style="border-left: 1px solid  grey; padding-left: 5px">Calendar</li>
                 <li ng-click="pageChange('trantrack')" style="border-left: 1px solid  grey; padding-left: 5px">Transaction Tracker</li>
@@ -41,7 +45,7 @@ $user_id = $_SESSION['user_id'];
         </div>
         <a onclick="document.getElementById('edit_user').style.display='block'" class="w3-bar-item w3-bar w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>&nbsp; Edit Account</a>
         <a onclick="document.getElementById('team_create').style.display='block'" class="w3-bar-item w3-bar w3-button w3-padding"><i class="fa fa-plus fa-fw"></i>&nbsp; Create Team</a>
-        <a href="php/logout.php" class="w3-bar-item w3-bar w3-button w3-padding logout"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Log Out</a>
+        <a href="php/logout.php" class="logout w3-bar-item w3-bar w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Log Out</a>
         <hr>
         <div ng-click="teamSelect(x.team_id, x.admin, x.type, x.team_name, x.plan)" ng-repeat="x in teams | filter : {'type':'team'}" style="text-transform: capitalize; color: white;">
             <a ng-class="{'active': x.team_id == <?php echo $team_id;?>}" class="w3-bar-item w3-bar w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; {{x.team_name}}</a>
@@ -50,6 +54,7 @@ $user_id = $_SESSION['user_id'];
                 <li ng-click="pageChange('boards')" style="border-left: 1px solid  grey; padding-left: 5px">Boards</li>
                 <li ng-click="pageChange('linkBank')" style="border-left: 1px solid  grey; padding-left: 5px">Link Bank</li>
                 <li ng-click="pageChange('personalTodo')" style="border-left: 1px solid  grey; padding-left: 5px">Personal To Do</li>
+                <li ng-click="pageChange('map')" style="border-left: 1px solid  grey; padding-left: 5px">POI Map</li>
                 <li ng-click="pageChange('chat')" style="border-left: 1px solid  grey; padding-left: 5px">Chat</li>
                 <li ng-click="pageChange('calendar')" style="border-left: 1px solid  grey; padding-left: 5px">Calendar</li>
                 <li ng-click="pageChange('trantrack')" style="border-left: 1px solid  grey; padding-left: 5px">Transaction Tracker</li>

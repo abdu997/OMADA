@@ -18,6 +18,12 @@ h4 {
         margin-right: 15px
     }
 }
+
+.logout:hover {
+    background: red;
+    color: white;
+}
+
 .w3-bar,
 .w3-bar:link,
 .w3-bar:hover,
@@ -73,7 +79,6 @@ input {
     margin-bottom: 15px;
     margin-top: 15px;
 }
-
 
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }

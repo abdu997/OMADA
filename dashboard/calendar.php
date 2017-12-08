@@ -1,5 +1,8 @@
-
-<!DOCTYPE html>
+<?php
+if(!isset($_SESSION['user_id']) && !isset($_SESSION['team_id'])){
+header('Location: login.php');
+}
+?>
 <html>
 <head>
 <meta charset='utf-8' />

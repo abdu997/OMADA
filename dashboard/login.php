@@ -38,6 +38,9 @@ if(isset($_GET['email'])){
             button {
                 width: 100px;
             }
+            button, input {
+                border-radius: 0px;
+            }
             .w3-button {
                 background: #bdc3c7;
             }

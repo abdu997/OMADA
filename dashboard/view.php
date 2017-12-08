@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['user_id']) && !isset($_SESSION['team_id'])){
+header('Location: login.php');
+}
+?>
 <style>
     .col-xs-4 {
         padding-right: 0px;

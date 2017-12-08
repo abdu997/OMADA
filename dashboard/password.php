@@ -34,6 +34,9 @@
         label, small, p, a {
             float: left;
         }
+        button, input {
+            border-radius: 0px;
+        }
     </style>
 </head>
 <?php

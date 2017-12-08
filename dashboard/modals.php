@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['user_id']) && !isset($_SESSION['team_id'])){
+header('Location: login.php');
+}
+?>
     <div id="questionaire" class="w3-modal">
         <div class="w3-modal-content w3-animate-top w3-card-4" style="padding: 25px; background: #f1f1f1!important; width: 40%;">
             <div class="w3-container w3-light-grey"> 

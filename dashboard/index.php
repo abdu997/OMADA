@@ -1,11 +1,8 @@
 <?php
 session_start();
 $team_name = $_SESSION['team_name'];
-$page = $_SESSION["page"];
+$page = $_SESSION['page'];
 include "php/connect.php";
-if(!isset($_SESSION['name'])){
-header('Location: login.php');
-}
 ?>
 <html>
 <head>
@@ -13,6 +10,10 @@ header('Location: login.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="https://omadahq.com/img/icon.png">
+    
+    <!--Custom Stylesheet-->
+    <link rel="stylesheet" href="css/style.css">
+    
     <!--UI FrameWorks-->
     <link rel="stylesheet" href="css/w3.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -24,9 +25,7 @@ header('Location: login.php');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/ionicons-2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    
-    <!--Custom Stylesheet-->
-    <link rel="stylesheet" href="css/style.css">
+
     
     <!--Angular Scripts-->
     <script src="js/angular.min.js"></script>

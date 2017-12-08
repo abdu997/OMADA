@@ -4,8 +4,6 @@ include "../connect.php";
 
  $user_id = $_SESSION['user_id'];
  $team_id = $_SESSION['team_id'];
-$db = 'test';
-$table = 'calendar';
 
 if (isset($_POST)){
     if (isset($_POST['event_title']) && (trim($_POST['event_title']) !== "")){

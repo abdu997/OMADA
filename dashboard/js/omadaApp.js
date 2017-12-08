@@ -39,10 +39,9 @@ app.controller('SessionController', function($scope, $http) {
             'page': $scope.page 
             }
         ).success(function(data){
+            location.reload(); 
            if(data == "success"){
-               location.reload(); 
            } else {
-               location.reload();
                alert(data);
            }
         });

@@ -48,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `team_nonuser`(
     PRIMARY KEY(`confirmation_id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 01 DEFAULT CHARSET = latin1;
 
-
 CREATE TABLE IF NOT EXISTS `team_boards`(
     `board_id` INT(11) NOT NULL AUTO_INCREMENT,
     `team_id` INT(11) NOT NULL,

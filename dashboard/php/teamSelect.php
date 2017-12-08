@@ -9,6 +9,5 @@ if(count($data) > 0){
     $_SESSION['team_type'] = $data->team_type;
     $_SESSION['team_name'] = $data->team_name;
     $_SESSION['plan'] = $data->plan;  
-    $_SESSION['page'] = "goals";
 }
 ?>
