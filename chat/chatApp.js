@@ -93,6 +93,14 @@ app.controller('ChatController', function($scope, $http) {
         $scope.chatroom_id = id;
         $http.get("readMessages.php?chatroom_id=" + id).success(function(msgs) {
             $scope.chat = msgs;
+            var height = 0;
+            $('#messages ul').each(function(i, value){
+                height += parseInt($(this).height());
+            });
+
+            height += '';
+
+            $('#messages').animate({scrollTop: height});
         });
     }
 });

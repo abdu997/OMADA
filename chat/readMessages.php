@@ -17,7 +17,7 @@ if (isset($_GET['chatroom_id'])) {
                 $row[2] = 'smessage';
                 $status = 'sender';
             }
-            elseif($user_id != $row[3]){
+            else if($user_id != $row[3]){
                 $row[2] = 'rmessage';
                 $status = 'receiver';
             }
@@ -36,12 +36,9 @@ if (isset($_GET['chatroom_id'])) {
                 'message' => $message,
                 'initial_message'=> $row[6],
             );
-            $output[] = $out;
-                
+            $output[] = $out;    
         }
         echo json_encode($output);
-    }
-    
-    
+    } 
 }
 ?>  

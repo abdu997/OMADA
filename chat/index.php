@@ -59,14 +59,13 @@
             max-width: 700px
         }
         .message-input.compressed {
-            width: 60%;
+            width: 71.5%;
             height: 40px;
             margin-left: 200px
         }
         .message-input {
-            width: 92.3%;
+            width: 100%;
             height: 40px;
-            
         }
         #chat-toggle {
             margin: 6px;
@@ -192,7 +191,7 @@
         <div class="panel-foot">
             <form id="sendMsg" name="sendMsg">
                 <input type="text" class="message-input compressed" id="msg" placeholder="Type message here..." ng-model="messageInput" autocomplete="off" name="message" autofocus required>
-                <input type="submit" ng-click="submitMessage(messageInput); messageInput = null" value="Send" ng-disabled="sendMsg.$invalid">
+                <input class="hidden" type="submit" ng-click="submitMessage(messageInput); messageInput = null" value="Send" ng-disabled="sendMsg.$invalid">
             </form>
         </div>
     </div>
@@ -214,5 +213,15 @@
 //            e.preventDefault();
 //            $("#sendMsg").removeClass("hidden");
 //        });
+    </script>
+    <script>
+            var height = 0;
+            $('#messages ul').each(function(i, value){
+                height += parseInt($(this).height());
+            });
+
+            height += '';
+
+            $('#messages').animate({scrollTop: height});
     </script>
 </div>

@@ -7,7 +7,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 if (count($data) > 0) {
     $message = mysqli_real_escape_string($connect, $data->message);
-    $chatroom_id   = $data->chatroom_id;
+    $chatroom_id = mysqli_real_escape_string($connect, $data->chatroom_id);
     
     if($chatroom_id == 0){
         echo "Error: Invalid chatroom_id";
